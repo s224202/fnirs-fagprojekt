@@ -1,3 +1,4 @@
+# code from : https://mne.tools/dev/auto_tutorials/preprocessing/70_fnirs_processing.html#converting-from-raw-intensity-to-optical-density
 from itertools import compress
 
 import matplotlib.pyplot as plt
