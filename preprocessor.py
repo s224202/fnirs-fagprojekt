@@ -182,3 +182,4 @@ plt.plot(wienerPreprocessor(long_channels0.get_data()[0]), label='Wiener filter'
 plt.legend()
 plt.show()
 # %%
+# test
