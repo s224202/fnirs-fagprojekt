@@ -246,7 +246,7 @@ def studentizedResiduals(x, y):
 
     return x[mask]
 
-# TDDR
+# TDDR (needs to be used along with a low-pass filter and sampling frequency above 1 Hz according to the study by Fishburn et al. (2019))
 def tddr(signals, sample_rate):
     return TDDR(signals, sample_rate)
 
