@@ -12,7 +12,10 @@ from scipy.interpolate import CubicSpline
 from sklearn.pipeline import make_pipeline
 from mne.datasets import sample
 from Scripts.TDDR import TDDR
+from mne_nirs.signal_enhancement import short_channel_regression
+from scipy.stats import studentized_range as student_dist
 import mne
+from mne_nirs.channels import get_long_channels
 from mne_bids import (
     BIDSPath,
     read_raw_bids,
@@ -65,20 +68,27 @@ dists4 = mne.preprocessing.nirs.source_detector_distances(raw4.info,picks=picks4
 # %%
 
 # Short channels
-
-short_channels0 = raw0.copy().pick(picks0[dists0 <= 0.01])
-short_channels1 = raw1.copy().pick(picks1[dists1 <= 0.01])
-short_channels2 = raw2.copy().pick(picks2[dists2 <= 0.01])
-short_channels3 = raw3.copy().pick(picks3[dists3 <= 0.01])
-short_channels4 = raw4.copy().pick(picks4[dists4 <= 0.01])
+short_channels0 = mne.preprocessing.nirs.short_channels(raw0.info, threshold=0.01)
+short_channels1 = mne.preprocessing.nirs.short_channels(raw1.info, threshold=0.01)
+short_channels2 = mne.preprocessing.nirs.short_channels(raw2.info, threshold=0.01)
+short_channels3 = mne.preprocessing.nirs.short_channels(raw3.info, threshold=0.01)
+short_channels4 = mne.preprocessing.nirs.short_channels(raw4.info, threshold=0.01)
 
 # Long channels
+long_channels0 = get_long_channels(raw0, min_dist=0.015, max_dist=0.045)
+long_channels1 = get_long_channels(raw1, min_dist=0.015, max_dist=0.045)
+long_channels2 = get_long_channels(raw2, min_dist=0.015, max_dist=0.045)
+long_channels3 = get_long_channels(raw3, min_dist=0.015, max_dist=0.045)
+long_channels4 = get_long_channels(raw4, min_dist=0.015, max_dist=0.045)
 
-long_channels0 = raw0.copy().pick(picks0[dists0 > 0.01])
-long_channels1 = raw1.copy().pick(picks1[dists1 > 0.01])
-long_channels2 = raw2.copy().pick(picks2[dists2 > 0.01])
-long_channels3 = raw3.copy().pick(picks3[dists3 > 0.01])
-long_channels4 = raw4.copy().pick(picks4[dists4 > 0.01])
+#%%
+
+# Visualize the short and long channels (only on the first subject)
+
+brain = mne.viz.Brain("fsaverage", subjects_dir=raw0, background="w", cortex="0.5")
+brain.add_sensors(raw0.info, trans="fsaverage", fnirs=["channels", "pairs", "sources", "detectors"],)
+brain.show_view(azimuth=20, elevation=60, distance=400)
+
 #%%
 
 # Visualize motion artifacts (only on the first subject)
@@ -96,12 +106,76 @@ plt.show()
 
 #%%
 
+# Convert from raw intensity to optical density
+
+# With short and long channels
+raw_od0 = mne.preprocessing.nirs.optical_density(raw0)
+raw_od1 = mne.preprocessing.nirs.optical_density(raw1)
+raw_od2 = mne.preprocessing.nirs.optical_density(raw2)
+raw_od3 = mne.preprocessing.nirs.optical_density(raw3)
+raw_od4 = mne.preprocessing.nirs.optical_density(raw4)
+
+# Without short channels
+raw_od0_long = mne.preprocessing.nirs.optical_density(long_channels0)
+raw_od1_long = mne.preprocessing.nirs.optical_density(long_channels1)
+raw_od2_long = mne.preprocessing.nirs.optical_density(long_channels2)
+raw_od3_long = mne.preprocessing.nirs.optical_density(long_channels3)
+raw_od4_long = mne.preprocessing.nirs.optical_density(long_channels4)
+
+#%%
+
+# Evaluating data quality, calculating scalp coupling index (SCI) for all channels (a version of SNR)
+sci0 = mne.preprocessing.nirs.scalp_coupling_index(raw_od0)
+sci1 = mne.preprocessing.nirs.scalp_coupling_index(raw_od1)
+sci2 = mne.preprocessing.nirs.scalp_coupling_index(raw_od2)
+sci3 = mne.preprocessing.nirs.scalp_coupling_index(raw_od3)
+sci4 = mne.preprocessing.nirs.scalp_coupling_index(raw_od4)
+
+# Plot the SCI values (only on the first subject)
+
+fig, ax = plt.subplots(layout="constrained")
+ax.hist(sci0)
+ax.set(xlabel="Scalp Coupling Index", ylabel="Count", xlim=[0, 1])
+
+# Plot optical density before removal of bad channels (only on the first subject)
+raw_od0.plot(n_channels=90, duration=4000, show_scrollbars=False, clipping=None)
+
+# %%
+
+# Remove bad channels, eg. channels with SCI < 0.8
+
+# With short and long channels
+raw_od0.info['bads'] = list(compress(raw_od0.ch_names, sci0 < 0.8))
+raw_od1.info['bads'] = list(compress(raw_od1.ch_names, sci1 < 0.8))
+raw_od2.info['bads'] = list(compress(raw_od2.ch_names, sci2 < 0.8))
+raw_od3.info['bads'] = list(compress(raw_od3.ch_names, sci3 < 0.8))
+raw_od4.info['bads'] = list(compress(raw_od4.ch_names, sci4 < 0.8))
+
+# Without short channels
+raw_od0_long.info['bads'] = list(compress(raw_od0_long.ch_names, sci0 < 0.8))
+raw_od1_long.info['bads'] = list(compress(raw_od1_long.ch_names, sci1 < 0.8))
+raw_od2_long.info['bads'] = list(compress(raw_od2_long.ch_names, sci2 < 0.8))
+raw_od3_long.info['bads'] = list(compress(raw_od3_long.ch_names, sci3 < 0.8))
+raw_od4_long.info['bads'] = list(compress(raw_od4_long.ch_names, sci4 < 0.8))
+
+# print how many bad channels were removed and which ones
+print('Number of bad channels removed (subject 0):', len(raw_od0.info['bads']))
+print(raw_od0.info['bads'])
+
+# Plot optical density after removal of bad channels (only on the first subject)
+raw_od0.plot(n_channels=90, duration=4000, show_scrollbars=False, clipping=None)
+
+# Plot montage (only on the first subject)
+raw_od0.plot_sensors()
+
+#%%
+
 # Motion Artifact Correction
 
 r = 42
 
-# PCA last comps.
-def lastCompsPCA(x, n):
+# bPCA (baseline PCA, last comps.)
+def bPCA(x, n):
     pca = PCA()
     pca.fit(x)
     #print(pca.explained_variance_ratio_.shape)
@@ -110,13 +184,13 @@ def lastCompsPCA(x, n):
     return pca.inverse_transform(X_reduced)[:,n:]
 
 
-lastCompsPCATransformer1 = FunctionTransformer(lastCompsPCA, kw_args={'n': 39})
-lastCompsPCATransformer2 = FunctionTransformer(lastCompsPCA, kw_args={'n': 38})
+bPCA1 = FunctionTransformer(bPCA, kw_args={'n': 39})
+bPCA2 = FunctionTransformer(bPCA, kw_args={'n': 38})
 
 # print(lastCompsPCATransformer1.fit_transform(long_channels0.get_data()).shape)
 
-lastCompsPCALogisticPipeline1 = make_pipeline(lastCompsPCATransformer1, LogisticRegression(random_state = r))
-lastCompsPCALogisticPipeline2 = make_pipeline(lastCompsPCATransformer2, LogisticRegression(random_state = r))
+bPCALogisticPipeline1 = make_pipeline(bPCA1, LogisticRegression(random_state = r))
+bPCACALogisticPipeline2 = make_pipeline(bPCA2, LogisticRegression(random_state = r))
 
 # Wiener filter
 from scipy.signal import wiener
@@ -172,6 +246,13 @@ def studentizedResiduals(x, y):
 
     return x[mask]
 
+# TDDR
+def tddr(signals, sample_rate):
+    return TDDR(signals, sample_rate)
+
+# Short-channel regression (mne)
+def shortChannelRegression(x):
+    return short_channel_regression(x, max_dist=0.01)
 
 
 # %%
