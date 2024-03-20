@@ -11,6 +11,7 @@ from sklearn.linear_model import LogisticRegression
 from scipy.interpolate import CubicSpline
 from sklearn.pipeline import make_pipeline
 from mne.datasets import sample
+from Scripts.TDDR import TDDR
 import mne
 from mne_bids import (
     BIDSPath,
