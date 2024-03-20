@@ -1,10 +1,14 @@
 # %% 
+from scipy.signal import find_peaks
+import pywt
 from itertools import compress
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import FunctionTransformer
 from sklearn.decomposition import PCA
+from sklearn.linear_model import LogisticRegression
+from scipy.interpolate import CubicSpline
 from sklearn.pipeline import make_pipeline
 from mne.datasets import sample
 import mne
@@ -76,17 +80,26 @@ long_channels3 = raw3.copy().pick(picks3[dists3 > 0.01])
 long_channels4 = raw4.copy().pick(picks4[dists4 > 0.01])
 #%%
 
-# Visualize artifacts (only on the first subject) (mne overview of artifacts detection)
+# Visualize motion artifacts (only on the first subject)
+# Large jumps in light intensities
+
 raw = read_raw_bids(bids_paths[0])
+raw.plot(n_channels=56, duration=60)
+plt.show()
 
-# Low-frequency drifts
-
-mag_channels0 = mne.pick_types(raw.info, meg="mag")
-raw.load_data()
-mne.viz.plot_raw(raw, duration=60, n_channels = len(raw.ch_names), scalings="auto")
-
+# Physiological artifacts (heartbeat)
+fig, axes = plt.subplots(2, 1, figsize=(15, 10))
+long_channels0.plot_psd(axes=axes[0], show=False)
+short_channels0.plot_psd(axes=axes[1], show=False)
+plt.show()
 
 #%%
+
+# Motion Artifact Correction
+
+r = 42
+
+# PCA last comps.
 def lastCompsPCA(x, n):
     pca = PCA()
     pca.fit(x)
@@ -96,9 +109,77 @@ def lastCompsPCA(x, n):
     return pca.inverse_transform(X_reduced)[:,n:]
 
 
-# # %%
-# # Motion Artifact Correction
+lastCompsPCATransformer1 = FunctionTransformer(lastCompsPCA, kw_args={'n': 39})
+lastCompsPCATransformer2 = FunctionTransformer(lastCompsPCA, kw_args={'n': 38})
 
-PCA_MAC = make_pipeline(PCA(n ))
+# print(lastCompsPCATransformer1.fit_transform(long_channels0.get_data()).shape)
+
+lastCompsPCALogisticPipeline1 = make_pipeline(lastCompsPCATransformer1, LogisticRegression(random_state = r))
+lastCompsPCALogisticPipeline2 = make_pipeline(lastCompsPCATransformer2, LogisticRegression(random_state = r))
+
+# Wiener filter
+from scipy.signal import wiener
+def wienerPreprocessor(x, n=5):
+    return wiener(x, mysize=n)
+
+wienerLogisticPipeline = make_pipeline(FunctionTransformer(wienerPreprocessor), LogisticRegression(random_state = r))
+
+# Cubic spline interpolation 
+def cubicSplineInterpolation(x):
+    n = x.shape[1]
+    t = np.arange(n)
+    cs = CubicSpline(t, x, axis = 1)
+    return cs(t)
+
+cubicSplineLogisticPipeline = make_pipeline(FunctionTransformer(cubicSplineInterpolation), LogisticRegression(random_state = r))
+
+# Wavelet denoising
+def waveletPreprocessor(x, wavelet='db1'):
+    cA, cD = pywt.dwt(x, 'bior1.3')
+    return cA
 
 
+# Kalman filtering
+
+
+# Studentized residuals (outlier detection)
+def studentizedResiduals(x, y):
+    # Create a polynomial fit and apply the fit to data
+    poly_order = 2
+    coefs = np.polyfit(x, y, poly_order)
+    y_pred = np.polyval(coefs, x)
+
+    # Calculate hat matrix
+    X_mat = np.vstack((np.ones_like(x), x)).T
+    X_hat = X_mat @ np.linalg.inv(X_mat.T @ X_mat) @ X_mat.T
+    hat_diagonal = X_hat.diagonal()
+
+    # Calculate degrees of freedom
+    n = len(y)
+    dof = n - 3  # Using p = 2 from paper
+
+    # Calculate standardised residuals 
+    res = y - y_pred
+    sse = np.sum(res ** 2)
+    t_res = res * np.sqrt(dof / (sse * (1 - hat_diagonal) - res**2))
+
+    # Return filtered dataframe with the anomalies removed using BC value
+    alpha=0.05
+    bc_relaxation = 1/6
+    bc = student_dist.ppf(1 - alpha / (2 * n), df=dof) * bc_relaxation
+    mask = np.logical_and(t_res < bc, t_res > - bc)
+
+    return x[mask]
+
+
+
+# %%
+plt.plot(long_channels0.get_data()[0], label='Original')
+plt.plot(waveletPreprocessor(long_channels0.get_data()[0]), label='Wavelet denoising')
+# plt.plot(cubicSplineInterpolation(long_channels0.get_data()), label='Cubic spline interpolation')
+plt.plot(wienerPreprocessor(long_channels0.get_data()[0]), label='Wiener filter')
+# plt.plot(lastCompsPCA(long_channels0.get_data()[0], 39), label='PCA last comps.')
+plt.legend()
+plt.show()
+# %%
+# test
