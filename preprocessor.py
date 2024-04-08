@@ -5,7 +5,7 @@ from itertools import compress
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import FunctionTransformer
+from sklearn.preprocessing import FunctionTransformer, LabelBinarizer
 from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
 from scipy.interpolate import CubicSpline
@@ -77,6 +77,7 @@ short_channels2 = mne.preprocessing.nirs.short_channels(raw2.info, threshold=0.0
 short_channels3 = mne.preprocessing.nirs.short_channels(raw3.info, threshold=0.01)
 short_channels4 = mne.preprocessing.nirs.short_channels(raw4.info, threshold=0.01)
 
+short_channels00 = mne_nirs.channels.get_short_channels(raw, max_dist=0.01)
 # Long channels
 long_channels0 = get_long_channels(raw0, min_dist=0.015, max_dist=0.045)
 long_channels1 = get_long_channels(raw1, min_dist=0.015, max_dist=0.045)
@@ -142,6 +143,7 @@ ax.set(xlabel="Scalp Coupling Index", ylabel="Count", xlim=[0, 1])
 
 # Plot optical density before removal of bad channels (only on the first subject)
 raw_od0.plot(n_channels=90, duration=4000, show_scrollbars=False, clipping=None)
+
 
 # %%
 
@@ -240,14 +242,22 @@ plt.show()
 # Random Forest Classifier
 
 # Assuming X is your feature set and y is your target variable
-X = long_channels0.get_data()
+events, event_dict = mne.events_from_annotations(raw0)
+X = mne.Epochs(raw0, events,event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
 
+
+def arrayflattener(x):
+    Xflat = np.zeros((x.shape[0], x.shape[1]*x.shape[2]))
+    for i in range(x.shape[0]):
+        Xflat[i] = np.reshape(x[i], (x.shape[1]*x.shape[2]))
+    return Xflat
+X = arrayflattener(X)
+print(X.shape)
 # Create a binary target variable for raw0
 y = raw0.annotations.to_data_frame()
+y = y['description'].to_numpy()
 
-# Create a binary target variable for raw0
-
-y = y['description'].apply(lambda x: 1 if x == '1.0' else 0)
+y = LabelBinarizer().fit_transform(y)
 
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
@@ -277,5 +287,5 @@ print(f'Cross-validation scores: {scores}')
 print(f'Average score: {scores.mean()}')
 
 #%%
-
+print(X.shape)
 # %%
