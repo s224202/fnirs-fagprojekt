@@ -24,6 +24,9 @@ from mne_bids import (
     find_matching_paths,
     get_entity_vals,
 )
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score
 sessions = get_entity_vals("./Rob Luke Tapping dataset", "session")
 datatype = "nirs"
 extension = [".snirf"]
@@ -214,37 +217,7 @@ def waveletPreprocessor(x, wavelet='db1'):
     return cA
 
 
-# Kalman filtering
 
-
-# Studentized residuals (outlier detection)
-def studentizedResiduals(x, y):
-    # Create a polynomial fit and apply the fit to data
-    poly_order = 2
-    coefs = np.polyfit(x, y, poly_order)
-    y_pred = np.polyval(coefs, x)
-
-    # Calculate hat matrix
-    X_mat = np.vstack((np.ones_like(x), x)).T
-    X_hat = X_mat @ np.linalg.inv(X_mat.T @ X_mat) @ X_mat.T
-    hat_diagonal = X_hat.diagonal()
-
-    # Calculate degrees of freedom
-    n = len(y)
-    dof = n - 3  # Using p = 2 from paper
-
-    # Calculate standardised residuals 
-    res = y - y_pred
-    sse = np.sum(res ** 2)
-    t_res = res * np.sqrt(dof / (sse * (1 - hat_diagonal) - res**2))
-
-    # Return filtered dataframe with the anomalies removed using BC value
-    alpha=0.05
-    bc_relaxation = 1/6
-    bc = student_dist.ppf(1 - alpha / (2 * n), df=dof) * bc_relaxation
-    mask = np.logical_and(t_res < bc, t_res > - bc)
-
-    return x[mask]
 
 # TDDR (needs to be used along with a low-pass filter and sampling frequency above 1 Hz according to the study by Fishburn et al. (2019))
 def tddr(signals, sample_rate):
@@ -264,4 +237,45 @@ plt.plot(wienerPreprocessor(long_channels0.get_data()[0]), label='Wiener filter'
 plt.legend()
 plt.show()
 # %%
-# test
+# Random Forest Classifier
+
+# Assuming X is your feature set and y is your target variable
+X = long_channels0.get_data()
+
+# Create a binary target variable for raw0
+y = raw0.annotations.to_data_frame()
+
+# Create a binary target variable for raw0
+
+y = y['description'].apply(lambda x: 1 if x == '1.0' else 0)
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Initialize the RandomForestClassifier
+clf = RandomForestClassifier(random_state=42)
+
+# Train the classifier
+clf.fit(X_train, y_train)
+
+# Make predictions on the testing set
+y_pred = clf.predict(X_test)
+
+# Evaluate the classifier
+accuracy = accuracy_score(y_test, y_pred)
+print(f'Accuracy: {accuracy * 100}%')
+
+from sklearn.model_selection import cross_val_score
+
+# Initialize the RandomForestClassifier
+clf = RandomForestClassifier(random_state=42)
+
+# Perform cross-validation
+scores = cross_val_score(clf, X, y, cv=5)
+
+print(f'Cross-validation scores: {scores}')
+print(f'Average score: {scores.mean()}')
+
+#%%
+
+# %%
