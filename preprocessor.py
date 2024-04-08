@@ -5,9 +5,11 @@ from itertools import compress
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import FunctionTransformer, LabelBinarizer
+from sklearn.preprocessing import FunctionTransformer, LabelEncoder
 from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.neural_network import MLPClassifier
 from scipy.interpolate import CubicSpline
 from sklearn.pipeline import make_pipeline
 from mne.datasets import sample
@@ -257,28 +259,16 @@ print(X.shape)
 y = raw0.annotations.to_data_frame()
 y = y['description'].to_numpy()
 
-y = LabelBinarizer().fit_transform(y)
+y = LabelEncoder().fit_transform(y)
 
 # Split the data into training and testing sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Initialize the RandomForestClassifier
-clf = RandomForestClassifier(random_state=42)
-
-# Train the classifier
-clf.fit(X_train, y_train)
-
-# Make predictions on the testing set
-y_pred = clf.predict(X_test)
-
-# Evaluate the classifier
-accuracy = accuracy_score(y_test, y_pred)
-print(f'Accuracy: {accuracy * 100}%')
+clf = MLPClassifier(hidden_layer_sizes=(100, 100), max_iter=1000, random_state=42)
 
 from sklearn.model_selection import cross_val_score
 
-# Initialize the RandomForestClassifier
-clf = RandomForestClassifier(random_state=42)
 
 # Perform cross-validation
 scores = cross_val_score(clf, X, y, cv=5)
