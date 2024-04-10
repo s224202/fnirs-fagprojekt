@@ -99,21 +99,6 @@ long_channels4 = get_long_channels(raw4, min_dist=0.015, max_dist=0.045)
 
 #%%
 
-# Visualize motion artifacts (only on the first subject)
-# Large jumps in light intensities
-
-raw = read_raw_bids(bids_paths[0])
-raw.plot(n_channels=56, duration=60)
-plt.show()
-
-# Physiological artifacts (heartbeat)
-fig, axes = plt.subplots(2, 1, figsize=(15, 10))
-long_channels0.plot_psd(axes=axes[0], show=False)
-#short_channels0.plot_psd(axes=axes[1], show=False)
-plt.show()
-
-#%%
-
 # Convert from raw intensity to optical density
 
 # With short and long channels
@@ -134,8 +119,13 @@ raw_od4_long = mne.preprocessing.nirs.optical_density(long_channels4)
 
 # Resample the data to 3 Hz and show artifacts in plot (only on the first subject)
 raw_od0_resampled = raw_od0.copy().resample(3, npad="auto")
-raw_od0_resampled.plot(n_channels=28, duration=500, show_scrollbars=False, clipping=None)
-raw_od0_resampled.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
+raw_od0_resampled.plot(n_channels=28, duration=250, show_scrollbars=False, clipping=None)
+
+new_annotations = mne.Annotations(
+    [450, 1075, 2150, 2650], [50, 50, 50, 50], ["Spike", "Spike", "Movement", "Baseline"]
+)
+raw_od0_resampled_new_annotations = raw_od0_resampled.set_annotations(new_annotations)
+raw_od0_resampled_new_annotations.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
 #raw_od1_resampled = raw_od1.copy().resample(3, npad="auto")
 #raw_od1.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
 
@@ -163,11 +153,10 @@ fig, ax = plt.subplots(layout="constrained")
 ax.hist(sci0)
 ax.set(xlabel="Scalp Coupling Index", ylabel="Count", xlim=[0, 1])
 
-# Plot optical density before removal of bad channels (only on the first subject)
-raw_od0.plot(n_channels=90, duration=4000, show_scrollbars=False, clipping=None)
-
-
 # %%
+
+# The whole plot of optical density before bad channels removal (only on the first subject) (for comparison)
+raw_od0.plot(n_channels=56, duration=4000, show_scrollbars=False, clipping=None)
 
 # Remove bad channels, eg. channels with SCI < 0.8
 
@@ -188,11 +177,12 @@ raw_od4_long.info['bads'] = list(compress(raw_od4_long.ch_names, sci4 < 0.8))
 # print how many bad channels were removed and which ones
 print('Number of bad channels removed (subject 0):', len(raw_od0.info['bads']))
 print(raw_od0.info['bads'])
+# BAD CHANNELS ER IKKE FJERNET; BRUG exclude='bads' OG SØRG FOR DE IKKE ER MED I PREPROCESSING
 
 # Plot optical density after removal of bad channels (only on the first subject)
-raw_od0.plot(n_channels=90, duration=4000, show_scrollbars=False, clipping=None)
+raw_od0.plot(n_channels=56, duration=4000, show_scrollbars=False, clipping=None)
 
-# Plot montage (only on the first subject)
+# Plot montage (only on the first subject) VIRKER IKKE!!! ikke rigtigt resultat
 raw_od0.plot_sensors()
 
 #%%
@@ -308,14 +298,15 @@ raw_haemo0_unfiltered = raw_haemo0.copy()
 # BRUG BANDPASS NÅR DEN VIRKER?
 # raw_haemo0_filtered = bandPassFilter(raw_haemo0.copy(), 0.05, 0.7)
 raw_haemo0_filtered = raw_haemo0.copy().filter(0.05, 0.7, h_trans_bandwidth = 0.2, l_trans_bandwidth = 0.02) # fra mne
-plot_unfiltered = raw_haemo0_unfiltered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
-plot_filtered = raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
-
+print("Unfiltered")
+raw_haemo0_unfiltered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
+print("Filtered")
+raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
 
 #%%
-for when, _raw in dict(Before=raw_haemo0_unfiltered, After=raw_haemo0_filtered).items():
-    fig = _raw.compute_psd.plot(average=True, amplitude=False, picks="data", exclude="bads")
-    fig.suptitle(f"{when} filtering", weight="bold", size="x-large")
+
+# FEATURE SELECTION
+
 
 # %%
 # Random Forest Classifier
