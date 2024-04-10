@@ -15,7 +15,6 @@ from sklearn.pipeline import make_pipeline
 from mne.datasets import sample
 from Scripts.TDDR import TDDR
 from mne_nirs.signal_enhancement import short_channel_regression
-from scipy.stats import studentized_range as student_dist
 import mne
 from mne_nirs.channels import get_long_channels
 from mne_bids import (
@@ -79,7 +78,7 @@ short_channels2 = mne.preprocessing.nirs.short_channels(raw2.info, threshold=0.0
 short_channels3 = mne.preprocessing.nirs.short_channels(raw3.info, threshold=0.01)
 short_channels4 = mne.preprocessing.nirs.short_channels(raw4.info, threshold=0.01)
 
-short_channels00 = mne_nirs.channels.get_short_channels(raw, max_dist=0.01)
+#short_channels00 = mne_nirs.channels.get_short_channels(raw, max_dist=0.01)
 # Long channels
 long_channels0 = get_long_channels(raw0, min_dist=0.015, max_dist=0.045)
 long_channels1 = get_long_channels(raw1, min_dist=0.015, max_dist=0.045)
@@ -90,10 +89,13 @@ long_channels4 = get_long_channels(raw4, min_dist=0.015, max_dist=0.045)
 #%%
 
 # Visualize the short and long channels (only on the first subject)
+# VIRKER IKKE!!
 
-brain = mne.viz.Brain("fsaverage", subjects_dir=raw0, background="w", cortex="0.5")
-brain.add_sensors(raw0.info, trans="fsaverage", fnirs=["channels", "pairs", "sources", "detectors"],)
-brain.show_view(azimuth=20, elevation=60, distance=400)
+#subjects_dir = "./Rob Luke Tapping dataset" 
+
+#brain = mne.viz.Brain("fsaverage", subjects_dir = subjects_dir, background="w", cortex="0.5")
+#brain.add_sensors(raw0.info, trans="fsaverage", fnirs=["channels", "pairs", "sources", "detectors"],)
+#brain.show_view(azimuth=20, elevation=60, distance=400)
 
 #%%
 
@@ -107,7 +109,7 @@ plt.show()
 # Physiological artifacts (heartbeat)
 fig, axes = plt.subplots(2, 1, figsize=(15, 10))
 long_channels0.plot_psd(axes=axes[0], show=False)
-short_channels0.plot_psd(axes=axes[1], show=False)
+#short_channels0.plot_psd(axes=axes[1], show=False)
 plt.show()
 
 #%%
@@ -127,6 +129,24 @@ raw_od1_long = mne.preprocessing.nirs.optical_density(long_channels1)
 raw_od2_long = mne.preprocessing.nirs.optical_density(long_channels2)
 raw_od3_long = mne.preprocessing.nirs.optical_density(long_channels3)
 raw_od4_long = mne.preprocessing.nirs.optical_density(long_channels4)
+
+#%%
+
+# Resample the data to 3 Hz and show artifacts in plot (only on the first subject)
+raw_od0_resampled = raw_od0.copy().resample(3, npad="auto")
+raw_od0_resampled.plot(n_channels=28, duration=500, show_scrollbars=False, clipping=None)
+raw_od0_resampled.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
+#raw_od1_resampled = raw_od1.copy().resample(3, npad="auto")
+#raw_od1.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
+
+#raw_od2_resampled = raw_od2.copy().resample(3, npad="auto")
+#raw_od2.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
+
+#raw_od3_resampled = raw_od3.copy().resample(3, npad="auto")
+#raw_od3.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
+
+#raw_od4_resampled = raw_od4.copy().resample(3, npad="auto")
+#raw_od4.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
 
 #%%
 
@@ -177,6 +197,14 @@ raw_od0.plot_sensors()
 
 #%%
 
+#Standardize the data
+
+# Instrumental Noise Correction
+
+#Low-pass filter
+
+#%% 
+
 # Motion Artifact Correction
 
 r = 42
@@ -221,15 +249,13 @@ def waveletPreprocessor(x, wavelet='db1'):
     return cA
 
 
-
-
 # TDDR (needs to be used along with a low-pass filter and sampling frequency above 1 Hz according to the study by Fishburn et al. (2019))
 def tddr(signals, sample_rate):
     return TDDR(signals, sample_rate)
 
-# Short-channel regression (mne)
-def shortChannelRegression(x):
-    return short_channel_regression(x, max_dist=0.01)
+
+
+
 
 
 # %%
@@ -240,13 +266,64 @@ plt.plot(wienerPreprocessor(long_channels0.get_data()[0]), label='Wiener filter'
 # plt.plot(lastCompsPCA(long_channels0.get_data()[0], 39), label='PCA last comps.')
 plt.legend()
 plt.show()
+
+#%%
+# Converting from optical density to hemoglobin concentration
+
+# With short and long channels
+raw_haemo0 = mne.preprocessing.nirs.beer_lambert_law(raw_od0, ppf=0.1)
+raw_haemo1 = mne.preprocessing.nirs.beer_lambert_law(raw_od1, ppf=0.1)
+raw_haemo2 = mne.preprocessing.nirs.beer_lambert_law(raw_od2, ppf=0.1)
+raw_haemo3 = mne.preprocessing.nirs.beer_lambert_law(raw_od3, ppf=0.1)
+raw_haemo4 = mne.preprocessing.nirs.beer_lambert_law(raw_od4, ppf=0.1)
+
+# Without short channels
+raw_haemo0_long = mne.preprocessing.nirs.beer_lambert_law(raw_od0_long, ppf=0.1)
+raw_haemo1_long = mne.preprocessing.nirs.beer_lambert_law(raw_od1_long, ppf=0.1)
+raw_haemo2_long = mne.preprocessing.nirs.beer_lambert_law(raw_od2_long, ppf=0.1)
+raw_haemo3_long = mne.preprocessing.nirs.beer_lambert_law(raw_od3_long, ppf=0.1)
+raw_haemo4_long = mne.preprocessing.nirs.beer_lambert_law(raw_od4_long, ppf=0.1)
+#%%
+
+# Physiological Noise Correction
+
+# Band-pass filter
+def bandPassFilter(x, lowcut, highcut, sfreq = data['sfreq']):
+    return mne.filter.filter_data(x, lowcut, highcut)
+
+# our sampling frequency from data
+
+# Short-channel regression (mne)
+def shortChannelRegression(x):
+    return short_channel_regression(x, max_dist=0.01)
+
+# PCA
+
+# ICA
+
+#%%
+
+# Visualize example of heartrate artifacts before and after bandpass filter (only on the first subject)
+raw_haemo0_unfiltered = raw_haemo0.copy()
+# BRUG BANDPASS NÅR DEN VIRKER?
+# raw_haemo0_filtered = bandPassFilter(raw_haemo0.copy(), 0.05, 0.7)
+raw_haemo0_filtered = raw_haemo0.copy().filter(0.05, 0.7, h_trans_bandwidth = 0.2, l_trans_bandwidth = 0.02) # fra mne
+plot_unfiltered = raw_haemo0_unfiltered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
+plot_filtered = raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
+
+
+#%%
+for when, _raw in dict(Before=raw_haemo0_unfiltered, After=raw_haemo0_filtered).items():
+    fig = _raw.compute_psd.plot(average=True, amplitude=False, picks="data", exclude="bads")
+    fig.suptitle(f"{when} filtering", weight="bold", size="x-large")
+
 # %%
 # Random Forest Classifier
 
 # Assuming X is your feature set and y is your target variable
 events, event_dict = mne.events_from_annotations(raw0)
-X = mne.Epochs(raw0, events,event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
-
+#X = mne.Epochs(raw0, events,event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
+X = mne.Epochs(raw_haemo0_long, events,event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
 
 def arrayflattener(x):
     Xflat = np.zeros((x.shape[0], x.shape[1]*x.shape[2]))
@@ -256,7 +333,7 @@ def arrayflattener(x):
 X = arrayflattener(X)
 print(X.shape)
 # Create a binary target variable for raw0
-y = raw0.annotations.to_data_frame()
+y = raw_haemo0_long.annotations.to_data_frame()
 y = y['description'].to_numpy()
 
 y = LabelEncoder().fit_transform(y)
