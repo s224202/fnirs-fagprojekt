@@ -259,7 +259,20 @@ print("Filtered")
 raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
 
 #%%
-
+# This is stupid
+raws = [raw0, raw1, raw2, raw3, raw4]
+longs = [raw_haemo0_long, raw_haemo1_long, raw_haemo2_long, raw_haemo3_long, raw_haemo4_long]
+subject_datas = []
+for i in range(5):
+    events, event_dict = mne.events_from_annotations(raws[i])
+    dat = mne.Epochs(longs[i], events, event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
+    subject_datas.append(dat)
+labels = []
+for i in range(5):
+    y = longs[i].annotations.to_data_frame()
+    y = y['description'].to_numpy()
+    y = LabelEncoder().fit_transform(y)
+    labels.append(y)
 # FEATURE SELECTION
 K = 10
 tol = 1e-3
@@ -269,13 +282,14 @@ train_MSE = np.zeros((participants, K))
 CV = KFold(n_splits=K, shuffle=True, random_state=r)
 sfs_features = [[] for _ in range(participants)]
 for subject in range(participants):
-    subject_data = arrayflattener(data[subject])
-    for k, (train, test) in enumerate(CV.split(data[subject])):
+    subject_data = arrayflattener(subject_datas[subject])
+    label = labels[subject]
+    for k, (train, test) in enumerate(CV.split(subject_data)):
         best_mse = np.inf
         X_train = subject_data[train]
         X_test = subject_data[test]
-        y_train = subject_data[train]
-        y_test = subject_data[test]
+        y_train = label[train]
+        y_test = label[test]
         for i in range(1, X_train.shape[1]+1):
             sfs = SequentialFeatureSelector(LogisticRegression(random_state=r), n_features_to_select=i)
             sfs.fit(X_train, y_train)
@@ -291,6 +305,7 @@ for subject in range(participants):
             else:
                 sfs_features[subject] = sfs.get_support()
                 break
+print("Best features for each subject: " + str(sfs_features))
 # %%
 # Random Forest Classifier
 raw0=raws[0].copy() # using the first subject for now
