@@ -36,7 +36,12 @@ datatype = "nirs"
 extension = [".snirf"]
 bids_paths = find_matching_paths("./Rob Luke Tapping dataset", datatypes=datatype, extensions=extension)
 data = [read_raw_bids(bids_path) for bids_path in bids_paths]
-
+# %%
+def arrayflattener(x):
+    Xflat = np.zeros((x.shape[0], x.shape[1]*x.shape[2]))
+    for i in range(x.shape[0]):
+        Xflat[i] = np.reshape(x[i], (x.shape[1]*x.shape[2]))
+    return Xflat
 # %%
 raws = []
 for i in range(5):
@@ -230,6 +235,26 @@ for raw_od in raw_ods:
 raw_haemos_long = []
 for raw_od_long in raw_od_longs:
     raw_haemos_long.append(mne.preprocessing.nirs.beer_lambert_law(raw_od_long, ppf=0.1))
+
+oxy_haemos_long = []
+deoxy_haemos_long = []
+for raw_haemo_long in raw_haemos_long:
+    oxy = raw_haemo_long.copy().pick(picks="hbo")
+    deoxy = raw_haemo_long.copy().pick(picks="hbr")
+    oxy_haemos_long.append(oxy)
+    deoxy_haemos_long.append(deoxy)
+
+oxy_haemos = []
+deoxy_haemos = []
+for raw_haemo in raw_haemos:
+    oxy = raw_haemo.copy().pick(picks="hbo")
+    deoxy = raw_haemo.copy().pick(picks="hbr")
+    oxy_haemos.append(oxy)
+    deoxy_haemos.append(deoxy)
+
+# %%
+# Unpack data to numpy arrays
+
 #%% Physiological Noise Correction
 
 # Band-pass filter
@@ -260,16 +285,14 @@ raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="dat
 
 #%%
 # This is stupid
-raws = [raw0, raw1, raw2, raw3, raw4]
-longs = [raw_haemo0_long, raw_haemo1_long, raw_haemo2_long, raw_haemo3_long, raw_haemo4_long]
 subject_datas = []
 for i in range(5):
     events, event_dict = mne.events_from_annotations(raws[i])
-    dat = mne.Epochs(longs[i], events, event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
+    dat = mne.Epochs(long_channels[i], events, event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
     subject_datas.append(dat)
 labels = []
 for i in range(5):
-    y = longs[i].annotations.to_data_frame()
+    y = long_channels[i].annotations.to_data_frame()
     y = y['description'].to_numpy()
     y = LabelEncoder().fit_transform(y)
     labels.append(y)
@@ -314,11 +337,7 @@ events, event_dict = mne.events_from_annotations(raw0)
 #X = mne.Epochs(raw0, events,event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
 X = mne.Epochs(raw_haemos_long[0], events,event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
 
-def arrayflattener(x):
-    Xflat = np.zeros((x.shape[0], x.shape[1]*x.shape[2]))
-    for i in range(x.shape[0]):
-        Xflat[i] = np.reshape(x[i], (x.shape[1]*x.shape[2]))
-    return Xflat
+
 X = arrayflattener(X)
 print(X.shape)
 # Create a binary target variable for raw0
@@ -342,6 +361,30 @@ scores = cross_val_score(clf, X, y, cv=5)
 print(f'Cross-validation scores: {scores}')
 print(f'Average score: {scores.mean()}')
 
-#%%
-print(X.shape)
 # %%
+# Heuristic for selecting the best features
+heurisic_data_oxy = []
+heurisic_data_deoxy = []
+for oxy, deoxy in zip(oxy_haemos_long, deoxy_haemos_long):
+    heurisic_data_oxy.append(mne.Epochs(oxy, events, event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data())
+    heurisic_data_deoxy.append(mne.Epochs(deoxy, events, event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data())
+
+#means for oxy and deoxy
+means = []
+for person in heurisic_data_oxy:
+    per_means = np.zeros((len(person), len(person[0])))
+    for i in range(len(person)):
+        for j in range(len(person[i])):
+            per_means[i][j] = np.mean(person[i][j])
+    means.append(per_means)
+for person in heurisic_data_deoxy:
+    per_means = np.zeros((len(person), len(person[0])))
+    for i in range(len(person)):
+        for j in range(len(person[i])):
+            per_means[i][j] = np.mean(person[i][j])
+    means.append(per_means)
+
+
+print(means[0].shape, len(means))
+# %%
+oxy_haemos_long[0].get_data().shape
