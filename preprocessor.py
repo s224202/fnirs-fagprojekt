@@ -1,5 +1,6 @@
 # %% 
 from scipy.signal import find_peaks
+from scipy.stats import skew
 import pywt
 from itertools import compress
 import matplotlib.pyplot as plt
@@ -284,6 +285,7 @@ print("Filtered")
 raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
 
 #%%
+# This is for channels (we need to check whether it should be implemented, doesnt seem to be in the literature)
 # This is stupid
 subject_datas = []
 for i in range(5):
@@ -369,22 +371,153 @@ for oxy, deoxy in zip(oxy_haemos_long, deoxy_haemos_long):
     heurisic_data_oxy.append(mne.Epochs(oxy, events, event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data())
     heurisic_data_deoxy.append(mne.Epochs(deoxy, events, event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data())
 
-#means for oxy and deoxy
-means = []
+#signal means for oxy and deoxy
+means_oxy = []
 for person in heurisic_data_oxy:
     per_means = np.zeros((len(person), len(person[0])))
     for i in range(len(person)):
         for j in range(len(person[i])):
             per_means[i][j] = np.mean(person[i][j])
-    means.append(per_means)
+    means_oxy.append(per_means)
+
+means_deoxy = []
 for person in heurisic_data_deoxy:
     per_means = np.zeros((len(person), len(person[0])))
     for i in range(len(person)):
         for j in range(len(person[i])):
             per_means[i][j] = np.mean(person[i][j])
-    means.append(per_means)
+    means_deoxy.append(per_means)
+
+means = []
+for i in range(len(means_oxy)):
+    means.append(np.hstack((means_oxy[i], means_deoxy[i])))
 
 
 print(means[0].shape, len(means))
+
+# signal peaks for oxy and deoxy
+peaks_oxy = []
+for person in heurisic_data_oxy:
+    per_peaks = np.zeros((len(person), len(person[0])))
+    for i in range(len(person)):
+        for j in range(len(person[i])):
+            per_peaks[i][j] = max(person[i][j])
+    peaks_oxy.append(per_peaks)
+
+peaks_deoxy = []
+for person in heurisic_data_deoxy:
+    per_peaks = np.zeros((len(person), len(person[0])))
+    for i in range(len(person)):
+        for j in range(len(person[i])):
+            per_peaks[i][j] = max(person[i][j])
+    peaks_deoxy.append(per_peaks)
+
+peaks = []
+for i in range(len(peaks_oxy)):
+    peaks.append(np.hstack((peaks_oxy[i], peaks_deoxy[i])))
+
+print(peaks[0].shape, len(peaks))
+
+# signal skewness for oxy and deoxy
+skewness_oxy = []
+for person in heurisic_data_oxy:
+    per_skewness = np.zeros((len(person), len(person[0])))
+    for i in range(len(person)):
+        for j in range(len(person[i])):
+            per_skewness[i][j] = skew(person[i][j])
+    skewness_oxy.append(per_skewness)
+
+skewness_deoxy = []
+for person in heurisic_data_deoxy:
+    per_skewness = np.zeros((len(person), len(person[0])))
+    for i in range(len(person)):
+        for j in range(len(person[i])):
+            per_skewness[i][j] = skew(person[i][j])
+    skewness_deoxy.append(per_skewness)
+
+skewness = []
+for i in range(len(skewness_oxy)):
+    skewness.append(np.hstack((skewness_oxy[i], skewness_deoxy[i])))
+
+print(skewness[0].shape, len(skewness))
+
+# signal slope for oxy and deoxy
+slope_oxy = []
+for person in heurisic_data_oxy:
+    per_slope = np.zeros((len(person), len(person[0])))
+    for i in range(len(person)):
+        for j in range(len(person[i])):
+            per_slope[i][j] = np.polyfit(np.arange(len(person[i][j])), person[i][j], 1)[0]
+    slope_oxy.append(per_slope)
+
+slope_deoxy = []
+for person in heurisic_data_deoxy:
+    per_slope = np.zeros((len(person), len(person[0])))
+    for i in range(len(person)):
+        for j in range(len(person[i])):
+            per_slope[i][j] = np.polyfit(np.arange(len(person[i][j])), person[i][j], 1)[0]
+    slope_deoxy.append(per_slope)
+
+slope = []
+for i in range(len(slope_oxy)):
+    slope.append(np.hstack((slope_oxy[i], slope_deoxy[i])))
+
+print(slope[0].shape, len(slope))
+
+# print example of the heuristics (virker legit?)
+print(f'Mean, peak, skewness and slope of the first epoch of the first channel of the first person: {means[0][0][0]}, {peaks[0][0][0]}, {skewness[0][0][0]}, {slope[0][0][0]}')
+
+# other heuristics (could be used)
+# kurtosis
+# variance
+# std
+# median
+
+# %%
+# SFFS for heuristics
+subject_datas = []
+for i in range(len(data)):
+    subject_datas.append(np.hstack((means[i], peaks[i], skewness[i], slope[i])))
+
+labels = []
+for i in range(len(data)):
+    y = long_channels[i].annotations.to_data_frame()
+    y = y['description'].to_numpy()
+    y = LabelEncoder().fit_transform(y)
+    labels.append(y)
+# FEATURE SELECTION
+K = 10
+tol = 1e-3
+participants = len(data)
+test_MSE = np.zeros((participants, K))
+train_MSE = np.zeros((participants, K))
+CV = KFold(n_splits=K, shuffle=True, random_state=r)
+sfs_features = [[] for _ in range(participants)]
+for subject in range(participants):
+    subject_data = subject_datas[subject]
+    label = labels[subject]
+    for k, (train, test) in enumerate(CV.split(subject_data)):
+        best_mse = np.inf
+        X_train = subject_data[train]
+        X_test = subject_data[test]
+        y_train = label[train]
+        y_test = label[test]
+        for i in range(1, X_train.shape[1]+1):
+            sfs = SequentialFeatureSelector(LogisticRegression(random_state=r), n_features_to_select=i)
+            sfs.fit(X_train, y_train)
+            model= LogisticRegression(random_state=r)
+            model.fit(X_train[:,sfs.get_support()], y_train)
+            est_y = model.predict(X_test[:, sfs.get_support()])
+            error = mean_squared_error(est_y, y_test)
+            improvement = best_mse - error
+            if improvement > tol:
+                best_mse = error
+                test_MSE[subject, k] = error
+                train_MSE[subject, k] = mean_squared_error(model.predict(X_train[:, sfs.get_support()]), y_train)
+            else:
+                sfs_features[subject] = sfs.get_support()
+                break
+print("Best features for each subject: " + str(sfs_features))
+
 # %%
 oxy_haemos_long[0].get_data().shape
