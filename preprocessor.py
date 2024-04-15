@@ -4,6 +4,8 @@ import pywt
 from itertools import compress
 import matplotlib.pyplot as plt
 import numpy as np
+from sklearn.model_selection import KFold
+from sklearn.metrics import mean_squared_error
 from sklearn.preprocessing import StandardScaler
 from sklearn.preprocessing import FunctionTransformer, LabelEncoder
 from sklearn.decomposition import PCA
@@ -26,8 +28,9 @@ from mne_bids import (
     get_entity_vals,
 )
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, GroupKFold
 from sklearn.metrics import accuracy_score
+from sklearn.feature_selection import SequentialFeatureSelector
 sessions = get_entity_vals("./Rob Luke Tapping dataset", "session")
 datatype = "nirs"
 extension = [".snirf"]
@@ -306,8 +309,36 @@ raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="dat
 #%%
 
 # FEATURE SELECTION
-
-
+K = 10
+tol = 1e-3
+participants = len(data)
+test_MSE = np.zeros((participants, K))
+train_MSE = np.zeros((participants, K))
+CV = KFold(n_splits=K, shuffle=True, random_state=r)
+sfs_features = [[] for _ in range(participants)]
+for subject in range(participants):
+    subject_data = arrayflattener(data[subject])
+    for k, (train, test) in enumerate(CV.split(data[subject])):
+        best_mse = np.inf
+        X_train = subject_data[train]
+        X_test = subject_data[test]
+        y_train = subject_data[train]
+        y_test = subject_data[test]
+        for i in range(1, X_train.shape[1]+1):
+            sfs = SequentialFeatureSelector(LogisticRegression(random_state=r), n_features_to_select=i)
+            sfs.fit(X_train, y_train)
+            model= LogisticRegression(random_state=r)
+            model.fit(X_train[:,sfs.get_support()], y_train)
+            est_y = model.predict(X_test[:, sfs.get_support()])
+            error = mean_squared_error(est_y, y_test)
+            improvement = best_mse - error
+            if improvement > tol:
+                best_mse = error
+                test_MSE[subject, k] = error
+                train_MSE[subject, k] = mean_squared_error(model.predict(X_train[:, sfs.get_support()]), y_train)
+            else:
+                sfs_features[subject] = sfs.get_support()
+                break
 # %%
 # Random Forest Classifier
 
