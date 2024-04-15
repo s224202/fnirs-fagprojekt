@@ -35,56 +35,32 @@ bids_paths = find_matching_paths("./Rob Luke Tapping dataset", datatypes=datatyp
 data = [read_raw_bids(bids_path) for bids_path in bids_paths]
 
 # %%
-raw0 = data[0].pick(picks="all")
-raw1 = data[1].pick(picks="all")
-raw2 = data[2].pick(picks="all")
-raw3 = data[3].pick(picks="all")
-raw4 = data[4].pick(picks="all")
+raws = []
+for i in range(5):
+    raws.append(data[i].pick(picks="all"))
 # %%
-raw0.annotations.set_durations(5)
-raw1.annotations.set_durations(5)
-raw2.annotations.set_durations(5)
-raw3.annotations.set_durations(5)
-raw4.annotations.set_durations(5)
-
+for i in raws:
+    i.annotations.set_durations(5)
 # %%
-raw0.annotations.delete(np.nonzero(raw0.annotations.description == "15.0"))
-raw1.annotations.delete(np.nonzero(raw1.annotations.description == "15.0"))
-raw2.annotations.delete(np.nonzero(raw2.annotations.description == "15.0"))
-raw3.annotations.delete(np.nonzero(raw3.annotations.description == "15.0"))
-raw4.annotations.delete(np.nonzero(raw4.annotations.description == "15.0"))
-
+for i in raws:
+    i.annotations.delete(np.nonzero(i.annotations.description == "15.0"))
 # %% 
-picks0 = mne.pick_types(raw0.info, meg=False, eeg=False, fnirs=True)
-picks1 = mne.pick_types(raw1.info, meg=False, eeg=False, fnirs=True)
-picks2 = mne.pick_types(raw2.info, meg=False, eeg=False, fnirs=True)
-picks3 = mne.pick_types(raw3.info, meg=False, eeg=False, fnirs=True)
-picks4 = mne.pick_types(raw4.info, meg=False, eeg=False, fnirs=True)
-
+picks = []
+for i in raws:
+    picks.append(mne.pick_types(i.info, meg=False, eeg=False, fnirs=True))
 # %%
-
-dists0 = mne.preprocessing.nirs.source_detector_distances(raw0.info,picks=picks0)
-dists1 = mne.preprocessing.nirs.source_detector_distances(raw1.info,picks=picks1)
-dists2 = mne.preprocessing.nirs.source_detector_distances(raw2.info,picks=picks2)
-dists3 = mne.preprocessing.nirs.source_detector_distances(raw3.info,picks=picks3)
-dists4 = mne.preprocessing.nirs.source_detector_distances(raw4.info,picks=picks4)
-
+dists = []
+for i in range(5):
+    dists.append(mne.preprocessing.nirs.source_detector_distances(raws[i].info,picks=picks[i]))
 # %%
-
-# Short channels
-short_channels0 = mne.preprocessing.nirs.short_channels(raw0.info, threshold=0.01)
-short_channels1 = mne.preprocessing.nirs.short_channels(raw1.info, threshold=0.01)
-short_channels2 = mne.preprocessing.nirs.short_channels(raw2.info, threshold=0.01)
-short_channels3 = mne.preprocessing.nirs.short_channels(raw3.info, threshold=0.01)
-short_channels4 = mne.preprocessing.nirs.short_channels(raw4.info, threshold=0.01)
-
-#short_channels00 = mne_nirs.channels.get_short_channels(raw, max_dist=0.01)
+#short channels
+short_channels = []
+for raw in raws:
+    short_channels.append(mne.preprocessing.nirs.short_channels(raw.info, threshold=0.01))
 # Long channels
-long_channels0 = get_long_channels(raw0, min_dist=0.015, max_dist=0.045)
-long_channels1 = get_long_channels(raw1, min_dist=0.015, max_dist=0.045)
-long_channels2 = get_long_channels(raw2, min_dist=0.015, max_dist=0.045)
-long_channels3 = get_long_channels(raw3, min_dist=0.015, max_dist=0.045)
-long_channels4 = get_long_channels(raw4, min_dist=0.015, max_dist=0.045)
+long_channels = []
+for raw in raws:
+    long_channels.append(get_long_channels(raw, min_dist=0.015, max_dist=0.045))
 
 #%%
 
@@ -97,28 +73,18 @@ long_channels4 = get_long_channels(raw4, min_dist=0.015, max_dist=0.045)
 #brain.add_sensors(raw0.info, trans="fsaverage", fnirs=["channels", "pairs", "sources", "detectors"],)
 #brain.show_view(azimuth=20, elevation=60, distance=400)
 
-#%%
-
-# Convert from raw intensity to optical density
-
-# With short and long channels
-raw_od0 = mne.preprocessing.nirs.optical_density(raw0)
-raw_od1 = mne.preprocessing.nirs.optical_density(raw1)
-raw_od2 = mne.preprocessing.nirs.optical_density(raw2)
-raw_od3 = mne.preprocessing.nirs.optical_density(raw3)
-raw_od4 = mne.preprocessing.nirs.optical_density(raw4)
+#%% Convert from raw intensity to optical density
+raw_ods = []
+for raw in raws:
+    raw_ods.append(mne.preprocessing.nirs.optical_density(raw))
 
 # Without short channels
-raw_od0_long = mne.preprocessing.nirs.optical_density(long_channels0)
-raw_od1_long = mne.preprocessing.nirs.optical_density(long_channels1)
-raw_od2_long = mne.preprocessing.nirs.optical_density(long_channels2)
-raw_od3_long = mne.preprocessing.nirs.optical_density(long_channels3)
-raw_od4_long = mne.preprocessing.nirs.optical_density(long_channels4)
+raw_od_longs = []
+for long_channel in long_channels:
+    raw_od_longs.append(mne.preprocessing.nirs.optical_density(long_channel))
 
-#%%
-
-# Resample the data to 3 Hz and show artifacts in plot (only on the first subject)
-raw_od0_resampled = raw_od0.copy().resample(3, npad="auto")
+#%% Resample the data to 3 Hz and show artifacts in plot (only on the first subject)
+raw_od0_resampled = raw_ods[0].copy().resample(3, npad="auto")
 raw_od0_resampled.plot(n_channels=28, duration=250, show_scrollbars=False, clipping=None)
 
 new_annotations = mne.Annotations(
@@ -138,48 +104,40 @@ raw_od0_resampled_new_annotations.plot(n_channels=28, duration=4000, show_scroll
 #raw_od4_resampled = raw_od4.copy().resample(3, npad="auto")
 #raw_od4.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
 
-#%%
-
-# Evaluating data quality, calculating scalp coupling index (SCI) for all channels (a version of SNR)
-sci0 = mne.preprocessing.nirs.scalp_coupling_index(raw_od0)
-sci1 = mne.preprocessing.nirs.scalp_coupling_index(raw_od1)
-sci2 = mne.preprocessing.nirs.scalp_coupling_index(raw_od2)
-sci3 = mne.preprocessing.nirs.scalp_coupling_index(raw_od3)
-sci4 = mne.preprocessing.nirs.scalp_coupling_index(raw_od4)
+#%% Evaluating data quality, calculating scalp coupling index (SCI) for all channels (a version of SNR) (only on the first subject)
+scis = []
+for raw_od in raw_ods:
+    scis.append(mne.preprocessing.nirs.scalp_coupling_index(raw_od))    
 
 # Plot the SCI values (only on the first subject)
 
 fig, ax = plt.subplots(layout="constrained")
-ax.hist(sci0)
+ax.hist(scis[0])
 ax.set(xlabel="Scalp Coupling Index", ylabel="Count", xlim=[0, 1])
 
 # %%
 
 # The whole plot of optical density before bad channels removal (only on the first subject) (for comparison)
-raw_od0.plot(n_channels=56, duration=4000, show_scrollbars=False, clipping=None)
+raw_ods[0].plot(n_channels=56, duration=4000, show_scrollbars=False, clipping=None)
 
 # Remove bad channels, eg. channels with SCI < 0.8
 
 # With short and long channels
-raw_od0.info['bads'] = list(compress(raw_od0.ch_names, sci0 < 0.8))
-raw_od1.info['bads'] = list(compress(raw_od1.ch_names, sci1 < 0.8))
-raw_od2.info['bads'] = list(compress(raw_od2.ch_names, sci2 < 0.8))
-raw_od3.info['bads'] = list(compress(raw_od3.ch_names, sci3 < 0.8))
-raw_od4.info['bads'] = list(compress(raw_od4.ch_names, sci4 < 0.8))
+for raw_od, sci in zip(raw_ods, scis):
+    raw_od.info['bads'] = list(compress(raw_od.ch_names, sci < 0.8))
+
 
 # Without short channels
-raw_od0_long.info['bads'] = list(compress(raw_od0_long.ch_names, sci0 < 0.8))
-raw_od1_long.info['bads'] = list(compress(raw_od1_long.ch_names, sci1 < 0.8))
-raw_od2_long.info['bads'] = list(compress(raw_od2_long.ch_names, sci2 < 0.8))
-raw_od3_long.info['bads'] = list(compress(raw_od3_long.ch_names, sci3 < 0.8))
-raw_od4_long.info['bads'] = list(compress(raw_od4_long.ch_names, sci4 < 0.8))
+for raw_od_long, sci in zip(raw_od_longs, scis):
+    raw_od_long.info['bads'] = list(compress(raw_od_long.ch_names, sci < 0.8))
 
 # print how many bad channels were removed and which ones
-print('Number of bad channels removed (subject 0):', len(raw_od0.info['bads']))
-print(raw_od0.info['bads'])
+print('Number of bad channels removed (subject 0):', len(raw_ods[0].info['bads']))
+print(raw_ods[0].info['bads'])
 # BAD CHANNELS ER IKKE FJERNET; BRUG exclude='bads' OG SØRG FOR DE IKKE ER MED I PREPROCESSING
 
 # Plot optical density after removal of bad channels (only on the first subject)
+raw_od0=raw_ods[0].copy()
 raw_od0.plot(n_channels=56, duration=4000, show_scrollbars=False, clipping=None)
 
 # Plot montage (only on the first subject) VIRKER IKKE!!! ikke rigtigt resultat
@@ -249,10 +207,10 @@ def tddr(signals, sample_rate):
 
 
 # %%
-plt.plot(long_channels0.get_data()[0], label='Original')
-plt.plot(waveletPreprocessor(long_channels0.get_data()[0]), label='Wavelet denoising')
+plt.plot(long_channels[0].get_data()[0], label='Original')
+plt.plot(waveletPreprocessor(long_channels[0].get_data()[0]), label='Wavelet denoising')
 # plt.plot(cubicSplineInterpolation(long_channels0.get_data()), label='Cubic spline interpolation')
-plt.plot(wienerPreprocessor(long_channels0.get_data()[0]), label='Wiener filter')
+plt.plot(wienerPreprocessor(long_channels[0].get_data()[0]), label='Wiener filter')
 # plt.plot(lastCompsPCA(long_channels0.get_data()[0], 39), label='PCA last comps.')
 plt.legend()
 plt.show()
@@ -261,24 +219,18 @@ plt.show()
 # Converting from optical density to hemoglobin concentration
 
 # With short and long channels
-raw_haemo0 = mne.preprocessing.nirs.beer_lambert_law(raw_od0, ppf=0.1)
-raw_haemo1 = mne.preprocessing.nirs.beer_lambert_law(raw_od1, ppf=0.1)
-raw_haemo2 = mne.preprocessing.nirs.beer_lambert_law(raw_od2, ppf=0.1)
-raw_haemo3 = mne.preprocessing.nirs.beer_lambert_law(raw_od3, ppf=0.1)
-raw_haemo4 = mne.preprocessing.nirs.beer_lambert_law(raw_od4, ppf=0.1)
+raw_haemos = []
+for raw_od in raw_ods:
+    raw_haemos.append(mne.preprocessing.nirs.beer_lambert_law(raw_od, ppf=0.1))
 
 # Without short channels
-raw_haemo0_long = mne.preprocessing.nirs.beer_lambert_law(raw_od0_long, ppf=0.1)
-raw_haemo1_long = mne.preprocessing.nirs.beer_lambert_law(raw_od1_long, ppf=0.1)
-raw_haemo2_long = mne.preprocessing.nirs.beer_lambert_law(raw_od2_long, ppf=0.1)
-raw_haemo3_long = mne.preprocessing.nirs.beer_lambert_law(raw_od3_long, ppf=0.1)
-raw_haemo4_long = mne.preprocessing.nirs.beer_lambert_law(raw_od4_long, ppf=0.1)
-#%%
-
-# Physiological Noise Correction
+raw_haemos_long = []
+for raw_od_long in raw_od_longs:
+    raw_haemos_long.append(mne.preprocessing.nirs.beer_lambert_law(raw_od_long, ppf=0.1))
+#%% Physiological Noise Correction
 
 # Band-pass filter
-def bandPassFilter(x, lowcut, highcut, sfreq = data['sfreq']):
+def bandPassFilter(x, lowcut, highcut, sfreq = data):
     return mne.filter.filter_data(x, lowcut, highcut)
 
 # our sampling frequency from data
@@ -294,10 +246,10 @@ def shortChannelRegression(x):
 #%%
 
 # Visualize example of heartrate artifacts before and after bandpass filter (only on the first subject)
-raw_haemo0_unfiltered = raw_haemo0.copy()
+raw_haemo0_unfiltered = raw_haemos[0].copy()
 # BRUG BANDPASS NÅR DEN VIRKER?
 # raw_haemo0_filtered = bandPassFilter(raw_haemo0.copy(), 0.05, 0.7)
-raw_haemo0_filtered = raw_haemo0.copy().filter(0.05, 0.7, h_trans_bandwidth = 0.2, l_trans_bandwidth = 0.02) # fra mne
+raw_haemo0_filtered = raw_haemos[0].copy().filter(0.05, 0.7, h_trans_bandwidth = 0.2, l_trans_bandwidth = 0.02) # fra mne
 print("Unfiltered")
 raw_haemo0_unfiltered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
 print("Filtered")
@@ -310,11 +262,11 @@ raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="dat
 
 # %%
 # Random Forest Classifier
-
+raw0=raws[0].copy() # using the first subject for now
 # Assuming X is your feature set and y is your target variable
 events, event_dict = mne.events_from_annotations(raw0)
 #X = mne.Epochs(raw0, events,event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
-X = mne.Epochs(raw_haemo0_long, events,event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
+X = mne.Epochs(raw_haemos_long[0], events,event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
 
 def arrayflattener(x):
     Xflat = np.zeros((x.shape[0], x.shape[1]*x.shape[2]))
@@ -324,7 +276,7 @@ def arrayflattener(x):
 X = arrayflattener(X)
 print(X.shape)
 # Create a binary target variable for raw0
-y = raw_haemo0_long.annotations.to_data_frame()
+y = raw_haemos_long[0].annotations.to_data_frame()
 y = y['description'].to_numpy()
 
 y = LabelEncoder().fit_transform(y)
