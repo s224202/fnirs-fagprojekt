@@ -37,6 +37,8 @@ datatype = "nirs"
 extension = [".snirf"]
 bids_paths = find_matching_paths("./Rob Luke Tapping dataset", datatypes=datatype, extensions=extension)
 data = [read_raw_bids(bids_path) for bids_path in bids_paths]
+
+plotting = False
 # %%
 def arrayflattener(x):
     Xflat = np.zeros((x.shape[0], x.shape[1]*x.shape[2]))
@@ -93,14 +95,15 @@ for long_channel in long_channels:
     raw_od_longs.append(mne.preprocessing.nirs.optical_density(long_channel))
 
 #%% Resample the data to 3 Hz and show artifacts in plot (only on the first subject)
-raw_od0_resampled = raw_ods[0].copy().resample(3, npad="auto")
-raw_od0_resampled.plot(n_channels=28, duration=250, show_scrollbars=False, clipping=None)
+if plotting:
+    raw_od0_resampled = raw_ods[0].copy().resample(3, npad="auto")
+    raw_od0_resampled.plot(n_channels=28, duration=250, show_scrollbars=False, clipping=None)
 
-new_annotations = mne.Annotations(
-    [450, 1075, 2150, 2650], [50, 50, 50, 50], ["Spike", "Spike", "Movement", "Baseline"]
-)
-raw_od0_resampled_new_annotations = raw_od0_resampled.set_annotations(new_annotations)
-raw_od0_resampled_new_annotations.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
+    new_annotations = mne.Annotations(
+        [450, 1075, 2150, 2650], [50, 50, 50, 50], ["Spike", "Spike", "Movement", "Baseline"]
+    )
+    raw_od0_resampled_new_annotations = raw_od0_resampled.set_annotations(new_annotations)
+    raw_od0_resampled_new_annotations.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
 #raw_od1_resampled = raw_od1.copy().resample(3, npad="auto")
 #raw_od1.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
 
@@ -119,15 +122,16 @@ for raw_od in raw_ods:
     scis.append(mne.preprocessing.nirs.scalp_coupling_index(raw_od))    
 
 # Plot the SCI values (only on the first subject)
-
-fig, ax = plt.subplots(layout="constrained")
-ax.hist(scis[0])
-ax.set(xlabel="Scalp Coupling Index", ylabel="Count", xlim=[0, 1])
+if plotting:
+    fig, ax = plt.subplots(layout="constrained")
+    ax.hist(scis[0])
+    ax.set(xlabel="Scalp Coupling Index", ylabel="Count", xlim=[0, 1])
 
 # %%
 
 # The whole plot of optical density before bad channels removal (only on the first subject) (for comparison)
-raw_ods[0].plot(n_channels=56, duration=4000, show_scrollbars=False, clipping=None)
+if plotting:
+    raw_ods[0].plot(n_channels=56, duration=4000, show_scrollbars=False, clipping=None)
 
 # Remove bad channels, eg. channels with SCI < 0.8
 
@@ -146,11 +150,12 @@ print(raw_ods[0].info['bads'])
 # BAD CHANNELS ER IKKE FJERNET; BRUG exclude='bads' OG SØRG FOR DE IKKE ER MED I PREPROCESSING
 
 # Plot optical density after removal of bad channels (only on the first subject)
-raw_od0=raw_ods[0].copy()
-raw_od0.plot(n_channels=56, duration=4000, show_scrollbars=False, clipping=None)
+if plotting:
+    raw_od0=raw_ods[0].copy()
+    raw_od0.plot(n_channels=56, duration=4000, show_scrollbars=False, clipping=None)
 
 # Plot montage (only on the first subject) VIRKER IKKE!!! ikke rigtigt resultat
-raw_od0.plot_sensors()
+    raw_od0.plot_sensors()
 
 #%%
 
@@ -216,13 +221,14 @@ def tddr(signals, sample_rate):
 
 
 # %%
-plt.plot(long_channels[0].get_data()[0], label='Original')
-plt.plot(waveletPreprocessor(long_channels[0].get_data()[0]), label='Wavelet denoising')
-# plt.plot(cubicSplineInterpolation(long_channels0.get_data()), label='Cubic spline interpolation')
-plt.plot(wienerPreprocessor(long_channels[0].get_data()[0]), label='Wiener filter')
-# plt.plot(lastCompsPCA(long_channels0.get_data()[0], 39), label='PCA last comps.')
-plt.legend()
-plt.show()
+if plotting:
+    plt.plot(long_channels[0].get_data()[0], label='Original')
+    plt.plot(waveletPreprocessor(long_channels[0].get_data()[0]), label='Wavelet denoising')
+    # plt.plot(cubicSplineInterpolation(long_channels0.get_data()), label='Cubic spline interpolation')
+    plt.plot(wienerPreprocessor(long_channels[0].get_data()[0]), label='Wiener filter')
+    # plt.plot(lastCompsPCA(long_channels0.get_data()[0], 39), label='PCA last comps.')
+    plt.legend()
+    plt.show()
 
 #%%
 # Converting from optical density to hemoglobin concentration
@@ -279,10 +285,11 @@ raw_haemo0_unfiltered = raw_haemos[0].copy()
 # BRUG BANDPASS NÅR DEN VIRKER?
 # raw_haemo0_filtered = bandPassFilter(raw_haemo0.copy(), 0.05, 0.7)
 raw_haemo0_filtered = raw_haemos[0].copy().filter(0.05, 0.7, h_trans_bandwidth = 0.2, l_trans_bandwidth = 0.02) # fra mne
-print("Unfiltered")
-raw_haemo0_unfiltered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
-print("Filtered")
-raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
+if plotting:
+    print("Unfiltered")
+    raw_haemo0_unfiltered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
+    print("Filtered")
+    raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
 
 #%%
 # This is for channels (we need to check whether it should be implemented, doesnt seem to be in the literature)
