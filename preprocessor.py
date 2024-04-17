@@ -13,7 +13,9 @@ from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.neural_network import MLPClassifier
+from sklearn.preprocessing import StandardScaler
 from scipy.interpolate import CubicSpline
+from scipy.signal import wiener
 from sklearn.pipeline import make_pipeline
 from mne.datasets import sample
 from Scripts.TDDR import TDDR
@@ -152,14 +154,54 @@ raw_od0.plot(n_channels=56, duration=4000, show_scrollbars=False, clipping=None)
 # Plot montage (only on the first subject) VIRKER IKKE!!! ikke rigtigt resultat
 raw_od0.plot_sensors()
 
-#%%
+# %%
+# Brug StandardScaler() fra sklearn
+import numpy as np
+from numpy.fft import fft, fftfreq
+from scipy import signal
+import matplotlib.pyplot as plt
 
+from mne.time_frequency.tfr import morlet
+from mne.viz import plot_filter, plot_ideal_filter
+
+import mne
 #Standardize the data
 
 # Instrumental Noise Correction
 
-#Low-pass filter
+#Low-pass filter (MNE)
 
+# FIR example
+# Filter requirements.
+gain = [1, 1, 0, 0]
+fs = 7.8125       # sample rate, Hz
+nyq = 0.5 * fs  # Nyquist Frequency
+trans_bandwidth = 2  # desired width of transition from pass band to stop band, Hz
+cutoff = 1  # desired cutoff frequency of the filter, Hz
+f_s = cutoff + trans_bandwidth
+freq = [0, cutoff, f_s, nyq]
+flim = (1., fs/2.) #figure limits
+title = '%s Hz low-pass FIR filter with a %s Hz transition' % (cutoff, trans_bandwidth)
+third_height = np.array(plt.rcParams['figure.figsize']) * [1,1./3.]
+def lowpass(x, plotting):
+    filter = mne.filter.create_filter(x, fs, l_freq=None, h_freq=cutoff, fir_design='firwin')
+    if plotting:
+        plot_filter(filter, fs, freq=freq, gain=gain, title=title, flim=flim, compensate=True)
+    return filter
+
+lowpass(raw_od0.get_data(), True)
+
+# IIR example
+trans_bandwidth = 0.2  # desired width of transition from pass band to stop band, Hz
+freq = [0, cutoff, cutoff+trans_bandwidth, nyq]
+# butterworth
+sos = signal.butter(1, cutoff/nyq, btype='low', output='sos')
+plot_filter(dict(sos=sos), fs, freq=freq, gain=gain, title=title, flim=flim, compensate=True)
+x_shallow = signal.sosfilt(sos, raw_od0.get_data())
+plt.figure(figsize=third_height)
+
+# hva fuck foregår deeeeeeeeeeer hilsen signe
+# mne foreslår h_trans_bandwidth på 2 når man har cutoff på 1 et sted men et andet sted bruger de 0.2 Hz
 #%% 
 
 # Motion Artifact Correction
@@ -185,7 +227,6 @@ bPCALogisticPipeline1 = make_pipeline(bPCA1, LogisticRegression(random_state = r
 bPCACALogisticPipeline2 = make_pipeline(bPCA2, LogisticRegression(random_state = r))
 
 # Wiener filter
-from scipy.signal import wiener
 def wienerPreprocessor(x, n=5):
     return wiener(x, mysize=n)
 
@@ -210,12 +251,13 @@ def waveletPreprocessor(x, wavelet='db1'):
 def tddr(signals, sample_rate):
     return TDDR(signals, sample_rate)
 
+# ICA
+from mne.preprocessing import ICA
+ica = ICA(n_components=20, random_state=r)
 
+# Adaptive Filtering
 
-
-
-
-# %%
+ # %%
 plt.plot(long_channels[0].get_data()[0], label='Original')
 plt.plot(waveletPreprocessor(long_channels[0].get_data()[0]), label='Wavelet denoising')
 # plt.plot(cubicSplineInterpolation(long_channels0.get_data()), label='Cubic spline interpolation')
@@ -331,7 +373,15 @@ for subject in range(participants):
                 sfs_features[subject] = sfs.get_support()
                 break
 print("Best features for each subject: " + str(sfs_features))
+
+
+
+
+
+
 # %%
+
+#%%
 # Random Forest Classifier
 raw0=raws[0].copy() # using the first subject for now
 # Assuming X is your feature set and y is your target variable
@@ -521,3 +571,12 @@ print("Best features for each subject: " + str(sfs_features))
 
 # %%
 oxy_haemos_long[0].get_data().shape
+
+#%%
+
+#Standardize the data
+
+# Instrumental Noise Correction
+
+#Low-pass filter
+
