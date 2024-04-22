@@ -17,9 +17,11 @@ from scipy.interpolate import CubicSpline
 from sklearn.pipeline import make_pipeline
 from mne.datasets import sample
 from Scripts.TDDR import TDDR
+from scipy.signal import butter, filtfilt
 from mne_nirs.signal_enhancement import short_channel_regression
 import mne
 from mne_nirs.channels import get_long_channels
+from mne.preprocessing.nirs import temporal_derivative_distribution_repair
 from mne_bids import (
     BIDSPath,
     read_raw_bids,
@@ -222,11 +224,12 @@ def tddr(signals, sample_rate):
 
 # %%
 if plotting:
-    plt.plot(long_channels[0].get_data()[0], label='Original')
-    plt.plot(waveletPreprocessor(long_channels[0].get_data()[0]), label='Wavelet denoising')
-    # plt.plot(cubicSplineInterpolation(long_channels0.get_data()), label='Cubic spline interpolation')
-    plt.plot(wienerPreprocessor(long_channels[0].get_data()[0]), label='Wiener filter')
-    # plt.plot(lastCompsPCA(long_channels0.get_data()[0], 39), label='PCA last comps.')
+    plt.plot(long_channels[0].get_data()[0], label='Original', alpha=1)
+    #plt.plot(waveletPreprocessor(long_channels[0].get_data()[0]), label='Wavelet denoising')
+    #plt.plot(cubicSplineInterpolation(long_channels[0].get_data()), label='Cubic spline interpolation')
+    plt.plot(bPCA(long_channels[0].get_data(), 38)[0], label='PCA last comps', alpha=0.5)
+    plt.plot(wienerPreprocessor(long_channels[0].get_data()[0]), label='Wiener filter', alpha=0.25)
+    plt.plot(temporal_derivative_distribution_repair(long_channels[0]).get_data()[0], label='Temporal derivative distribution repair')
     plt.legend()
     plt.show()
 
@@ -312,6 +315,8 @@ participants = len(data)
 test_MSE = np.zeros((participants, K))
 train_MSE = np.zeros((participants, K))
 CV = KFold(n_splits=K, shuffle=True, random_state=r)
+best_features = [0,0,0,0,0]
+best_scores = [0,0,0,0,0]
 sfs_features = [[] for _ in range(participants)]
 for subject in range(participants):
     subject_data = arrayflattener(subject_datas[subject])
@@ -323,7 +328,7 @@ for subject in range(participants):
         y_train = label[train]
         y_test = label[test]
         for i in range(1, X_train.shape[1]+1):
-            sfs = SequentialFeatureSelector(LogisticRegression(random_state=r), n_features_to_select=i)
+            sfs = SequentialFeatureSelector(MLPClassifier(hidden_layer_sizes=(10,10,8,5), random_state=r))
             sfs.fit(X_train, y_train)
             model= LogisticRegression(random_state=r)
             model.fit(X_train[:,sfs.get_support()], y_train)
@@ -334,10 +339,14 @@ for subject in range(participants):
                 best_mse = error
                 test_MSE[subject, k] = error
                 train_MSE[subject, k] = mean_squared_error(model.predict(X_train[:, sfs.get_support()]), y_train)
+                best_scores[subject] = model.score(X_test[:, sfs.get_support()], y_test)
+                best_features[subject] = sfs.get_support()
             else:
                 sfs_features[subject] = sfs.get_support()
                 break
 print("Best features for each subject: " + str(sfs_features))
+print("Best scores: " + str(best_scores))
+print("Best features: " + str(best_features))
 # %%
 # Random Forest Classifier
 raw0=raws[0].copy() # using the first subject for now
@@ -499,7 +508,9 @@ participants = len(data)
 test_MSE = np.zeros((participants, K))
 train_MSE = np.zeros((participants, K))
 CV = KFold(n_splits=K, shuffle=True, random_state=r)
+best_scores = [0,0,0,0,0]
 sfs_features = [[] for _ in range(participants)]
+best_features = [0,0,0,0,0]
 for subject in range(participants):
     subject_data = subject_datas[subject]
     label = labels[subject]
@@ -510,7 +521,7 @@ for subject in range(participants):
         y_train = label[train]
         y_test = label[test]
         for i in range(1, X_train.shape[1]+1):
-            sfs = SequentialFeatureSelector(LogisticRegression(random_state=r), n_features_to_select=i)
+            sfs = SequentialFeatureSelector(MLPClassifier(hidden_layer_sizes=(10,10,8,5), random_state=r), n_features_to_select=i)
             sfs.fit(X_train, y_train)
             model= LogisticRegression(random_state=r)
             model.fit(X_train[:,sfs.get_support()], y_train)
@@ -519,12 +530,30 @@ for subject in range(participants):
             improvement = best_mse - error
             if improvement > tol:
                 best_mse = error
+                best_scores[subject] = model.score(X_test[:, sfs.get_support()], y_test)
                 test_MSE[subject, k] = error
                 train_MSE[subject, k] = mean_squared_error(model.predict(X_train[:, sfs.get_support()]), y_train)
+                best_features[subject] = sfs.get_support()
             else:
                 sfs_features[subject] = sfs.get_support()
                 break
-print("Best features for each subject: " + str(sfs_features))
+print("Selected features for each subject: " + str(best_features))
+print("Best scores: " + str(best_scores))
 
 # %%
 oxy_haemos_long[0].get_data().shape
+
+# %% 
+if plotting:
+    test_data = raw_haemos_long[0].copy()
+    test_data.filter(0.05,0.7, h_trans_bandwidth=0.2,l_trans_bandwidth=0.02)
+
+    events, event_dict = mne.events_from_annotations(test_data)
+    X = mne.Epochs(test_data, events,event_id=event_dict, tmin=-5, tmax=15, baseline=None, preload=True)
+    X["Control"].plot_image(
+    combine="mean",
+    vmin=-30,
+    vmax=30,
+    ts_args=dict(ylim=dict(hbo=[-15, 20], hbr=[-15, 15])),
+    )
+# %%
