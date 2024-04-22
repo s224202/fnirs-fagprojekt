@@ -163,52 +163,7 @@ if plotting:
 
 # %%
 # Brug StandardScaler() fra sklearn
-import numpy as np
-from numpy.fft import fft, fftfreq
-from scipy import signal
-import matplotlib.pyplot as plt
 
-from mne.time_frequency.tfr import morlet
-from mne.viz import plot_filter, plot_ideal_filter
-
-import mne
-#Standardize the data
-
-# Instrumental Noise Correction
-
-#Low-pass filter (MNE)
-
-# FIR example
-# Filter requirements.
-gain = [1, 1, 0, 0]
-fs = 7.8125       # sample rate, Hz
-nyq = 0.5 * fs  # Nyquist Frequency
-trans_bandwidth = 2  # desired width of transition from pass band to stop band, Hz
-cutoff = 1  # desired cutoff frequency of the filter, Hz
-f_s = cutoff + trans_bandwidth
-freq = [0, cutoff, f_s, nyq]
-flim = (1., fs/2.) #figure limits
-title = '%s Hz low-pass FIR filter with a %s Hz transition' % (cutoff, trans_bandwidth)
-third_height = np.array(plt.rcParams['figure.figsize']) * [1,1./3.]
-def lowpass(x, plotting):
-    filter = mne.filter.create_filter(x, fs, l_freq=None, h_freq=cutoff, fir_design='firwin')
-    if plotting:
-        plot_filter(filter, fs, freq=freq, gain=gain, title=title, flim=flim, compensate=True)
-    return filter
-
-lowpass(raw_od0.get_data(), True)
-
-# IIR example
-trans_bandwidth = 0.2  # desired width of transition from pass band to stop band, Hz
-freq = [0, cutoff, cutoff+trans_bandwidth, nyq]
-# butterworth
-sos = signal.butter(1, cutoff/nyq, btype='low', output='sos')
-plot_filter(dict(sos=sos), fs, freq=freq, gain=gain, title=title, flim=flim, compensate=True)
-x_shallow = signal.sosfilt(sos, raw_od0.get_data())
-plt.figure(figsize=third_height)
-
-# hva fuck foregår deeeeeeeeeeer hilsen signe
-# mne foreslår h_trans_bandwidth på 2 når man har cutoff på 1 et sted men et andet sted bruger de 0.2 Hz
 #%% 
 
 # Motion Artifact Correction
@@ -307,8 +262,8 @@ for raw_haemo in raw_haemos:
 from scipy.signal import butter, filtfilt
 
 T = 5
-lowcut = 0.05
-highcut = 0.7
+lowcut = 0.04
+cutoff = 0.7
 fs = 7.8125
 order = 3
 nyq = 0.5 * fs
@@ -328,18 +283,13 @@ plt.plot(y, label='Filtered')
 plt.legend()
 plt.show()
 
-#def bandPassFilter(x, sfreq = data):
-    #return mne.filter.filter_data(x, lowcut, highcut)
-
-# our sampling frequency from data
-
 # Short-channel regression (mne)
 def shortChannelRegression(x):
     return short_channel_regression(x, max_dist=0.01)
 
-# PCA
-
 # ICA
+from mne.preprocessing import ICA
+ica = ICA(n_components=20, random_state=r)
 
 #%%
 
