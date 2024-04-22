@@ -103,17 +103,6 @@ new_annotations = mne.Annotations(
 )
 raw_od0_resampled_new_annotations = raw_od0_resampled.set_annotations(new_annotations)
 raw_od0_resampled_new_annotations.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
-#raw_od1_resampled = raw_od1.copy().resample(3, npad="auto")
-#raw_od1.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
-
-#raw_od2_resampled = raw_od2.copy().resample(3, npad="auto")
-#raw_od2.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
-
-#raw_od3_resampled = raw_od3.copy().resample(3, npad="auto")
-#raw_od3.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
-
-#raw_od4_resampled = raw_od4.copy().resample(3, npad="auto")
-#raw_od4.plot(n_channels=28, duration=4000, show_scrollbars=False, clipping=None)
 
 #%% Evaluating data quality, calculating scalp coupling index (SCI) for all channels (a version of SNR) (only on the first subject)
 scis = []
@@ -156,52 +145,7 @@ raw_od0.plot_sensors()
 
 # %%
 # Brug StandardScaler() fra sklearn
-import numpy as np
-from numpy.fft import fft, fftfreq
-from scipy import signal
-import matplotlib.pyplot as plt
 
-from mne.time_frequency.tfr import morlet
-from mne.viz import plot_filter, plot_ideal_filter
-
-import mne
-#Standardize the data
-
-# Instrumental Noise Correction
-
-#Low-pass filter (MNE)
-
-# FIR example
-# Filter requirements.
-gain = [1, 1, 0, 0]
-fs = 7.8125       # sample rate, Hz
-nyq = 0.5 * fs  # Nyquist Frequency
-trans_bandwidth = 2  # desired width of transition from pass band to stop band, Hz
-cutoff = 1  # desired cutoff frequency of the filter, Hz
-f_s = cutoff + trans_bandwidth
-freq = [0, cutoff, f_s, nyq]
-flim = (1., fs/2.) #figure limits
-title = '%s Hz low-pass FIR filter with a %s Hz transition' % (cutoff, trans_bandwidth)
-third_height = np.array(plt.rcParams['figure.figsize']) * [1,1./3.]
-def lowpass(x, plotting):
-    filter = mne.filter.create_filter(x, fs, l_freq=None, h_freq=cutoff, fir_design='firwin')
-    if plotting:
-        plot_filter(filter, fs, freq=freq, gain=gain, title=title, flim=flim, compensate=True)
-    return filter
-
-lowpass(raw_od0.get_data(), True)
-
-# IIR example
-trans_bandwidth = 0.2  # desired width of transition from pass band to stop band, Hz
-freq = [0, cutoff, cutoff+trans_bandwidth, nyq]
-# butterworth
-sos = signal.butter(1, cutoff/nyq, btype='low', output='sos')
-plot_filter(dict(sos=sos), fs, freq=freq, gain=gain, title=title, flim=flim, compensate=True)
-x_shallow = signal.sosfilt(sos, raw_od0.get_data())
-plt.figure(figsize=third_height)
-
-# hva fuck foregår deeeeeeeeeeer hilsen signe
-# mne foreslår h_trans_bandwidth på 2 når man har cutoff på 1 et sted men et andet sted bruger de 0.2 Hz
 #%% 
 
 # Motion Artifact Correction
@@ -247,9 +191,7 @@ cubicSplineLogisticPipeline = make_pipeline(FunctionTransformer(cubicSplineInter
 def tddr(signals, sample_rate):
     return TDDR(signals, sample_rate)
 
-# ICA
-from mne.preprocessing import ICA
-ica = ICA(n_components=20, random_state=r)
+
 
  # %%
 plt.plot(long_channels[0].get_data()[0], label='Original')
@@ -297,8 +239,8 @@ for raw_haemo in raw_haemos:
 from scipy.signal import butter, filtfilt
 
 T = 5
-lowcut = 0.05
-highcut = 0.7
+lowcut = 0.04
+cutoff = 0.7
 fs = 7.8125
 order = 3
 nyq = 0.5 * fs
@@ -318,30 +260,62 @@ plt.plot(y, label='Filtered')
 plt.legend()
 plt.show()
 
-#def bandPassFilter(x, sfreq = data):
-    #return mne.filter.filter_data(x, lowcut, highcut)
-
-# our sampling frequency from data
-
 # Short-channel regression (mne)
 def shortChannelRegression(x):
     return short_channel_regression(x, max_dist=0.01)
 
-# PCA
-
 # ICA
+from mne.preprocessing import ICA
+ica = ICA(n_components=20, random_state=r)
 
 #%%
 
 # Visualize example of heartrate artifacts before and after bandpass filter (only on the first subject)
-raw_haemo0_unfiltered = raw_haemos[0].copy()
-# BRUG BANDPASS NÅR DEN VIRKER?
-# raw_haemo0_filtered = bandPassFilter(raw_haemo0.copy(), 0.05, 0.7)
-raw_haemo0_filtered = raw_haemos[0].copy().filter(0.05, 0.7, h_trans_bandwidth = 0.2, l_trans_bandwidth = 0.02) # fra mne
-print("Unfiltered")
-raw_haemo0_unfiltered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
-print("Filtered")
-raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
+#raw_haemo0_unfiltered = raw_haemos[0].copy()
+#raw_haemo0_filtered = raw_haemos[0].copy().filter(0.04, 0.7, h_trans_bandwidth = 0.2, l_trans_bandwidth = 0.02) # fra mne
+#print("Unfiltered")
+#raw_haemo0_unfiltered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads", color="red")
+#print("Filtered")
+#raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads", color="blue")
+
+# Power spectral density
+from scipy.signal import welch
+data1 = raw_haemos[0]
+data1hbo = data1.copy().pick("hbo")
+data1hbr = data1.copy().pick("hbr")
+frequencies0, psd0 = welch(data1hbo.get_data()[0], fs=fs, nperseg=n)
+plt.plot(frequencies0, psd0, label='Original_HBO')
+frequencies1, psd1 = welch(data1hbr.get_data()[0], fs=fs, nperseg=n)
+plt.plot(frequencies1, psd1, label='Original_HBR')
+plt.legend()
+plt.show()
+#%%
+import seaborn as sns
+
+sns.set_theme(style="whitegrid")
+plt.plot(frequencies0, psd0, label='Original_HBO')
+plt.plot(frequencies1, psd1, label='Original_HBR')
+plt.legend()
+plt.show()
+
+#%%
+import plotly.graph_objects as go
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=frequencies0, y=psd0, mode='lines', name='Original_HBO'))
+fig.add_trace(go.Scatter(x=frequencies1, y=psd1, mode='lines', name='Original_HBR'))
+fig.show()
+
+#%%
+from bokeh.plotting import figure, show
+from bokeh.io import output_notebook
+
+output_notebook()
+
+p = figure(title = "Power Spectral Density")
+p.line(frequencies0, psd0, legend_label='Original_HBO', line_color="blue")
+p.line(frequencies1, psd1, legend_label='Original_HBR', line_color="red")
+show(p)
 
 #%%
 # This is for channels (we need to check whether it should be implemented, doesnt seem to be in the literature)
