@@ -248,10 +248,6 @@ def cubicSplineInterpolation(x):
 
 cubicSplineLogisticPipeline = make_pipeline(FunctionTransformer(cubicSplineInterpolation), LogisticRegression(random_state = r))
 
-# Wavelet denoising
-def waveletPreprocessor(x, wavelet='db1'):
-    cA, cD = pywt.dwt(x, 'bior1.3')
-    return cA
 
 
 # TDDR (needs to be used along with a low-pass filter and sampling frequency above 1 Hz according to the study by Fishburn et al. (2019))
@@ -261,8 +257,6 @@ def tddr(signals, sample_rate):
 # ICA
 from mne.preprocessing import ICA
 ica = ICA(n_components=20, random_state=r)
-
-# Adaptive Filtering
 
 # %%
 if plotting:
@@ -310,8 +304,32 @@ for raw_haemo in raw_haemos:
 #%% Physiological Noise Correction
 
 # Band-pass filter
-def bandPassFilter(x, lowcut, highcut, sfreq = data):
-    return mne.filter.filter_data(x, lowcut, highcut)
+from scipy.signal import butter, filtfilt
+
+T = 5
+lowcut = 0.05
+highcut = 0.7
+fs = 7.8125
+order = 3
+nyq = 0.5 * fs
+n = int(T*fs)
+data = long_channels[0].get_data()[0]
+
+def butter_lowpass_filter(data, cutoff, fs, order):
+    normal_cutoff = cutoff / nyq
+    b, a = butter(order, normal_cutoff, btype='low', analog=False)
+    y = filtfilt(b, a, data)
+    return y
+
+y = butter_lowpass_filter(data, cutoff, fs, order)
+
+plt.plot(data, label='Original')
+plt.plot(y, label='Filtered')
+plt.legend()
+plt.show()
+
+#def bandPassFilter(x, sfreq = data):
+    #return mne.filter.filter_data(x, lowcut, highcut)
 
 # our sampling frequency from data
 
@@ -446,12 +464,14 @@ for person in heurisic_data_deoxy:
             per_means[i][j] = np.mean(person[i][j])
     means_deoxy.append(per_means)
 
-means = []
-for i in range(len(means_oxy)):
-    means.append(np.hstack((means_oxy[i], means_deoxy[i])))
+
+#means = []
+#for i in range(len(means_oxy)):
+    #means.append(np.hstack((means_oxy[i], means_deoxy[i])))
 
 
-print(means[0].shape, len(means))
+print(means_oxy[0].shape, len(means_oxy))
+print(means_deoxy[0].shape, len(means_deoxy))
 
 # signal peaks for oxy and deoxy
 peaks_oxy = []
@@ -470,12 +490,12 @@ for person in heurisic_data_deoxy:
             per_peaks[i][j] = max(person[i][j])
     peaks_deoxy.append(per_peaks)
 
-peaks = []
-for i in range(len(peaks_oxy)):
-    peaks.append(np.hstack((peaks_oxy[i], peaks_deoxy[i])))
+#peaks = []
+#for i in range(len(peaks_oxy)):
+    #peaks.append(np.hstack((peaks_oxy[i], peaks_deoxy[i])))
 
-print(peaks[0].shape, len(peaks))
-
+print(peaks_oxy[0].shape, len(peaks_oxy))
+print(peaks_deoxy[0].shape, len(peaks_deoxy))
 # signal skewness for oxy and deoxy
 skewness_oxy = []
 for person in heurisic_data_oxy:
@@ -493,11 +513,12 @@ for person in heurisic_data_deoxy:
             per_skewness[i][j] = skew(person[i][j])
     skewness_deoxy.append(per_skewness)
 
-skewness = []
-for i in range(len(skewness_oxy)):
-    skewness.append(np.hstack((skewness_oxy[i], skewness_deoxy[i])))
+#skewness = []
+#for i in range(len(skewness_oxy)):
+    #skewness.append(np.hstack((skewness_oxy[i], skewness_deoxy[i])))
 
-print(skewness[0].shape, len(skewness))
+print(skewness_oxy[0].shape, len(skewness_oxy))
+print(skewness_deoxy[0].shape, len(skewness_deoxy))
 
 # signal slope for oxy and deoxy
 slope_oxy = []
@@ -516,14 +537,15 @@ for person in heurisic_data_deoxy:
             per_slope[i][j] = np.polyfit(np.arange(len(person[i][j])), person[i][j], 1)[0]
     slope_deoxy.append(per_slope)
 
-slope = []
-for i in range(len(slope_oxy)):
-    slope.append(np.hstack((slope_oxy[i], slope_deoxy[i])))
+#slope = []
+#for i in range(len(slope_oxy)):
+    #slope.append(np.hstack((slope_oxy[i], slope_deoxy[i])))
 
-print(slope[0].shape, len(slope))
+print(slope_oxy[0].shape, len(slope_oxy))
+print(slope_deoxy[0].shape, len(slope_deoxy))
 
 # print example of the heuristics (virker legit?)
-print(f'Mean, peak, skewness and slope of the first epoch of the first channel of the first person: {means[0][0][0]}, {peaks[0][0][0]}, {skewness[0][0][0]}, {slope[0][0][0]}')
+print(f'Mean oxy and deoxy, peak oxy and deoxy, skewness oxy and deoxy and slope oxy and deoxy of the first epoch of the first channel of the first person: {means_oxy[0][0][0]}, {means_deoxy[0][0][0]}, {peaks_oxy[0][0][0]},{peaks_deoxy[0][0][0]}, {skewness_oxy[0][0][0]}, {skewness_deoxy[0][0][0]}, {slope_oxy[0][0][0]}, {slope_deoxy[0][0][0]}')
 
 # other heuristics (could be used)
 # kurtosis
@@ -535,7 +557,7 @@ print(f'Mean, peak, skewness and slope of the first epoch of the first channel o
 # SFFS for heuristics
 subject_datas = []
 for i in range(len(data)):
-    subject_datas.append(np.hstack((means[i], peaks[i], skewness[i], slope[i])))
+    subject_datas.append(np.hstack((means_oxy[i], means_deoxy[i],peaks_oxy[i], peaks_deoxy[i], skewness_oxy[i], skewness_deoxy[i], slope_oxy[i], slope_deoxy[i])))
 
 labels = []
 for i in range(len(data)):
