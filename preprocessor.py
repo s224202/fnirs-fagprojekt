@@ -552,7 +552,7 @@ if plotting:
 r = 69
 cv = StratifiedKFold(n_splits = 5, shuffle = True, random_state=42)
 for subject in range(participants):
-    X = subject_datas[subject][sfs_features[subject]]
+    X = subject_datas[subject][best_features[subject]]
     y = labels[subject]
     model = DummyClassifier(strategy="most_frequent")
     scores = cross_val_score(model, X, y, cv=cv)
