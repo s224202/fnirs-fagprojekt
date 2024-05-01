@@ -14,6 +14,7 @@ from sklearn.pipeline import make_pipeline
 from sklearn.neural_network import MLPClassifier
 from scipy.interpolate import CubicSpline
 from scipy.signal import wiener
+from sklearn.svm import SVC
 from scipy.signal import wiener
 from sklearn.pipeline import make_pipeline
 from mne.datasets import sample
@@ -279,7 +280,7 @@ fs = 7.8125
 order = 3
 nyq = 0.5 * fs
 n = int(T*fs)
-data = long_channels[0].get_data()[0]
+data2 = long_channels[0].get_data()[0]
 
 def butter_lowpass_filter(data, cutoff, fs, order):
     normal_cutoff = cutoff / nyq
@@ -287,12 +288,13 @@ def butter_lowpass_filter(data, cutoff, fs, order):
     y = filtfilt(b, a, data)
     return y
 
-y = butter_lowpass_filter(data, cutoff, fs, order)
+y = butter_lowpass_filter(data2, cutoff, fs, order)
 
-plt.plot(data, label='Original')
-plt.plot(y, label='Filtered')
-plt.legend()
-plt.show()
+if plotting:
+    plt.plot(data, label='Original')
+    plt.plot(y, label='Filtered')
+    plt.legend()
+    plt.show()
 
 # Short-channel regression (mne)
 def shortChannelRegression(x):
@@ -327,38 +329,42 @@ data1 = raw_haemos[0]
 data1hbo = data1.copy().pick("hbo")
 data1hbr = data1.copy().pick("hbr")
 frequencies0, psd0 = welch(data1hbo.get_data()[0], fs=fs, nperseg=n)
-plt.plot(frequencies0, psd0, label='Original_HBO')
+if plotting:
+    plt.plot(frequencies0, psd0, label='Original_HBO')
 frequencies1, psd1 = welch(data1hbr.get_data()[0], fs=fs, nperseg=n)
-plt.plot(frequencies1, psd1, label='Original_HBR')
-plt.legend()
-plt.show()
+if plotting:
+    plt.plot(frequencies1, psd1, label='Original_HBR')
+    plt.legend()
+    plt.show()
 #%%
 import seaborn as sns
-
-sns.set_theme(style="whitegrid")
-plt.plot(frequencies0, psd0, label='Original_HBO')
-plt.plot(frequencies1, psd1, label='Original_HBR')
-plt.legend()
-plt.show()
+if plotting:
+    sns.set_theme(style="whitegrid")
+    plt.plot(frequencies0, psd0, label='Original_HBO')
+    plt.plot(frequencies1, psd1, label='Original_HBR')
+    plt.legend()
+    plt.show()
 
 #%%
 import plotly.graph_objects as go
 
-fig = go.Figure()
-fig.add_trace(go.Scatter(x=frequencies0, y=psd0, mode='lines', name='Original_HBO'))
-fig.add_trace(go.Scatter(x=frequencies1, y=psd1, mode='lines', name='Original_HBR'))
-fig.show()
+if plotting:
+    fig = go.Figure()
+    fig.add_trace(go.Scatter(x=frequencies0, y=psd0, mode='lines', name='Original_HBO'))
+    fig.add_trace(go.Scatter(x=frequencies1, y=psd1, mode='lines', name='Original_HBR'))
+    fig.show()
 
 #%%
-from bokeh.plotting import figure, show
-from bokeh.io import output_notebook
+if plotting:
+    from bokeh.plotting import figure, show
+    from bokeh.io import output_notebook
 
-output_notebook()
+    output_notebook()
 
-p = figure(title = "Power Spectral Density")
-p.line(frequencies0, psd0, legend_label='Original_HBO', line_color="blue")
-p.line(frequencies1, psd1, legend_label='Original_HBR', line_color="red")
-show(p)
+    p = figure(title = "Power Spectral Density")
+    p.line(frequencies0, psd0, legend_label='Original_HBO', line_color="blue")
+    p.line(frequencies1, psd1, legend_label='Original_HBR', line_color="red")
+    show(p)
 
 # %%
 # Heuristic for selecting the best features
@@ -508,7 +514,7 @@ for subject in range(participants):
         y_train = label[train]
         y_test = label[test]
         for i in range(1, X_train.shape[1]+1):
-            sfs = SequentialFeatureSelector(MLPClassifier(hidden_layer_sizes=(10,10,8,5), random_state=r), n_features_to_select=i)
+            sfs = SequentialFeatureSelector(SVC(kernel='linear'), n_features_to_select=i)
             sfs.fit(X_train, y_train)
             model= LogisticRegression(random_state=r)
             model.fit(X_train[:,sfs.get_support()], y_train)
@@ -545,31 +551,16 @@ if plotting:
 # Baseline (most frequent class)
 r = 69
 cv = StratifiedKFold(n_splits = 5, shuffle = True, random_state=42)
-
-t = 3.5
-ts = 7.5
-X = epochs.copy().crop(t, ts).get_data(copy = False).mean(axis=-1)
-X = X.reshape(len(X), -1)
-y = epochs.events[:, 2] - 1
-
-# For splitting into left tap, right tap and control
-model = DummyClassifier(strategy="most_frequent")
-scores = cross_val_score(model, X, y, cv=cv)
-
-# print(y)
-print("When splitting into left tap, right tap and control: %0.2f accuracy with a standard deviation of %0.2f" % (scores.mean(), scores.std()))
-
-# For splitting into tap and control
-for i in range(len(y)):
-    if y[i] == 2:
-        y[i] = 1
-
-model = DummyClassifier(strategy="most_frequent")
-scores = cross_val_score(model, X, y, cv=cv)
-
-print("When splitting into tap and control: %0.2f accuracy with a standard deviation of %0.2f" % (scores.mean(), scores.std()))
-# print(y)
+for subject in range(participants):
+    X = subject_datas[subject][sfs_features[subject]]
+    y = labels[subject]
+    model = DummyClassifier(strategy="most_frequent")
+    scores = cross_val_score(model, X, y, cv=cv)
+    print("Dummy performance:")
+    print(f"Subject {subject} - Baseline accuracy: {scores.mean()} with a standard deviation of {scores.std()}")
+    model = SVC(kernel="linear")
+    scores = cross_val_score(model, X, y, cv=cv)
+    print("SVM performance:")
+    print(f"Subject {subject} - SVM accuracy: {scores.mean()} with a standard deviation of {scores.std()}")
 
 # SVM Classifier
-
-
