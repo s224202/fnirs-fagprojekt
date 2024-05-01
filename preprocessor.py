@@ -505,7 +505,7 @@ best_scores = [0,0,0,0,0]
 sfs_features = [[] for _ in range(participants)]
 best_features = [0,0,0,0,0]
 for subject in range(participants):
-    subject_data = subject_datas[subject]
+    subject_data = StandardScaler().fit_transform(subject_datas[subject])
     label = labels[subject]
     for k, (train, test) in enumerate(CV.split(subject_data)):
         best_mse = np.inf
@@ -552,8 +552,8 @@ if plotting:
 r = 69
 cv = StratifiedKFold(n_splits = 5, shuffle = True, random_state=42)
 for subject in range(participants):
-    X = subject_datas[subject][best_features[subject]]
-    y = labels[subject]
+    X = StandardScaler().fit_transform(subject_datas[subject][best_features[subject]])
+    y = LabelEncoder.fit_transform(labels[subject])
     model = DummyClassifier(strategy="most_frequent")
     scores = cross_val_score(model, X, y, cv=cv)
     print("Dummy performance:")
