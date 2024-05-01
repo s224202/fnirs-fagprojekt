@@ -1,5 +1,4 @@
 # %% 
-from scipy.signal import find_peaks
 from scipy.stats import skew
 import pywt
 from itertools import compress
@@ -13,8 +12,6 @@ from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.neural_network import MLPClassifier
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import StandardScaler
 from scipy.interpolate import CubicSpline
 from scipy.signal import wiener
 from scipy.signal import wiener
@@ -38,6 +35,19 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split, GroupKFold
 from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SequentialFeatureSelector
+from sklearn.dummy import DummyClassifier
+from sklearn.svm import SVC
+from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_predict
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report
+from sklearn.metrics import f1_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.model_selection import StratifiedKFold
+
+
 sessions = get_entity_vals("./Rob Luke Tapping dataset", "session")
 datatype = "nirs"
 extension = [".snirf"]
@@ -140,7 +150,6 @@ if plotting:
     raw_ods[0].plot(n_channels=56, duration=4000, show_scrollbars=False, clipping=None)
 
 # Remove bad channels, eg. channels with SCI < 0.8
-
 # With short and long channels
 for raw_od, sci in zip(raw_ods, scis):
     raw_od.info['bads'] = list(compress(raw_od.ch_names, sci < 0.8))
@@ -351,99 +360,14 @@ p.line(frequencies0, psd0, legend_label='Original_HBO', line_color="blue")
 p.line(frequencies1, psd1, legend_label='Original_HBR', line_color="red")
 show(p)
 
-#%%
-# This is for channels (we need to check whether it should be implemented, doesnt seem to be in the literature)
-# This is stupid
-subject_datas = []
-for i in range(5):
-    events, event_dict = mne.events_from_annotations(raws[i])
-    dat = mne.Epochs(long_channels[i], events, event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
-    subject_datas.append(dat)
-labels = []
-for i in range(5):
-    y = long_channels[i].annotations.to_data_frame()
-    y = y['description'].to_numpy()
-    y = LabelEncoder().fit_transform(y)
-    labels.append(y)
-# FEATURE SELECTION
-K = 10
-tol = 1e-3
-participants = len(data)
-test_MSE = np.zeros((participants, K))
-train_MSE = np.zeros((participants, K))
-CV = KFold(n_splits=K, shuffle=True, random_state=r)
-best_features = [0,0,0,0,0]
-best_scores = [0,0,0,0,0]
-sfs_features = [[] for _ in range(participants)]
-for subject in range(participants):
-    subject_data = arrayflattener(subject_datas[subject])
-    label = labels[subject]
-    for k, (train, test) in enumerate(CV.split(subject_data)):
-        best_mse = np.inf
-        X_train = subject_data[train]
-        X_test = subject_data[test]
-        y_train = label[train]
-        y_test = label[test]
-        for i in range(1, X_train.shape[1]+1):
-            sfs = SequentialFeatureSelector(MLPClassifier(hidden_layer_sizes=(10,10,8,5), random_state=r))
-            sfs.fit(X_train, y_train)
-            model= LogisticRegression(random_state=r)
-            model.fit(X_train[:,sfs.get_support()], y_train)
-            est_y = model.predict(X_test[:, sfs.get_support()])
-            error = mean_squared_error(est_y, y_test)
-            improvement = best_mse - error
-            if improvement > tol:
-                best_mse = error
-                test_MSE[subject, k] = error
-                train_MSE[subject, k] = mean_squared_error(model.predict(X_train[:, sfs.get_support()]), y_train)
-                best_scores[subject] = model.score(X_test[:, sfs.get_support()], y_test)
-                best_features[subject] = sfs.get_support()
-            else:
-                sfs_features[subject] = sfs.get_support()
-                break
-print("Best features for each subject: " + str(sfs_features))
-print("Best scores: " + str(best_scores))
-print("Best features: " + str(best_features))
-# %%
-
-#%%
-# Random Forest Classifier
-raw0=raws[0].copy() # using the first subject for now
-# Assuming X is your feature set and y is your target variable
-events, event_dict = mne.events_from_annotations(raw0)
-#X = mne.Epochs(raw0, events,event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
-X = mne.Epochs(raw_haemos_long[0], events,event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data()
-
-
-X = arrayflattener(X)
-print(X.shape)
-# Create a binary target variable for raw0
-y = raw_haemos_long[0].annotations.to_data_frame()
-y = y['description'].to_numpy()
-
-y = LabelEncoder().fit_transform(y)
-
-# Split the data into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-
-# Initialize the RandomForestClassifier
-clf = MLPClassifier(hidden_layer_sizes=(100, 100), max_iter=1000, random_state=42)
-
-from sklearn.model_selection import cross_val_score
-
-
-# Perform cross-validation
-scores = cross_val_score(clf, X, y, cv=5)
-
-print(f'Cross-validation scores: {scores}')
-print(f'Average score: {scores.mean()}')
-
 # %%
 # Heuristic for selecting the best features
 heurisic_data_oxy = []
 heurisic_data_deoxy = []
 for oxy, deoxy in zip(oxy_haemos_long, deoxy_haemos_long):
+    events, event_dict = mne.events_from_annotations(oxy)
     heurisic_data_oxy.append(mne.Epochs(oxy, events, event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data())
+    events, event_dict = mne.events_from_annotations(deoxy)
     heurisic_data_deoxy.append(mne.Epochs(deoxy, events, event_id=event_dict, tmin=0, tmax=15, baseline=None, preload=True).get_data())
 
 #signal means for oxy and deoxy
@@ -603,9 +527,6 @@ for subject in range(participants):
 print("Selected features for each subject: " + str(best_features))
 print("Best scores: " + str(best_scores))
 
-# %%
-oxy_haemos_long[0].get_data().shape
-
 # %% 
 if plotting:
     test_data = raw_haemos_long[0].copy()
@@ -620,3 +541,35 @@ if plotting:
     ts_args=dict(ylim=dict(hbo=[-15, 20], hbr=[-15, 15])),
     )
 # %%
+# Classifiers
+# Baseline (most frequent class)
+r = 69
+cv = StratifiedKFold(n_splits = 5, shuffle = True, random_state=42)
+
+t = 3.5
+ts = 7.5
+X = epochs.copy().crop(t, ts).get_data(copy = False).mean(axis=-1)
+X = X.reshape(len(X), -1)
+y = epochs.events[:, 2] - 1
+
+# For splitting into left tap, right tap and control
+model = DummyClassifier(strategy="most_frequent")
+scores = cross_val_score(model, X, y, cv=cv)
+
+# print(y)
+print("When splitting into left tap, right tap and control: %0.2f accuracy with a standard deviation of %0.2f" % (scores.mean(), scores.std()))
+
+# For splitting into tap and control
+for i in range(len(y)):
+    if y[i] == 2:
+        y[i] = 1
+
+model = DummyClassifier(strategy="most_frequent")
+scores = cross_val_score(model, X, y, cv=cv)
+
+print("When splitting into tap and control: %0.2f accuracy with a standard deviation of %0.2f" % (scores.mean(), scores.std()))
+# print(y)
+
+# SVM Classifier
+
+
