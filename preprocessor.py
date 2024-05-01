@@ -14,7 +14,9 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.neural_network import MLPClassifier
 from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler
 from scipy.interpolate import CubicSpline
+from scipy.signal import wiener
 from scipy.signal import wiener
 from sklearn.pipeline import make_pipeline
 from mne.datasets import sample
@@ -303,6 +305,51 @@ if plotting:
     raw_haemo0_unfiltered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
     print("Filtered")
     raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads")
+#raw_haemo0_unfiltered = raw_haemos[0].copy()
+#raw_haemo0_filtered = raw_haemos[0].copy().filter(0.04, 0.7, h_trans_bandwidth = 0.2, l_trans_bandwidth = 0.02) # fra mne
+#print("Unfiltered")
+#raw_haemo0_unfiltered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads", color="red")
+#print("Filtered")
+#raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads", color="blue")
+
+# Power spectral density
+from scipy.signal import welch
+data1 = raw_haemos[0]
+data1hbo = data1.copy().pick("hbo")
+data1hbr = data1.copy().pick("hbr")
+frequencies0, psd0 = welch(data1hbo.get_data()[0], fs=fs, nperseg=n)
+plt.plot(frequencies0, psd0, label='Original_HBO')
+frequencies1, psd1 = welch(data1hbr.get_data()[0], fs=fs, nperseg=n)
+plt.plot(frequencies1, psd1, label='Original_HBR')
+plt.legend()
+plt.show()
+#%%
+import seaborn as sns
+
+sns.set_theme(style="whitegrid")
+plt.plot(frequencies0, psd0, label='Original_HBO')
+plt.plot(frequencies1, psd1, label='Original_HBR')
+plt.legend()
+plt.show()
+
+#%%
+import plotly.graph_objects as go
+
+fig = go.Figure()
+fig.add_trace(go.Scatter(x=frequencies0, y=psd0, mode='lines', name='Original_HBO'))
+fig.add_trace(go.Scatter(x=frequencies1, y=psd1, mode='lines', name='Original_HBR'))
+fig.show()
+
+#%%
+from bokeh.plotting import figure, show
+from bokeh.io import output_notebook
+
+output_notebook()
+
+p = figure(title = "Power Spectral Density")
+p.line(frequencies0, psd0, legend_label='Original_HBO', line_color="blue")
+p.line(frequencies1, psd1, legend_label='Original_HBR', line_color="red")
+show(p)
 
 #%%
 # This is for channels (we need to check whether it should be implemented, doesnt seem to be in the literature)
@@ -358,6 +405,8 @@ print("Best features for each subject: " + str(sfs_features))
 print("Best scores: " + str(best_scores))
 print("Best features: " + str(best_features))
 # %%
+
+#%%
 # Random Forest Classifier
 raw0=raws[0].copy() # using the first subject for now
 # Assuming X is your feature set and y is your target variable
