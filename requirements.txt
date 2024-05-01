@@ -138,3 +138,5 @@ wslink==1.12.4
 yarl==1.9.4
 PyWavelets==1.6.0
 mne-nirs==0.6.0
+bokeh==3.4.1
+plotly==5.21.0
