@@ -46,7 +46,6 @@ def TDDR(signal, sample_rate):
         for ch in range(signal.shape[1]):
             signal[:, ch] = TDDR(signal[:, ch], sample_rate)
         return signal
-
     # Preprocess: Separate high and low frequencies
     filter_cutoff = .5
     filter_order = 3
