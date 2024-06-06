@@ -4,49 +4,27 @@ import pywt
 from itertools import compress
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.model_selection import KFold
-from sklearn.metrics import mean_squared_error
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import FunctionTransformer, LabelEncoder
+from sklearn.model_selection import KFold,train_test_split, GroupKFold,cross_val_predict,cross_val_score,StratifiedKFold
+from sklearn.metrics import mean_squared_error,accuracy_score,recall_score,precision_score,f1_score,classification_report,accuracy_score,confusion_matrix
+from sklearn.preprocessing import StandardScaler,FunctionTransformer, LabelEncoder
 from sklearn.decomposition import PCA
 from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import make_pipeline
 from sklearn.neural_network import MLPClassifier
 from scipy.interpolate import CubicSpline
-from scipy.signal import wiener
+from scipy.signal import wiener,butter, filtfilt
 from sklearn.svm import SVC
-from scipy.signal import wiener
-from sklearn.pipeline import make_pipeline
 from mne.datasets import sample
 from Scripts.TDDR import TDDR
-from scipy.signal import butter, filtfilt
 from mne_nirs.signal_enhancement import short_channel_regression
 import mne
 from mne_nirs.channels import get_long_channels
 from mne.preprocessing.nirs import temporal_derivative_distribution_repair
-from mne_bids import (
-    BIDSPath,
-    read_raw_bids,
-    print_dir_tree,
-    make_report,
-    find_matching_paths,
-    get_entity_vals,
-)
+from mne_bids import (BIDSPath,read_raw_bids,print_dir_tree,make_report,find_matching_paths,get_entity_vals)
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import train_test_split, GroupKFold
-from sklearn.metrics import accuracy_score
 from sklearn.feature_selection import SequentialFeatureSelector
 from sklearn.dummy import DummyClassifier
 from sklearn.svm import SVC
-from sklearn.model_selection import cross_val_score
-from sklearn.model_selection import cross_val_predict
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import classification_report
-from sklearn.metrics import f1_score
-from sklearn.metrics import precision_score
-from sklearn.metrics import recall_score
-from sklearn.model_selection import StratifiedKFold
 
 
 sessions = get_entity_vals("./Rob Luke Tapping dataset", "session")
