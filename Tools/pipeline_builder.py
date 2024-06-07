@@ -1,6 +1,6 @@
 from sklearn.pipeline import Pipeline, FunctionTransformer
 from sklearn.svm import SVC
-from Tools.function_wrappers import wiener_wrapper, nirs_od_wrapper, nirs_beer_lambert_wrapper, event_splitter_wrapper
+from Tools.function_wrappers import wiener_wrapper, nirs_od_wrapper, nirs_beer_lambert_wrapper, event_splitter_wrapper, butter_bandpass_wrapper, ICA_wrapper, PCA_wrapper, bPCA_wrapper, spline_wrapper, TDDR_wrapper
 from sklearn.preprocessing import StandardScaler
 
 # The big pipeline builder function
@@ -45,7 +45,7 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str)-> Pipelin
 # Funtions to find the correct function based on the input
 def systemic_function(systemic:str):
     if systemic == 'Low pass':
-        print('We should be doing some low pass filtering here')
+        return butter_bandpass_wrapper
     elif systemic == 'Wiener':
         return wiener_wrapper
     elif systemic == 'Regression':
@@ -58,13 +58,13 @@ def systemic_function(systemic:str):
     
 def motion_function(motion:str):
     if motion == 'ICA':
-        print('We should be doing some ICA here')
+        return ICA_wrapper
     elif motion == 'PCA':
-        print('We should be doing some PCA here')
+        return PCA_wrapper
     elif motion == 'Spline':
-        print('We should be doing some Spline here')
+        return spline_wrapper
     elif motion == 'TDDR':
-        print('We should be doing some TDDR here')
+        return TDDR_wrapper
     elif motion == 'None':
         print('No motion artifact removal')
         return None
@@ -78,7 +78,7 @@ def phys_function(phys:str):
     elif phys == 'PCA':
         print('We should be doing some PCA here')
     elif phys == 'bPCA':
-        print('We should be doing some bPCA here')
+        return bPCA_wrapper
     elif phys == 'None':
         print('No physiological noise removal')
         return None
