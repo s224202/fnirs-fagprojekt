@@ -1,9 +1,10 @@
 from sklearn.pipeline import Pipeline, FunctionTransformer
 from sklearn.svm import SVC
 from Tools.function_wrappers import wiener_wrapper, nirs_od_wrapper, nirs_beer_lambert_wrapper, event_splitter_wrapper
+from sklearn.preprocessing import StandardScaler
 
 # The big pipeline builder function
-# TODO: Figure out train-test split
+# TODO: Figure out removing bads, short channel regression, heuristics
 
 def build_pipeline(systemic:str, motion:str, phys:str, classifier:str)-> Pipeline:
     ''' 
@@ -34,6 +35,7 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str)-> Pipelin
     if phys_func is not None:
         estimator_list.append(('phys', phys_func))
     estimator_list.append(('event_splitter', FunctionTransformer(event_splitter_wrapper)))
+    estimator_list.append(('scaler', StandardScaler()))
     classifier_func = classifier_function(classifier)
     if classifier_func is not None:
         estimator_list.append(('classifier', classifier_func))

@@ -1,0 +1,2 @@
+def slope()
+    pass
