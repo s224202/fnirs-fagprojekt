@@ -19,12 +19,16 @@ from Scripts.TDDR import TDDR
 from mne_nirs.signal_enhancement import short_channel_regression
 import mne
 from mne_nirs.channels import get_long_channels
-from mne.preprocessing.nirs import temporal_derivative_distribution_repair
+from mne.preprocessing.nirs import temporal_derivative_distribution_repair,ICA
 from mne_bids import (BIDSPath,read_raw_bids,print_dir_tree,make_report,find_matching_paths,get_entity_vals)
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_selection import SequentialFeatureSelector
 from sklearn.dummy import DummyClassifier
 from sklearn.svm import SVC
+import plotly.graph_objects as go
+from bokeh.plotting import figure, show
+from bokeh.io import output_notebook
+import seaborn as sns
 
 
 sessions = get_entity_vals("./Rob Luke Tapping dataset", "session")
@@ -200,7 +204,6 @@ def tddr(signals, sample_rate):
     return TDDR(signals, sample_rate)
 
 # ICA
-from mne.preprocessing import ICA
 ica = ICA(n_components=20, random_state=r)
 
 # %%
@@ -249,8 +252,6 @@ for raw_haemo in raw_haemos:
 #%% Physiological Noise Correction
 
 # Band-pass filter
-from scipy.signal import butter, filtfilt
-
 T = 5
 lowcut = 0.04
 cutoff = 0.7
@@ -279,7 +280,6 @@ def shortChannelRegression(x):
     return short_channel_regression(x, max_dist=0.01)
 
 # ICA
-from mne.preprocessing import ICA
 ica = ICA(n_components=20, random_state=r)
 
 #%%
@@ -302,7 +302,6 @@ if plotting:
 #raw_haemo0_filtered.compute_psd().plot(average=True, amplitude=False, picks="data", exclude="bads", color="blue")
 
 # Power spectral density
-from scipy.signal import welch
 data1 = raw_haemos[0]
 data1hbo = data1.copy().pick("hbo")
 data1hbr = data1.copy().pick("hbr")
@@ -315,7 +314,6 @@ if plotting:
     plt.legend()
     plt.show()
 #%%
-import seaborn as sns
 if plotting:
     sns.set_theme(style="whitegrid")
     plt.plot(frequencies0, psd0, label='Original_HBO')
@@ -324,8 +322,6 @@ if plotting:
     plt.show()
 
 #%%
-import plotly.graph_objects as go
-
 if plotting:
     fig = go.Figure()
     fig.add_trace(go.Scatter(x=frequencies0, y=psd0, mode='lines', name='Original_HBO'))
@@ -334,9 +330,6 @@ if plotting:
 
 #%%
 if plotting:
-    from bokeh.plotting import figure, show
-    from bokeh.io import output_notebook
-
     output_notebook()
 
     p = figure(title = "Power Spectral Density")
