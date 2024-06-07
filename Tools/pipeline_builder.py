@@ -1,4 +1,5 @@
 from sklearn.pipeline import Pipeline, make_pipeline
+from Tools.function_wrappers import wiener_wrapper
 # The big pipeline builder function
 def build_pipeline(systemic:str, motion:str, phys:str, classifier:str)-> Pipeline:
     ''' 
@@ -47,7 +48,7 @@ def systemic_function(systemic:str)-> function:
     if systemic == 'Low pass':
         print('We should be doing some low pass filtering here')
     elif systemic == 'Wiener':
-        print('We should be doing some Wiener filtering here')
+        return wiener_wrapper
     elif systemic == 'Regression':
         print('We should be doing some regression here')
     elif systemic == 'None':
