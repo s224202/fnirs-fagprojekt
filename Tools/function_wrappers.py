@@ -1,6 +1,7 @@
 from scipy.signal import wiener
 from scipy.signal import butter, filtfilt
 from Tools.Array_transformers import arrayflattener
+from mne_nirs.signal_enhancement import short_channel_regression
 import mne
 
 def wiener_wrapper(x):
@@ -72,6 +73,7 @@ def TDDR_wrapper(x):
     return filtered_raw
 
 def spline_wrapper(x):
+    # This one does not work, blame gunnar
     data = x.copy().get_data()
     annotaions = x.annotations
     info = x.info
@@ -83,6 +85,7 @@ def spline_wrapper(x):
     return filtered_raw
 
 def bPCA_wrapper(x):
+    # This one does not work, blame gunnar
     data = x.copy().get_data()
     annotaions = x.annotations
     info = x.info
@@ -93,3 +96,5 @@ def bPCA_wrapper(x):
     filtered_raw.set_annotations(annotaions)
     return filtered_raw
 
+def short_channel_regression_wrapper(x):
+    return short_channel_regression(x, max_dist=0.01)

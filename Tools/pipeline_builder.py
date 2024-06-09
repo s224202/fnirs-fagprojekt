@@ -1,10 +1,10 @@
 from sklearn.pipeline import Pipeline, FunctionTransformer
 from sklearn.svm import SVC
-from Tools.function_wrappers import wiener_wrapper, nirs_od_wrapper, nirs_beer_lambert_wrapper, event_splitter_wrapper, butter_bandpass_wrapper, ICA_wrapper, PCA_wrapper, bPCA_wrapper, spline_wrapper, TDDR_wrapper
+from Tools.function_wrappers import wiener_wrapper, nirs_od_wrapper, nirs_beer_lambert_wrapper, event_splitter_wrapper, butter_bandpass_wrapper, ICA_wrapper, PCA_wrapper, bPCA_wrapper, spline_wrapper, TDDR_wrapper, short_channel_regression_wrapper
 from sklearn.preprocessing import StandardScaler
 
 # The big pipeline builder function
-# TODO: Figure out removing bads, short channel regression, heuristics
+# TODO: Figure out removing bads, heuristics
 
 def build_pipeline(systemic:str, motion:str, phys:str, classifier:str)-> Pipeline:
     ''' 
@@ -30,6 +30,7 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str)-> Pipelin
     if motion_func is not None:
         estimator_list.append(('motion', motion_func))
     estimator_list.append(('nirs_od', FunctionTransformer(nirs_od_wrapper)))
+    estimator_list.append(('short_channel_regression', FunctionTransformer(short_channel_regression_wrapper)))
     estimator_list.append(('nirs_beer_lambert', FunctionTransformer(nirs_beer_lambert_wrapper)))
     phys_func = phys_function(phys)
     if phys_func is not None:
