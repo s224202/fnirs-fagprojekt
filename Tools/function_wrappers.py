@@ -5,6 +5,8 @@ from mne_nirs.signal_enhancement import short_channel_regression
 from Scripts.TDDR import TDDR
 from Scripts.Spline import motion_artifact_correction
 import mne
+from sklearn.feature_selection import SequentialFeatureSelector
+from sklearn.neural_network import MLPClassifier
 
 
 def wiener_wrapper(x):
@@ -25,7 +27,7 @@ def nirs_beer_lambert_wrapper(x):
 def event_splitter_wrapper(x):
     events, event_dict = mne.events_from_annotations(x)
     X = mne.Epochs(x, events, event_dict, tmin=-5, tmax=15, baseline=None, preload=True)
-    return arrayflattener(X.get_data())
+    return X.get_data()
 
 def butter_bandpass_wrapper(x):
     data = x.copy().get_data()
@@ -97,3 +99,7 @@ def bPCA_wrapper(x):
 def short_channel_regression_wrapper(x):
     return short_channel_regression(x, max_dist=0.01)
 
+def feature_selection_wrapper(x,labels):
+    model = MLPClassifier(hidden_layer_sizes=(728, 728), max_iter=10000)
+    sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=3)
+    return sfs.fit_transform(X=x,y=labels)

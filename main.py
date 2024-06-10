@@ -1,5 +1,6 @@
 from Tools.pipeline_builder import build_pipeline
 from Tools.data_loaders import load_individual, load_author_data
+from Tools.function_wrappers import feature_selection_wrapper
 from sklearn.model_selection import cross_val_score
 from sklearn.preprocessing import LabelEncoder
 from sklearn.neural_network import MLPClassifier
@@ -9,14 +10,12 @@ import matplotlib.pyplot as plt
 data = load_individual(0)
 labels = data.annotations.to_data_frame()['description']
 labels = LabelEncoder().fit_transform(labels)
-print(data.annotations)
-pipeline1 = build_pipeline('None', 'Spline', 'None', 'None', False)
-#print(cross_val_score(MLPClassifier((728,728)), pipeline1.fit_transform(data), labels, cv=3))
+pipeline = build_pipeline(systemic='Wiener', motion='TDDR', phys='bPCA', classifier='None')
+pipeline = pipeline.fit(data)
+data = pipeline.transform(data)
 
-pipeline2 = build_pipeline('None', 'None', 'None', 'None', False)
-#print(cross_val_score(MLPClassifier((728,728)), pipeline2.fit_transform(data), labels, cv=3))
-print(data)
-plt.plot(pipeline1.fit_transform(data)[0])
-plt.plot(pipeline2.fit_transform(data)[0])
-plt.show()
-
+# Test the feature selection wrapper
+model = MLPClassifier(hidden_layer_sizes=(728, 728))
+data = feature_selection_wrapper(data, labels)
+scores = cross_val_score(model, data, labels, cv=3)
+print(scores)

@@ -2,9 +2,10 @@ from sklearn.pipeline import Pipeline, FunctionTransformer
 from sklearn.svm import SVC
 from Tools.function_wrappers import wiener_wrapper, nirs_od_wrapper, nirs_beer_lambert_wrapper, event_splitter_wrapper, butter_bandpass_wrapper, ICA_wrapper, PCA_wrapper, bPCA_wrapper, spline_wrapper, TDDR_wrapper, short_channel_regression_wrapper
 from sklearn.preprocessing import StandardScaler
-
+from Tools.heuristics import compute_heuristics
+from Tools.Array_transformers import arrayflattener
 # The big pipeline builder function
-# TODO: Figure out removing bads, heuristics
+# TODO: Figure out removing bads
 
 def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epochs:bool)-> Pipeline:
     ''' 
@@ -23,21 +24,33 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epo
 
     '''
     estimator_list = []
+
+    #Optional filters
     systemic_func = systemic_function(systemic)
     if systemic_func is not None:
         estimator_list.append(('systemic', FunctionTransformer(systemic_func)))
     motion_func = motion_function(motion)
     if motion_func is not None:
         estimator_list.append(('motion', FunctionTransformer(motion_func)))
+
+    #Mandatory conversion to HbO and HbR    
     estimator_list.append(('nirs_od', FunctionTransformer(nirs_od_wrapper)))
     estimator_list.append(('short_channel_regression', FunctionTransformer(short_channel_regression_wrapper)))
     estimator_list.append(('nirs_beer_lambert', FunctionTransformer(nirs_beer_lambert_wrapper)))
+
+    # Optional filters
     phys_func = phys_function(phys)
     if phys_func is not None:
         estimator_list.append(('phys', FunctionTransformer(phys_func)))
     if split_epochs:
+    
+    # Mandatory conversion to correct data format
         estimator_list.append(('event_splitter', FunctionTransformer(event_splitter_wrapper)))
+    estimator_list.append(('heuristics', FunctionTransformer(compute_heuristics)))
+    estimator_list.append(('array_flattener', FunctionTransformer(arrayflattener)))                      
     estimator_list.append(('scaler', StandardScaler()))
+
+    # Optional classifier
     classifier_func = classifier_function(classifier)
     if classifier_func is not None:
         estimator_list.append(('classifier', classifier_func))
