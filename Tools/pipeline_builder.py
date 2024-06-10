@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler
 from Tools.heuristics import compute_heuristics
 from Tools.Array_transformers import arrayflattener
 # The big pipeline builder function
-# TODO: Figure out removing bads, heuristics
+# TODO: Figure out removing bads
 
 def build_pipeline(systemic:str, motion:str, phys:str, classifier:str)-> Pipeline:
     ''' 

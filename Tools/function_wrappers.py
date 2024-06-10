@@ -4,6 +4,8 @@ from Tools.Array_transformers import arrayflattener, bPCA
 from mne_nirs.signal_enhancement import short_channel_regression
 from Scripts.TDDR import TDDR
 import mne
+from sklearn.feature_selection import SequentialFeatureSelector
+from sklearn.neural_network import MLPClassifier
 
 
 def wiener_wrapper(x):
@@ -97,3 +99,8 @@ def bPCA_wrapper(x):
 
 def short_channel_regression_wrapper(x):
     return short_channel_regression(x, max_dist=0.01)
+
+def feature_selection_wrapper(x,labels):
+    model = MLPClassifier(hidden_layer_sizes=(728, 728), max_iter=10000)
+    sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=3)
+    return sfs.fit_transform(X=x,y=labels)
