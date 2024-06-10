@@ -6,7 +6,7 @@ from sklearn.preprocessing import StandardScaler
 # The big pipeline builder function
 # TODO: Figure out removing bads, heuristics
 
-def build_pipeline(systemic:str, motion:str, phys:str, classifier:str)-> Pipeline:
+def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epochs:bool)-> Pipeline:
     ''' 
     Build a pipeline based on the input parameters. Can be used as a filter by setting the all the parameters to 'None', except for the desired filter.
     Systemic: The type of systemic filtering to be applied
@@ -35,7 +35,8 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str)-> Pipelin
     phys_func = phys_function(phys)
     if phys_func is not None:
         estimator_list.append(('phys', FunctionTransformer(phys_func)))
-    estimator_list.append(('event_splitter', FunctionTransformer(event_splitter_wrapper)))
+    if split_epochs:
+        estimator_list.append(('event_splitter', FunctionTransformer(event_splitter_wrapper)))
     estimator_list.append(('scaler', StandardScaler()))
     classifier_func = classifier_function(classifier)
     if classifier_func is not None:
@@ -98,3 +99,4 @@ def classifier_function(classifier:str):
         return None
     else:
         raise ValueError('Classifier not recognized, please check your input')
+    

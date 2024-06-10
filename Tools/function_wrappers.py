@@ -3,6 +3,7 @@ from scipy.signal import butter, filtfilt
 from Tools.Array_transformers import arrayflattener, bPCA
 from mne_nirs.signal_enhancement import short_channel_regression
 from Scripts.TDDR import TDDR
+from Scripts.Spline import motion_artifact_correction
 import mne
 
 
@@ -74,16 +75,14 @@ def TDDR_wrapper(x):
 
 
 def spline_wrapper(x):
-    # This one does not work, blame gunnar
     data = x.copy().get_data()
     annotaions = x.annotations
     info = x.info
-    spline = mne.preprocessing.Spline()
-    spline.fit(data)
-    data = spline.apply(data)
+    data = motion_artifact_correction(data)
     filtered_raw = mne.io.RawArray(data, info)
     filtered_raw.set_annotations(annotaions)
     return filtered_raw
+
 
 def bPCA_wrapper(x):
     data = x.copy().get_data()
@@ -97,3 +96,4 @@ def bPCA_wrapper(x):
 
 def short_channel_regression_wrapper(x):
     return short_channel_regression(x, max_dist=0.01)
+

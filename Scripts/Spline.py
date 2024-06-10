@@ -1,85 +1,51 @@
+
+# Moving Standard deviation
+
 import numpy as np
-from math import sqrt
+from scipy.signal import butter, filtfilt
+from scipy.interpolate import CubicSpline
 
-# Code provided by from Raphael Valentin on stackoverflow : https://stackoverflow.com/questions/31543775/how-to-perform-cubic-spline-interpolation-in-python
-
-
-def cubic_interp1d(x0, x, y):
+def moving_std(data, window_size):
     """
-    Interpolate a 1-D function using cubic splines.
-      x0 : a float or an 1d-array
-      x : (N,) array_like
-          A 1-D array of real/complex values.
-      y : (N,) array_like
-          A 1-D array of real values. The length of y along the
-          interpolation axis must be equal to the length of x.
-
-    Implement a trick to generate at first step the cholesky matrice L of
-    the tridiagonal matrice A (thus L is a bidiagonal matrice that
-    can be solved in two distinct loops).
-
-    additional ref: www.math.uh.edu/~jingqiu/math4364/spline.pdf 
+    Calculate the moving standard deviation of a signal.
+    
+    Parameters
+    ----------
+    data : np.ndarray
+        The signal to calculate the moving standard deviation of.
+    window_size : int
+        The size of the window to use for the moving standard deviation.
+        
+    Returns
+    -------
+    np.ndarray
+        The moving standard deviation of the signal.
     """
-    x = np.asfarray(x)
-    y = np.asfarray(y)
+    return np.array([np.std(data[i-window_size:i+window_size]) for i in range(window_size, len(data)-window_size)])
 
-    # remove non finite values
-    # indexes = np.isfinite(x)
-    # x = x[indexes]
-    # y = y[indexes]
+# Motion Artifact detection
 
-    # check if sorted
-    if np.any(np.diff(x) < 0):
-        indexes = np.argsort(x)
-        x = x[indexes]
-        y = y[indexes]
+def motion_artifact_detection(data,T):
+    Motion_Artifacts = []
+    for i in range(len(data)):
+        if data[i] > T:
+            Motion_Artifact = []
+            while data[i] > T:
+                i += 1
+                Motion_Artifact.append(i)
+            Motion_Artifacts.append(Motion_Artifact)
+    return Motion_Artifacts
 
-    size = len(x)
+# Motion Artifact correction
 
-    xdiff = np.diff(x)
-    ydiff = np.diff(y)
+def motion_artifact_correction(data):
+    
+    for i in range(len(data)):
+        MSTD = moving_std(data[i], 10)
+        MAD = motion_artifact_detection(MSTD, 0.5)
+        for j in range(len(MAD)):
+            myspline = CubicSpline(MAD[j], data[i][MAD[j]])
+            data[i][MAD[j]] = data[i][MAD[j]]-myspline(MAD[j])
+    return data
+    
 
-    # allocate buffer matrices
-    Li = np.empty(size)
-    Li_1 = np.empty(size-1)
-    z = np.empty(size)
-
-    # fill diagonals Li and Li-1 and solve [L][y] = [B]
-    Li[0] = sqrt(2*xdiff[0])
-    Li_1[0] = 0.0
-    B0 = 0.0 # natural boundary
-    z[0] = B0 / Li[0]
-
-    for i in range(1, size-1, 1):
-        Li_1[i] = xdiff[i-1] / Li[i-1]
-        Li[i] = sqrt(2*(xdiff[i-1]+xdiff[i]) - Li_1[i-1] * Li_1[i-1])
-        Bi = 6*(ydiff[i]/xdiff[i] - ydiff[i-1]/xdiff[i-1])
-        z[i] = (Bi - Li_1[i-1]*z[i-1])/Li[i]
-
-    i = size - 1
-    Li_1[i-1] = xdiff[-1] / Li[i-1]
-    Li[i] = sqrt(2*xdiff[-1] - Li_1[i-1] * Li_1[i-1])
-    Bi = 0.0 # natural boundary
-    z[i] = (Bi - Li_1[i-1]*z[i-1])/Li[i]
-
-    # solve [L.T][x] = [y]
-    i = size-1
-    z[i] = z[i] / Li[i]
-    for i in range(size-2, -1, -1):
-        z[i] = (z[i] - Li_1[i-1]*z[i+1])/Li[i]
-
-    # find index
-    index = x.searchsorted(x0)
-    np.clip(index, 1, size-1, index)
-
-    xi1, xi0 = x[index], x[index-1]
-    yi1, yi0 = y[index], y[index-1]
-    zi1, zi0 = z[index], z[index-1]
-    hi1 = xi1 - xi0
-
-    # calculate cubic
-    f0 = zi0/(6*hi1)*(xi1-x0)**3 + \
-         zi1/(6*hi1)*(x0-xi0)**3 + \
-         (yi1/hi1 - zi1*hi1/6)*(x0-xi0) + \
-         (yi0/hi1 - zi0*hi1/6)*(xi1-x0)
-    return f0
