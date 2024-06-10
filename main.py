@@ -9,5 +9,5 @@ data = load_individual(0)
 labels = data.annotations.to_data_frame()['description']
 labels = LabelEncoder().fit_transform(labels)
 print(data.annotations)
-pipeline = build_pipeline('Wiener', 'None', 'None', 'None')
+pipeline = build_pipeline('None', 'None', 'bPCA', 'None')
 print(cross_val_score(MLPClassifier((728,728)), pipeline.fit_transform(data), labels, cv=3))

@@ -28,13 +28,13 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str)-> Pipelin
         estimator_list.append(('systemic', FunctionTransformer(systemic_func)))
     motion_func = motion_function(motion)
     if motion_func is not None:
-        estimator_list.append(('motion', motion_func))
+        estimator_list.append(('motion', FunctionTransformer(motion_func)))
     estimator_list.append(('nirs_od', FunctionTransformer(nirs_od_wrapper)))
     estimator_list.append(('short_channel_regression', FunctionTransformer(short_channel_regression_wrapper)))
     estimator_list.append(('nirs_beer_lambert', FunctionTransformer(nirs_beer_lambert_wrapper)))
     phys_func = phys_function(phys)
     if phys_func is not None:
-        estimator_list.append(('phys', phys_func))
+        estimator_list.append(('phys', FunctionTransformer(phys_func)))
     estimator_list.append(('event_splitter', FunctionTransformer(event_splitter_wrapper)))
     estimator_list.append(('scaler', StandardScaler()))
     classifier_func = classifier_function(classifier)
