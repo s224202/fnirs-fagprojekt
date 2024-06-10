@@ -24,7 +24,7 @@ def nirs_beer_lambert_wrapper(x):
 def event_splitter_wrapper(x):
     events, event_dict = mne.events_from_annotations(x)
     X = mne.Epochs(x, events, event_dict, tmin=-5, tmax=15, baseline=None, preload=True)
-    return arrayflattener(X.get_data())
+    return X.get_data()
 
 def butter_bandpass_wrapper(x):
     data = x.copy().get_data()
