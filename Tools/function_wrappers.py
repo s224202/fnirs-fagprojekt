@@ -100,6 +100,6 @@ def short_channel_regression_wrapper(x):
     return short_channel_regression(x, max_dist=0.01)
 
 def feature_selection_wrapper(x,labels):
-    model = MLPClassifier(hidden_layer_sizes=(728, 728), max_iter=10000)
+    model = MLPClassifier(hidden_layer_sizes=(100, 100), max_iter=10000)
     sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=3)
     return sfs.fit_transform(X=x,y=labels)

@@ -8,7 +8,7 @@ def load_individual(id):
     datatype = "nirs"
     extension = [".snirf"]
     bids_paths = find_matching_paths("./Rob Luke Tapping dataset", datatypes=datatype, extensions=extension)
-    data = [read_raw_bids(bids_path) for bids_path in bids_paths]
+    data = [read_raw_bids(bids_path, verbose=False) for bids_path in bids_paths]
     data = data[id]
     data = data.pick(picks='all')
     data.annotations.set_durations(5)
@@ -26,3 +26,11 @@ def load_author_data(author_id):
     path_name = 'Author_dataset/rec' + f'/2024-05-01_00{author_id}.snirf'
     data = mne.io.read_raw_snirf(path_name)
     return data
+
+def concatenate_data(data_list:list, labels_list:list) -> np.ndarray:
+    data = data_list[0]
+    labels = labels_list[0]
+    for i in range(1, len(data_list)):
+        data = np.concatenate((data, data_list[i]), axis=0)
+        labels = np.concatenate((labels, labels_list[i]), axis=0)
+    return data, labels
