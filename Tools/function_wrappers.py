@@ -7,7 +7,7 @@ from Scripts.Spline import motion_artifact_correction
 import mne
 from sklearn.feature_selection import SequentialFeatureSelector
 from sklearn.neural_network import MLPClassifier
-
+from itertools import compress
 
 def wiener_wrapper(x):
     data = x.copy().get_data()
@@ -26,7 +26,9 @@ def nirs_beer_lambert_wrapper(x):
 
 def event_splitter_wrapper(x):
     events, event_dict = mne.events_from_annotations(x)
-    X = mne.Epochs(x, events, event_dict, tmin=-5, tmax=15, baseline=None, preload=True)
+    reject_criteria = dict(hbo=80e-6)
+    x.filter(0.05, 0.7, h_trans_bandwidth=0.2, l_trans_bandwidth=0.02)
+    X = mne.Epochs(x, events, event_dict, tmin=-5, tmax=15, baseline=(None, 0), preload=True, reject=reject_criteria, reject_by_annotation=True, proj=True, detrend=None)
     return X.get_data()
 
 def butter_bandpass_wrapper(x):
@@ -103,3 +105,8 @@ def feature_selection_wrapper(x,labels):
     model = MLPClassifier(hidden_layer_sizes=(100, 100), max_iter=10000)
     sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=3)
     return sfs.fit_transform(X=x,y=labels)
+
+def bads_wrapper(x):
+    scis = mne.preprocessing.nirs.scalp_coupling_index(x)
+    x.info['bads'] = list(compress(x.ch_names, scis < 0.8))
+    return x.pick(picks=None, exclude=x.info['bads'])

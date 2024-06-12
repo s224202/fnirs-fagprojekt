@@ -1,6 +1,6 @@
 from sklearn.pipeline import Pipeline, FunctionTransformer
 from sklearn.svm import SVC
-from Tools.function_wrappers import wiener_wrapper, nirs_od_wrapper, nirs_beer_lambert_wrapper, event_splitter_wrapper, butter_bandpass_wrapper, ICA_wrapper, PCA_wrapper, bPCA_wrapper, spline_wrapper, TDDR_wrapper, short_channel_regression_wrapper
+from Tools.function_wrappers import wiener_wrapper, nirs_od_wrapper, nirs_beer_lambert_wrapper, event_splitter_wrapper, butter_bandpass_wrapper, ICA_wrapper, bPCA_wrapper, spline_wrapper, TDDR_wrapper, short_channel_regression_wrapper, bads_wrapper
 from sklearn.preprocessing import StandardScaler
 from Tools.heuristics import compute_heuristics
 from Tools.Array_transformers import arrayflattener
@@ -16,9 +16,9 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epo
     Classifier: The type of classifier to be applied
 
     Supported types(not actually implemented yet):
-    Systemic: 'Low pass', 'Wiener',
-    Motion: 'ICA', 'PCA', 'Spline', 'TDDR',
-    Phys: 'Bandpass', 'PCA', 'bPCA',
+    Systemic: 'Low pass', 
+    Motion: 'ICA', 'Spline', 'TDDR', 'Wiener',
+    Phys: 'Bandpass', 'bPCA', 'ICA', 'Regression',
 
     Classifier: 'SVM', 'LDA', 'KNN'
 
@@ -35,7 +35,8 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epo
 
     #Mandatory conversion to HbO and HbR    
     estimator_list.append(('nirs_od', FunctionTransformer(nirs_od_wrapper)))
-    estimator_list.append(('short_channel_regression', FunctionTransformer(short_channel_regression_wrapper)))
+    # filtering out bads using sci
+    estimator_list.append(('bads', FunctionTransformer(bads_wrapper)))
     estimator_list.append(('nirs_beer_lambert', FunctionTransformer(nirs_beer_lambert_wrapper)))
 
     # Optional filters
@@ -61,10 +62,6 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epo
 def systemic_function(systemic:str):
     if systemic == 'Low pass':
         return butter_bandpass_wrapper
-    elif systemic == 'Wiener':
-        return wiener_wrapper
-    elif systemic == 'Regression':
-        print('We should be doing some regression here')
     elif systemic == 'None':
         print('No systemic filtering')
         return None
@@ -72,10 +69,8 @@ def systemic_function(systemic:str):
         raise ValueError('Systemic filtering not recognized, please check your input')
     
 def motion_function(motion:str):
-    if motion == 'ICA':
-        return ICA_wrapper
-    elif motion == 'PCA':
-        return PCA_wrapper
+    if motion == 'Wiener':
+        return wiener_wrapper
     elif motion == 'Spline':
         return spline_wrapper
     elif motion == 'TDDR':
@@ -90,10 +85,12 @@ def phys_function(phys:str):
     # Check for physiological noise removal type
     if phys == 'Bandpass':
         print('We should be doing some Bandpass filtering here')
-    elif phys == 'PCA':
-        print('We should be doing some PCA here')
     elif phys == 'bPCA':
         return bPCA_wrapper
+    elif phys == 'ICA':
+        return ICA_wrapper
+    elif phys == 'Regression':
+        return short_channel_regression_wrapper
     elif phys == 'None':
         print('No physiological noise removal')
         return None
