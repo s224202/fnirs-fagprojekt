@@ -1,6 +1,6 @@
 from sklearn.pipeline import Pipeline, FunctionTransformer
 from sklearn.svm import SVC
-from Tools.function_wrappers import wiener_wrapper, nirs_od_wrapper, nirs_beer_lambert_wrapper, event_splitter_wrapper, butter_bandpass_wrapper, ICA_wrapper, bPCA_wrapper, spline_wrapper, TDDR_wrapper, short_channel_regression_wrapper, bads_wrapper
+from Tools.function_wrappers import wiener_wrapper, nirs_od_wrapper, nirs_beer_lambert_wrapper, event_splitter_wrapper, bandpass_wrapper, ICA_wrapper, bPCA_wrapper, spline_wrapper, TDDR_wrapper, short_channel_regression_wrapper, bads_wrapper
 from sklearn.preprocessing import StandardScaler
 from Tools.heuristics import compute_heuristics
 from Tools.Array_transformers import arrayflattener
@@ -56,8 +56,8 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epo
 
 # Funtions to find the correct function based on the input
 def systemic_function(systemic:str):
-    if systemic == 'Low pass':
-        return butter_bandpass_wrapper
+    if systemic == 'Band pass':
+        return bandpass_wrapper
     elif systemic == 'None':
         print('No systemic filtering')
         return None
@@ -79,9 +79,7 @@ def motion_function(motion:str):
     
 def phys_function(phys:str):
     # Check for physiological noise removal type
-    if phys == 'Bandpass':
-        print('We should be doing some Bandpass filtering here')
-    elif phys == 'bPCA':
+    if phys == 'bPCA':
         return bPCA_wrapper
     elif phys == 'ICA':
         return ICA_wrapper
