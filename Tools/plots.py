@@ -1,10 +1,9 @@
 from data_loaders import *
 from function_wrappers import *
-import mne
 
 #load individual data
 id = int
-id_data = Raw
+id_data = []
 id_data.append(load_individual(id))
 
 #transform individual data
