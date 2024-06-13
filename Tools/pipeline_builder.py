@@ -24,7 +24,10 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epo
 
     '''
     estimator_list = []
-
+    #Mandatory conversion to HbO and HbR    
+    estimator_list.append(('nirs_od', FunctionTransformer(nirs_od_wrapper)))
+    estimator_list.append(('bads', FunctionTransformer(bads_wrapper)))
+    # filtering out bads using sci
     #Optional filters
     systemic_func = systemic_function(systemic)
     if systemic_func is not None:
@@ -32,20 +35,13 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epo
     motion_func = motion_function(motion)
     if motion_func is not None:
         estimator_list.append(('motion', FunctionTransformer(motion_func)))
-
-    #Mandatory conversion to HbO and HbR    
-    estimator_list.append(('nirs_od', FunctionTransformer(nirs_od_wrapper)))
-    # filtering out bads using sci
-    estimator_list.append(('bads', FunctionTransformer(bads_wrapper)))
     estimator_list.append(('nirs_beer_lambert', FunctionTransformer(nirs_beer_lambert_wrapper)))
 
     # Optional filters
     phys_func = phys_function(phys)
     if phys_func is not None:
         estimator_list.append(('phys', FunctionTransformer(phys_func)))
-    if split_epochs:
-    
-    # Mandatory conversion to correct data format
+    if split_epochs:  
         estimator_list.append(('event_splitter', FunctionTransformer(event_splitter_wrapper)))
     estimator_list.append(('heuristics', FunctionTransformer(compute_heuristics)))
     estimator_list.append(('array_flattener', FunctionTransformer(arrayflattener)))                      
