@@ -28,7 +28,7 @@ def event_splitter_wrapper(x):
     events, event_dict = mne.events_from_annotations(x)
     reject_criteria = dict(hbo=80e-6)
     x.filter(0.05, 0.7, h_trans_bandwidth=0.2, l_trans_bandwidth=0.02)
-    X = mne.Epochs(x, events, event_dict, tmin=-5, tmax=15, baseline=(None, 0), preload=True, reject=reject_criteria, reject_by_annotation=True, proj=True, detrend=None)
+    X = mne.Epochs(x, events, event_dict, tmin=-5, tmax=15, baseline=(None, 0), preload=True, reject=reject_criteria, reject_by_annotation=True, proj=True, detrend=None,verbose=True)
     return X.get_data()
 
 def butter_bandpass_wrapper(x):
