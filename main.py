@@ -7,6 +7,7 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.neural_network import MLPClassifier
 import matplotlib.pyplot as plt
 from sklearn.dummy import DummyClassifier
+from sklearn.feature_selection import SequentialFeatureSelector
 import pandas as pd
 
 # Test the pipeline builder
@@ -40,7 +41,7 @@ regression_wiener = build_pipeline(systemic='Band pass', motion='Wiener', phys='
 regression_spline = build_pipeline(systemic='Band pass', motion='Spline', phys='Regression', classifier='None', split_epochs=True)
 
 # Test the feature selection wrapper
-model = MLPClassifier(hidden_layer_sizes=(100, 100))
+model = MLPClassifier(hidden_layer_sizes=(100, 100), max_iter=10000)
 baselinemodel = DummyClassifier(strategy='most_frequent')
 datalist = [load_individual(0), load_individual(1), load_individual(2), load_individual(3), load_individual(4)]
 #datalist = [load_author_data(2), load_author_data(3), load_author_data(4)]
@@ -54,7 +55,8 @@ for i in range(3):
     labelslist[i] = label_encoder.fit_transform(labelslist[i])
     for j in range(len(pipelines_list)):
         newdata = pipelines_list[j].fit_transform(datalist[i])
-        scores = cross_val_score(model,newdata, labelslist[i], cv=3)
+        sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=3, tol=0.01)
+        scores = cross_val_score(sfs, newdata, labelslist[i], cv=3, scoring='accuracy')
         results_list[i].append((scores.mean(), scores.std()))
         scores2 = cross_val_score(baselinemodel,newdata, labelslist[i], cv=3)
         baseline_results[i].append((scores2.mean(), scores2.std()))
@@ -64,8 +66,6 @@ df = pd.DataFrame(results_list)
 df.T.to_csv('results.csv')
 df = pd.DataFrame(baseline_results)
 df.T.to_csv('baseline_results.csv')
-
-#data = feature_selection_wrapper(data, labels)
 
 
 #individual 0: (78, 120) labels = (90,)
