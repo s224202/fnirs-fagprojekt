@@ -1,5 +1,6 @@
 from data_loaders import *
 from function_wrappers import *
+import mne
 
 #load individual data
 id = int
