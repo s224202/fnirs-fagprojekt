@@ -27,7 +27,10 @@ def nirs_beer_lambert_wrapper(x):
 def event_splitter_wrapper(x):
     events, event_dict = mne.events_from_annotations(x)
     reject_criteria = dict(hbo=80e-6)
-    X = mne.Epochs(x, events, event_dict, tmin=-5, tmax=5, baseline=(None, 0), preload=True, reject=reject_criteria, reject_by_annotation=True, proj=True, detrend=None,verbose=True)
+    picks = mne.pick_types(x.info, meg=False, fnirs=True)
+    dists = mne.preprocessing.nirs.source_detector_distances(x.info, picks=picks)
+    newx = x.pick(picks[dists > 0.01])
+    X = mne.Epochs(newx, events, event_dict, tmin=-5, tmax=15, baseline=(None, 0), preload=True, reject=reject_criteria, reject_by_annotation=True, proj=True, detrend=None,verbose=True)
     return X.get_data()
 
 #  def butter_bandpass_wrapper(x):
