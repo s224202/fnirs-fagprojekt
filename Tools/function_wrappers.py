@@ -27,24 +27,28 @@ def nirs_beer_lambert_wrapper(x):
 def event_splitter_wrapper(x):
     events, event_dict = mne.events_from_annotations(x)
     reject_criteria = dict(hbo=80e-6)
-    x.filter(0.05, 0.7, h_trans_bandwidth=0.2, l_trans_bandwidth=0.02)
-    X = mne.Epochs(x, events, event_dict, tmin=-5, tmax=15, baseline=(None, 0), preload=True, reject=reject_criteria, reject_by_annotation=True, proj=True, detrend=None,verbose=True)
+    X = mne.Epochs(x, events, event_dict, tmin=-5, tmax=5, baseline=(None, 0), preload=True, reject=reject_criteria, reject_by_annotation=True, proj=True, detrend=None,verbose=True)
     return X.get_data()
 
-def butter_bandpass_wrapper(x):
+#  def butter_bandpass_wrapper(x):
+    # data = x.copy().get_data()
+    # annotaions = x.annotations
+    # info = x.info
+    # lowcut = 0.01
+    # highcut = 0.1
+    # nyquist = 0.5 * info['sfreq']
+    # low = lowcut / nyquist
+    # high = highcut / nyquist
+    # b, a = butter(2, [low, high], btype='band')
+    # data = filtfilt(b, a, data)
+    # filtered_raw = mne.io.RawArray(data, info)
+    # filtered_raw.set_annotations(annotaions)
+    # return filtered_raw
+
+def bandpass_wrapper(x):
     data = x.copy().get_data()
-    annotaions = x.annotations
-    info = x.info
-    lowcut = 0.01
-    highcut = 0.1
-    nyquist = 0.5 * info['sfreq']
-    low = lowcut / nyquist
-    high = highcut / nyquist
-    b, a = butter(2, [low, high], btype='band')
-    data = filtfilt(b, a, data)
-    filtered_raw = mne.io.RawArray(data, info)
-    filtered_raw.set_annotations(annotaions)
-    return filtered_raw
+    data.filter(0.05, 0.7, h_trans_bandwidth=0.2, l_trans_bandwidth=0.02)
+    return data
 
 def ICA_wrapper(x):
     data = x.copy().get_data()
