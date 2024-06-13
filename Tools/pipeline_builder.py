@@ -1,6 +1,6 @@
 from sklearn.pipeline import Pipeline, FunctionTransformer
 from sklearn.svm import SVC
-from Tools.function_wrappers import wiener_wrapper, nirs_od_wrapper, nirs_beer_lambert_wrapper, event_splitter_wrapper, bandpass_wrapper, ICA_wrapper, bPCA_wrapper, spline_wrapper, TDDR_wrapper, short_channel_regression_wrapper, bads_wrapper
+from Tools.function_wrappers import wiener_wrapper, nirs_od_wrapper, nirs_beer_lambert_wrapper, event_splitter_wrapper, bandpass_wrapper, ICA_wrapper, bPCA_wrapper, spline_wrapper, TDDR_wrapper, short_channel_regression_wrapper, bads_wrapper, shorts_wrapper
 from sklearn.preprocessing import StandardScaler
 from Tools.heuristics import compute_heuristics
 from Tools.Array_transformers import arrayflattener
@@ -35,6 +35,11 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epo
     motion_func = motion_function(motion)
     if motion_func is not None:
         estimator_list.append(('motion', FunctionTransformer(motion_func)))
+    #unfortunate but necessary hack to get the regression to work. mne does not want to do it on hbos and hbrs    
+    if phys == 'Regression':
+        estimator_list.append(('short_channel_regression', FunctionTransformer(short_channel_regression_wrapper)))
+    else:
+        estimator_list.append(('shorts', FunctionTransformer(shorts_wrapper)))
     estimator_list.append(('nirs_beer_lambert', FunctionTransformer(nirs_beer_lambert_wrapper)))
 
     # Optional filters
@@ -84,7 +89,9 @@ def phys_function(phys:str):
     elif phys == 'ICA':
         return ICA_wrapper
     elif phys == 'Regression':
-        return short_channel_regression_wrapper
+        pass
+        #this happens elsewhere
+        #return short_channel_regression_wrapper
     elif phys == 'None':
         print('No physiological noise removal')
         return None

@@ -26,11 +26,7 @@ def nirs_beer_lambert_wrapper(x):
 
 def event_splitter_wrapper(x):
     events, event_dict = mne.events_from_annotations(x)
-    reject_criteria = dict(hbo=80e-6)
-    picks = mne.pick_types(x.info, meg=False, fnirs=True)
-    dists = mne.preprocessing.nirs.source_detector_distances(x.info, picks=picks)
-    newx = x.pick(picks[dists > 0.01])
-    X = mne.Epochs(newx, events, event_dict, tmin=-5, tmax=15, baseline=(None, 0), preload=True, reject=reject_criteria, reject_by_annotation=True, proj=True, detrend=None,verbose=True)
+    X = mne.Epochs(x, events, event_dict, tmin=-5, tmax=15, baseline=(None, 0), preload=True, proj=True, detrend=None,verbose=True)
     return X.get_data()
 
 #  def butter_bandpass_wrapper(x):
@@ -49,20 +45,14 @@ def event_splitter_wrapper(x):
     # return filtered_raw
 
 def bandpass_wrapper(x):
-    data = x.copy().get_data()
-    data.filter(0.05, 0.7, h_trans_bandwidth=0.2, l_trans_bandwidth=0.02)
-    return data
+    x.filter(0.05, 0.7, h_trans_bandwidth=0.2, l_trans_bandwidth=0.02)
+    return x
 
 def ICA_wrapper(x):
-    data = x.copy().get_data()
-    annotaions = x.annotations
-    info = x.info
     ica = mne.preprocessing.ICA(n_components=20)
-    ica.fit(data)
-    data = ica.apply(data)
-    filtered_raw = mne.io.RawArray(data, info)
-    filtered_raw.set_annotations(annotaions)
-    return filtered_raw
+    ica.fit(x)
+    x = ica.apply(x)
+    return x
 
 def PCA_wrapper(x):
     data = x.copy().get_data()
@@ -116,4 +106,11 @@ def feature_selection_wrapper(x,labels):
 def bads_wrapper(x):
     scis = mne.preprocessing.nirs.scalp_coupling_index(x)
     x.info['bads'] = list(compress(x.ch_names, scis < 0.8))
+    print(x.info['bads'])
     return x.pick(picks=None, exclude=x.info['bads'])
+
+def shorts_wrapper(x):
+    picks = mne.pick_types(x.info, meg=False, fnirs=True, exclude='bads')
+    dists = mne.preprocessing.nirs.source_detector_distances(x.info, picks=picks)
+    longs = [x.ch_names[i] for i in range(len(dists)) if dists[i] > 0.01]
+    return x.pick(picks=longs, exclude='bads')

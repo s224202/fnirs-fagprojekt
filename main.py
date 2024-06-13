@@ -7,9 +7,12 @@ from sklearn.preprocessing import LabelEncoder
 from sklearn.neural_network import MLPClassifier
 import matplotlib.pyplot as plt
 from sklearn.dummy import DummyClassifier
+import pandas as pd
 
 # Test the pipeline builder
 # control pipeline
+results_list = []
+baseline_results = []
 pipeline = build_pipeline(systemic='None', motion='None', phys='None', classifier='None', split_epochs=True)
 
 # Chosen pipelines:
@@ -41,16 +44,29 @@ model = MLPClassifier(hidden_layer_sizes=(100, 100))
 baselinemodel = DummyClassifier(strategy='most_frequent')
 datalist = [load_individual(0), load_individual(1), load_individual(2), load_individual(3), load_individual(4)]
 #datalist = [load_author_data(2), load_author_data(3), load_author_data(4)]
-labelslist = [datalist[i].annotations.to_data_frame()['description'] for i in range(5)]
-
-for i in range(5):
-    datalist[i] = pipeline.fit_transform(datalist[i])
-data, labels = concatenate_data(datalist, labelslist)
+labelslist = [datalist[i].annotations.to_data_frame()['description'] for i in range(3)]
+pipelines_list = [pipeline,bandpass, ica, bpca, regression, tddr, Wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline]
+#data, labels = concatenate_data(datalist, labelslist)
 label_encoder = LabelEncoder()
-labels = label_encoder.fit_transform(labels)
+for i in range(3):
+    results_list.append([])
+    baseline_results.append([])
+    labelslist[i] = label_encoder.fit_transform(labelslist[i])
+    for j in range(len(pipelines_list)):
+        newdata = pipelines_list[j].fit_transform(datalist[i])
+        scores = cross_val_score(model,newdata, labelslist[i], cv=3)
+        results_list[i].append((scores.mean(), scores.std()))
+        scores2 = cross_val_score(baselinemodel,newdata, labelslist[i], cv=3)
+        baseline_results[i].append((scores2.mean(), scores2.std()))
+        print(f'{(i*17+j)/51*100}% done')
+
+df = pd.DataFrame(results_list)
+df.T.to_csv('results.csv')
+df = pd.DataFrame(baseline_results)
+df.T.to_csv('baseline_results.csv')
+
 #data = feature_selection_wrapper(data, labels)
-scores = cross_val_score(model, data, labels, cv=3)
-print(scores)
+
 
 #individual 0: (78, 120) labels = (90,)
 #individual 1: (4, 108)  labels = (90,)
