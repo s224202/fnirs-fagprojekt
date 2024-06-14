@@ -56,7 +56,7 @@ for i in range(len(datalist)):
     labelslist[i] = label_encoder.fit_transform(labelslist[i])
     for j in range(len(pipelines_list)):
         newdata = pipelines_list[j].fit_transform(datalist[i])
-        sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=3, tol=0.01, random_state=r, n_jobs=-1)
+        sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=3, tol=0.01, n_jobs=-1)
         scores = cross_val_score(sfs, newdata, labelslist[i], cv=3, scoring='accuracy')
         results_list[i].append((scores.mean(), scores.std()))
         scores2 = cross_val_score(baselinemodel,newdata, labelslist[i], cv=3)
