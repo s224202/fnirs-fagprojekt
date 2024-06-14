@@ -12,6 +12,7 @@ import pandas as pd
 
 # Test the pipeline builder
 # control pipeline
+r = 42
 results_list = []
 baseline_results = []
 pipeline = build_pipeline(systemic='None', motion='None', phys='None', classifier='None', split_epochs=True)
@@ -41,7 +42,7 @@ regression_wiener = build_pipeline(systemic='Band pass', motion='Wiener', phys='
 regression_spline = build_pipeline(systemic='Band pass', motion='Spline', phys='Regression', classifier='None', split_epochs=True)
 
 # Test the feature selection wrapper
-model = MLPClassifier(hidden_layer_sizes=(100, 100), max_iter=10000)
+model = MLPClassifier(hidden_layer_sizes=(100, 100), max_iter=10000, random_state=r)
 baselinemodel = DummyClassifier(strategy='most_frequent')
 datalist = [load_individual(0), load_individual(1), load_individual(2), load_individual(3), load_individual(4)]
 #datalist = [load_author_data(2), load_author_data(3), load_author_data(4)]
@@ -49,18 +50,18 @@ labelslist = [datalist[i].annotations.to_data_frame()['description'] for i in ra
 pipelines_list = [pipeline,bandpass, ica, bpca, regression, tddr, Wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline]
 #data, labels = concatenate_data(datalist, labelslist)
 label_encoder = LabelEncoder()
-for i in range(3):
+for i in range(len(datalist)):
     results_list.append([])
     baseline_results.append([])
     labelslist[i] = label_encoder.fit_transform(labelslist[i])
     for j in range(len(pipelines_list)):
         newdata = pipelines_list[j].fit_transform(datalist[i])
-        sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=3, tol=0.01)
+        sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=3, tol=0.01, random_state=r, n_jobs=-1)
         scores = cross_val_score(sfs, newdata, labelslist[i], cv=3, scoring='accuracy')
         results_list[i].append((scores.mean(), scores.std()))
         scores2 = cross_val_score(baselinemodel,newdata, labelslist[i], cv=3)
         baseline_results[i].append((scores2.mean(), scores2.std()))
-        print(f'{(i*17+j)/51*100}% done')
+        print(f'{(i*17+j)/(len(datalist)*17)*100}% done')
 
 df = pd.DataFrame(results_list)
 df.T.to_csv('results.csv')
