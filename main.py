@@ -46,7 +46,7 @@ model = MLPClassifier(hidden_layer_sizes=(100, 100), max_iter=10000, random_stat
 baselinemodel = DummyClassifier(strategy='most_frequent')
 datalist = [load_individual(0), load_individual(1), load_individual(2), load_individual(3), load_individual(4)]
 #datalist = [load_author_data(2), load_author_data(3), load_author_data(4)]
-labelslist = [datalist[i].annotations.to_data_frame()['description'] for i in range(3)]
+labelslist = [datalist[i].annotations.to_data_frame()['description'] for i in range(len(datalist))]
 pipelines_list = [pipeline,bandpass, ica, bpca, regression, tddr, Wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline]
 #data, labels = concatenate_data(datalist, labelslist)
 label_encoder = LabelEncoder()
@@ -56,12 +56,14 @@ for i in range(len(datalist)):
     labelslist[i] = label_encoder.fit_transform(labelslist[i])
     for j in range(len(pipelines_list)):
         newdata = pipelines_list[j].fit_transform(datalist[i])
-        sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=3, tol=0.01, n_jobs=-1)
-        scores = cross_val_score(sfs, newdata, labelslist[i], cv=3, scoring='accuracy')
+        sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=3, tol=0.01)
+        sfs.fit(newdata, labelslist[i])
+        scores = cross_val_score(model, newdata[sfs.get_support()], labelslist[i], cv=3, scoring='accuracy')
         results_list[i].append((scores.mean(), scores.std()))
         scores2 = cross_val_score(baselinemodel,newdata, labelslist[i], cv=3)
         baseline_results[i].append((scores2.mean(), scores2.std()))
         print(f'{(i*17+j)/(len(datalist)*17)*100}% done')
+        open('results.txt', 'a').write(sfs.get_support().__str__() + '\n' + scores.__str__() + '\n' + scores2.__str__() + '\n')
 
 df = pd.DataFrame(results_list)
 df.T.to_csv('results.csv')
