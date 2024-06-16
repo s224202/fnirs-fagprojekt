@@ -49,7 +49,7 @@ def bandpass_wrapper(x):
     return x
 
 def ICA_wrapper(x):
-    ica = mne.preprocessing.ICA(n_components=20)
+    ica = mne.preprocessing.ICA(n_components=0.8)
     ica.fit(x)
     x = ica.apply(x)
     return x
