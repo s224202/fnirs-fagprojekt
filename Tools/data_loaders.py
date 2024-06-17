@@ -34,3 +34,15 @@ def concatenate_data(data_list:list, labels_list:list) -> np.ndarray:
         data = np.concatenate((data, data_list[i]), axis=0)
         labels = np.concatenate((labels, labels_list[i]), axis=0)
     return data, labels
+
+def load_CUH_data(author_id,paradigm):
+    '''
+    values for author_id
+    the numbers between 1-7
+    
+    values for paradigm
+    DoC or Healthy
+    '''
+    path_name = 'Rigshospitalet_dataset/'+ paradigm + f'/_2024-04-29_0{author_id}.snirf'
+    data = mne.io.read_raw_snirf(path_name)
+    return data
