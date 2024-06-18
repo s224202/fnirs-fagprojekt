@@ -10,7 +10,8 @@ from sklearn.dummy import DummyClassifier
 from sklearn.metrics import confusion_matrix, make_scorer
 from sklearn.feature_selection import SequentialFeatureSelector
 import pandas as pd
-from sklearn.svm import SVC
+import mne
+from sklearn.preprocessing import StandardScaler
 
 # Test the pipeline builder
 # control pipeline
@@ -49,8 +50,6 @@ model = MLPClassifier(hidden_layer_sizes=(10), max_iter=10000, random_state=r, s
 baselinemodel = DummyClassifier(strategy='most_frequent')
 datalist = [load_individual(0), load_individual(1), load_individual(2), load_individual(3), load_individual(4)]
 #datalist = [load_author_data(2), load_author_data(3), load_author_data(4)]
-
-pipelines_list = [pipeline,bandpass, ica, bpca, regression, tddr, Wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline]
 #datalist = [load_CUH_data(1, 'Healthy'), load_CUH_data(2, 'Healthy'), load_CUH_data(3, 'Healthy'), load_CUH_data(4, 'Healthy'), 
             #load_CUH_data(5, 'Healthy'), 
             #load_CUH_data(5, 'Healthy'), load_CUH_data(7, 'Healthy')]
@@ -58,6 +57,7 @@ pipelines_list = [pipeline,bandpass, ica, bpca, regression, tddr, Wiener, spline
 #            #load_CUH_data(3, 'DoC'), load_CUH_data(6, 'DoC'),
 #            load_CUH_data(4, 'DoC'), load_CUH_data(7, 'DoC')]
 #data, labels = concatenate_data(datalist, labelslist)
+pipelines_list = [pipeline, bandpass, ica, bpca, regression, tddr, Wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline]
 labelslist = [datalist[i].annotations.to_data_frame()['description'] for i in range(len(datalist))]
 label_encoder = LabelEncoder()
 for i in range(len(datalist)):
@@ -66,40 +66,18 @@ for i in range(len(datalist)):
     labelslist[i] = label_encoder.fit_transform(labelslist[i])
     for j in range(len(pipelines_list)):
         newdata = pipelines_list[j].fit_transform(datalist[i])
-        #sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=3, tol=0.01)
-        #sfs.fit(newdata, labelslist[i])
-        #sfs.transform(newdata)
-        scores = cross_val_score(model, newdata, labelslist[i], cv=10, scoring='accuracy')
+        sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=10, tol=0.01, n_jobs=-1)
+        sfs.fit(newdata, labelslist[i])
+        sfs.transform(newdata)
+        scores = cross_val_score(model, newdata, labelslist[i], cv=10, scoring='accuracy', n_jobs=-1)
         print(np.mean(scores))
         results_list[i].append((scores.mean(), scores.std()))
-#         #scores2 = cross_val_score(baselinemodel,newdata, labelslist[i], cv=3)
-        #baseline_results[i].append((scores2.mean(), scores2.std()))
-        #print(f'{(i*17+j)/(len(datalist)*17)*100}% done')
-        #open('results.txt', 'a').write(sfs.get_support().__str__() + '\n' + scores.__str__() + '\n' + scores2.__str__() + '\n')
+        scores2 = cross_val_score(baselinemodel,newdata, labelslist[i], cv=3)
+        baseline_results[i].append((scores2.mean(), scores2.std()))
+        print(f'{(i*17+j)/(len(datalist)*17)*100}% done')
+        open('results.txt', 'a').write(sfs.get_support().__str__() + '\n' + scores.__str__() + '\n' + scores2.__str__() + '\n')
 
 df = pd.DataFrame(results_list)
-print(df)
 df.T.to_csv('results.csv')
-# df = pd.DataFrame(baseline_results)
-# df.T.to_csv('baseline_results.csv')
-
-
-#individual 0: (78, 120) labels = (90,)
-#individual 1: (4, 108)  labels = (90,)
-#individual 2: (28, 96)  labels = (90,)
-#individual 3: (35, 156) labels = (90,)
-#individual 4: (61, 78)  labels = (90,)
-
-# test_pipeline1 = build_pipeline(systemic='None', motion='None', phys='None', classifier='None', split_epochs=False)
-# test_pipeline2 = build_pipeline(systemic='Band pass', motion='None', phys='None', classifier='None', split_epochs=False)
-
-# data = load_individual(0)
-# data2 = load_individual(0)
-
-# newdata = test_pipeline1.fit_transform(data)
-# newdata2 = test_pipeline2.fit_transform(data2)
-
-# newdata.plot(n_channels=len(newdata.ch_names), title='No Correction', duration = 500)
-# newdata2.plot(n_channels=len(newdata2.ch_names), title='Bandpass + TDDR + bPCA', duration = 500)
-# plt.show()
-
+df = pd.DataFrame(baseline_results)
+df.T.to_csv('baseline_results.csv')
