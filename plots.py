@@ -74,9 +74,9 @@ id_data_bandpass.compute_psd().plot()
 #%%
 
 # Manual epoch extraction
-events, event_dict = mne.events_from_annotations(id_data)
+events, event_dict = mne.events_from_annotations(id_data_bandpass)
 epochs = mne.Epochs(
-    id_data,
+    id_data_bandpass,
     events,
     event_id=event_dict,
     tmin=-5,
@@ -131,8 +131,8 @@ evoked_right_hbo = epochs["Tapping/Right"].average(picks="hbo")
 evoked_right_hbr = epochs["Tapping/Right"].average(picks="hbr")
 evoked_control_hbo = epochs["Control"].average(picks="hbo")
 evoked_control_hbr = epochs["Control"].average(picks="hbr")
-evoked_diff_hbo = mne.combine_evoked([evoked_left_hbo, evoked_left_hbo], weights=[1, -1])
-evoked_diff_hbr = mne.combine_evoked([evoked_left_hbr, evoked_left_hbr], weights=[1, -1])
+evoked_diff_hbo = mne.combine_evoked([evoked_left_hbo, evoked_right_hbo], weights=[1, -1])
+evoked_diff_hbr = mne.combine_evoked([evoked_left_hbr, evoked_right_hbr], weights=[1, -1])
 
 ts = 9.0
 vlim = (-8, 8)
