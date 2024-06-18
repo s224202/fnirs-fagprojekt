@@ -17,7 +17,7 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epo
 
     Supported types(not actually implemented yet):
     Systemic: 'Low pass', 
-    Motion: 'ICA', 'Spline', 'TDDR', 'Wiener',
+    Motion: 'Spline', 'TDDR', 'Wiener',
     Phys: 'Bandpass', 'bPCA', 'ICA', 'Regression',
 
     Classifier: 'SVM', 'LDA', 'KNN'
@@ -48,9 +48,9 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epo
         estimator_list.append(('phys', FunctionTransformer(phys_func)))
     if split_epochs:  
         estimator_list.append(('event_splitter', FunctionTransformer(event_splitter_wrapper)))
-    estimator_list.append(('heuristics', FunctionTransformer(compute_heuristics)))
-    estimator_list.append(('array_flattener', FunctionTransformer(arrayflattener)))                      
-    estimator_list.append(('scaler', StandardScaler()))
+        estimator_list.append(('heuristics', FunctionTransformer(compute_heuristics)))
+        estimator_list.append(('array_flattener', FunctionTransformer(arrayflattener)))                      
+        estimator_list.append(('scaler', StandardScaler()))
 
     # Optional classifier
     classifier_func = classifier_function(classifier)
