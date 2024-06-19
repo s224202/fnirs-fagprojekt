@@ -15,7 +15,7 @@ def load_individual(id):
     data.annotations.delete(np.nonzero(data.annotations.description == "15.0"))
     return data
 
-def load_author_data(author_id):
+def load_author_data(author_id:int):
     '''
     values for author_id
     1:gunnar
@@ -35,7 +35,7 @@ def concatenate_data(data_list:list, labels_list:list) -> np.ndarray:
         labels = np.concatenate((labels, labels_list[i]), axis=0)
     return data, labels
 
-def load_CUH_data(author_id,paradigm):
+def load_CUH_data(author_id:int,paradigm:str):
     '''
     values for author_id
     the numbers between 1-7
