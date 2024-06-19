@@ -19,3 +19,22 @@ def compute_heuristics(data: np.ndarray) -> np.ndarray:
             heuristics[i,j] = np.array([mean, sd, slope])
     print(heuristics.shape)
     return heuristics
+
+def compute_heuristics_CUH(data: np.ndarray) -> np.ndarray:
+    heuristics = np.zeros((data.shape[0],data.shape[1],3))
+    for i in range(data.shape[0]):
+        for j in range(data.shape[1]):
+            #peak_index, peak_value = (np.argmax(data[i,j]), np.max(data[i,j]))
+            #peak_index = 1 if peak_index == 0 else peak_index
+            mean = np.mean(data[i,j])
+            sd = np.std(data[i,j])
+            slope = (data[i,j][-1] - data[i,j][0])/(len(data[i,j])/2)
+            
+            #check for nans 
+            assert not np.isnan(mean)
+            assert not np.isnan(sd)
+            assert not np.isnan(slope)
+
+            heuristics[i,j] = np.array([mean, sd, slope])
+    print(heuristics.shape)
+    return heuristics

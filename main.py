@@ -74,9 +74,9 @@ for i in range(5):
     # f1stds = []
     for j in range(len(pipelines_list)):
         newdata = pipelines_list[j].fit_transform(datalist[i])
-        #sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=10, tol=0.01, n_jobs=-1)
-        #sfs.fit(newdata, labelslist[i])
-        #sfs.transform(newdata)
+        sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=10, tol=0.01, n_jobs=-1)
+        sfs.fit(newdata, labelslist[i])
+        sfs.transform(newdata)
         scoring = {'rec': 'recall_macro', 'f1': 'f1_macro', 'acc': 'accuracy'}
         smallrecs = []
         smallf1s = []
@@ -99,7 +99,7 @@ for i in range(5):
         #baseline_results[i].append((scores2.mean(), scores2.std()))
         print(f'{(i*17+j)/(len(datalist)*17)*100}% done')
         persons[i].append(([np.mean(smallaccs), np.std(smallaccs), np.mean(smallrecs), np.std(smallrecs), np.mean(smallf1s), np.std(smallf1s)]))
-        #open('results.txt', 'a').write(sfs.get_support().__str__() + '\n' + scores.__str__() + '\n' + scores2.__str__() + '\n')
+        open('results.txt', 'a').write(sfs.get_support().__str__() + '\n' + scores.__str__() + '\n' + scores2.__str__() + '\n')
 
 # df = pd.DataFrame(results_list)
 # df.T.to_csv('results.csv')
@@ -110,15 +110,15 @@ for i in range(5):
 df = pd.DataFrame(persons)
 df.T.to_csv('results.csv')
 
-testpipe1 = build_pipeline(systemic='Band pass', motion='None', phys='None', classifier='None', split_epochs=False) 
-testpipe2 = build_pipeline(systemic='Band pass', motion='None', phys='ICA', classifier='None', split_epochs=False)
-testdata1 = load_CUH_data(1, 'DoC')
-testdata2 = load_CUH_data(1, 'DoC')
-testdata1 = testpipe1.fit_transform(testdata1)
-testdata2 = testpipe2.fit_transform(testdata2)
+# testpipe1 = build_pipeline(systemic='Band pass', motion='None', phys='None', classifier='None', split_epochs=False) 
+# testpipe2 = build_pipeline(systemic='Band pass', motion='None', phys='ICA', classifier='None', split_epochs=False)
+# testdata1 = load_CUH_data(1, 'DoC')
+# testdata2 = load_CUH_data(1, 'DoC')
+# testdata1 = testpipe1.fit_transform(testdata1)
+# testdata2 = testpipe2.fit_transform(testdata2)
 
-# plot the results
-testdata1.plot(n_channels=10, scalings=None, duration=100, show=False)
-testdata2.plot(n_channels=10, scalings=None, duration=100, show=False)
+# # plot the results
+# testdata1.plot(n_channels=10, scalings=None, duration=100, show=False)
+# testdata2.plot(n_channels=10, scalings=None, duration=100, show=False)
 
 plt.show()
