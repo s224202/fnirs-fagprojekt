@@ -174,7 +174,7 @@ evoked_control_hbr.plot_joint(
 #%%
 # For Rigets data
 author_id = 7
-paradigm = 'Healthy'
+paradigm = 'DoC'
 cuh_data = load_CUH_data(author_id, paradigm)
 
 #transform data

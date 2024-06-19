@@ -43,6 +43,6 @@ def load_CUH_data(author_id,paradigm):
     values for paradigm
     DoC or Healthy
     '''
-    path_name = 'Rigshospitalet_dataset/'+ paradigm + f'/_2024-04-29_0{author_id}.snirf'
+    path_name = 'Rigshospitalet_dataset/'+ paradigm + f'/CORRECTED_2024-04-29_0{author_id}.snirf'
     data = mne.io.read_raw_snirf(path_name)
     return data
