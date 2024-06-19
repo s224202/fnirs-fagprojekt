@@ -1,0 +1,2682 @@
+Defaulting to user installation because normal site-packages is not writeable
+Requirement already satisfied: asttokens==2.4.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 1)) (2.4.1)
+Requirement already satisfied: certifi==2024.2.2 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 2)) (2024.2.2)
+Requirement already satisfied: charset-normalizer==3.3.2 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 3)) (3.3.2)
+Requirement already satisfied: colorama==0.4.6 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 4)) (0.4.6)
+Requirement already satisfied: comm==0.2.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 5)) (0.2.1)
+Requirement already satisfied: contourpy==1.2.0 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 6)) (1.2.0)
+Requirement already satisfied: cycler==0.12.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 7)) (0.12.1)
+Requirement already satisfied: debugpy==1.8.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 8)) (1.8.1)
+Requirement already satisfied: decorator==5.1.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 9)) (5.1.1)
+Requirement already satisfied: exceptiongroup==1.2.0 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 10)) (1.2.0)
+Requirement already satisfied: executing==2.0.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 11)) (2.0.1)
+Requirement already satisfied: fonttools==4.49.0 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 12)) (4.49.0)
+Requirement already satisfied: h5py==3.10.0 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 13)) (3.10.0)
+Requirement already satisfied: idna==3.6 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 14)) (3.6)
+Requirement already satisfied: importlib-metadata==7.0.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 15)) (7.0.1)
+Requirement already satisfied: importlib_resources==6.1.2 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 16)) (6.1.2)
+Requirement already satisfied: ipykernel==6.29.2 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 17)) (6.29.2)
+Requirement already satisfied: ipython==8.18.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 18)) (8.18.1)
+Requirement already satisfied: ipywidgets==8.1.2 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 19)) (8.1.2)
+Requirement already satisfied: jedi==0.19.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 20)) (0.19.1)
+Requirement already satisfied: Jinja2==3.1.3 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 21)) (3.1.3)
+Requirement already satisfied: joblib==1.3.2 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 22)) (1.3.2)
+Requirement already satisfied: jupyter_client==8.6.0 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 23)) (8.6.0)
+Requirement already satisfied: jupyter_core==5.7.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 24)) (5.7.1)
+Requirement already satisfied: jupyterlab_widgets==3.0.10 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 25)) (3.0.10)
+Requirement already satisfied: kiwisolver==1.4.5 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 26)) (1.4.5)
+Requirement already satisfied: lazy_loader==0.3 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 27)) (0.3)
+Requirement already satisfied: MarkupSafe==2.1.5 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 28)) (2.1.5)
+Requirement already satisfied: matplotlib==3.8.3 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 29)) (3.8.3)
+Requirement already satisfied: matplotlib-inline==0.1.6 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 30)) (0.1.6)
+Requirement already satisfied: mne==1.6.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 31)) (1.6.1)
+Requirement already satisfied: mne-bids==0.14 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 32)) (0.14)
+Requirement already satisfied: nest-asyncio==1.6.0 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 33)) (1.6.0)
+Requirement already satisfied: numpy==1.26.4 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 34)) (1.26.4)
+Requirement already satisfied: packaging==23.2 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 35)) (23.2)
+Requirement already satisfied: parso==0.8.3 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 36)) (0.8.3)
+Requirement already satisfied: pillow==10.2.0 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 37)) (10.2.0)
+Collecting platformdirs==4.2.0 (from -r requirements.txt (line 38))
+  Using cached platformdirs-4.2.0-py3-none-any.whl.metadata (11 kB)
+Requirement already satisfied: pooch==1.8.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 39)) (1.8.1)
+Requirement already satisfied: prompt-toolkit==3.0.43 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 40)) (3.0.43)
+Requirement already satisfied: psutil==5.9.8 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 41)) (5.9.8)
+Requirement already satisfied: pure-eval==0.2.2 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 42)) (0.2.2)
+Requirement already satisfied: Pygments==2.17.2 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 43)) (2.17.2)
+Requirement already satisfied: pyparsing==3.1.1 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 44)) (3.1.1)
+Requirement already satisfied: python-dateutil==2.8.2 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 45)) (2.8.2)
+Requirement already satisfied: pyvista==0.43.3 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 46)) (0.43.3)
+Requirement already satisfied: pyvistaqt==0.11.0 in /zhome/ce/e/186696/.local/lib/python3.10/site-packages (from -r requirements.txt (line 47)) (0.11.0)
+No systemic filtering
+No motion artifact removal
+No physiological noise removal
+No classifier
+No motion artifact removal
+No physiological noise removal
+No classifier
+No motion artifact removal
+No classifier
+No motion artifact removal
+No classifier
+No motion artifact removal
+No classifier
+No physiological noise removal
+No classifier
+No physiological noise removal
+No classifier
+No physiological noise removal
+No classifier
+No classifier
+No classifier
+No classifier
+No classifier
+No classifier
+No classifier
+No classifier
+No classifier
+No classifier
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.6111111111111112
+0.0% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.6222222222222222
+1.1764705882352942% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Fitting ICA to data using 26 channels (please be patient, this may take a while)
+Selecting by explained variance: 11 components
+Fitting ICA took 1.4s.
+Applying ICA to Raw instance
+    Transforming to ICA space (11 components)
+    Zeroing out 0 ICA components
+    Projecting back using 26 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.6222222222222222
+2.3529411764705883% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23215
+    Range : 0 ... 23214 =      0.000 ...  2971.392 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.6111111111111112
+3.5294117647058822% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.711111111111111
+4.705882352941177% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23239
+    Range : 0 ... 23238 =      0.000 ...  2974.464 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.5777777777777777
+5.88235294117647% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23239
+    Range : 0 ... 23238 =      0.000 ...  2974.464 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.5
+7.0588235294117645% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23239
+    Range : 0 ... 23238 =      0.000 ...  2974.464 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.6222222222222222
+8.235294117647058% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23239
+    Range : 0 ... 23238 =      0.000 ...  2974.464 secs
+Ready.
+Fitting ICA to data using 26 channels (please be patient, this may take a while)
+Selecting by explained variance: 11 components
+Fitting ICA took 0.2s.
+Applying ICA to Raw instance
+    Transforming to ICA space (11 components)
+    Zeroing out 0 ICA components
+    Projecting back using 26 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.5777777777777777
+9.411764705882353% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23239
+    Range : 0 ... 23238 =      0.000 ...  2974.464 secs
+Ready.
+Fitting ICA to data using 26 channels (please be patient, this may take a while)
+Selecting by explained variance: 6 components
+Fitting ICA took 0.1s.
+Applying ICA to Raw instance
+    Transforming to ICA space (6 components)
+    Zeroing out 0 ICA components
+    Projecting back using 26 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.5
+10.588235294117647% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23239
+    Range : 0 ... 23238 =      0.000 ...  2974.464 secs
+Ready.
+Fitting ICA to data using 26 channels (please be patient, this may take a while)
+Selecting by explained variance: 11 components
+Fitting ICA took 3.0s.
+Applying ICA to Raw instance
+    Transforming to ICA space (11 components)
+    Zeroing out 0 ICA components
+    Projecting back using 26 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.6222222222222222
+11.76470588235294% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23239
+    Range : 0 ... 23238 =      0.000 ...  2974.464 secs
+Ready.
+Creating RawArray with float64 data, n_channels=26, n_times=23215
+    Range : 0 ... 23214 =      0.000 ...  2971.392 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.5888888888888889
+12.941176470588237% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23239
+    Range : 0 ... 23238 =      0.000 ...  2974.464 secs
+Ready.
+Creating RawArray with float64 data, n_channels=26, n_times=23215
+    Range : 0 ... 23214 =      0.000 ...  2971.392 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.5777777777777778
+14.117647058823529% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23239
+    Range : 0 ... 23238 =      0.000 ...  2974.464 secs
+Ready.
+Creating RawArray with float64 data, n_channels=26, n_times=23215
+    Range : 0 ... 23214 =      0.000 ...  2971.392 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.6111111111111112
+15.294117647058824% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23239
+    Range : 0 ... 23238 =      0.000 ...  2974.464 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.6777777777777778
+16.470588235294116% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23239
+    Range : 0 ... 23238 =      0.000 ...  2974.464 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.5333333333333334
+17.647058823529413% done
+Reading 0 ... 23238  =      0.000 ...  2974.464 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23239
+    Range : 0 ... 23238 =      0.000 ...  2974.464 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.711111111111111
+18.823529411764707% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.7444444444444445
+20.0% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.8666666666666668
+21.176470588235293% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Fitting ICA to data using 22 channels (please be patient, this may take a while)
+Selecting by explained variance: 8 components
+Fitting ICA took 2.8s.
+Applying ICA to Raw instance
+    Transforming to ICA space (8 components)
+    Zeroing out 0 ICA components
+    Projecting back using 22 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.8666666666666668
+22.35294117647059% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=22, n_times=18858
+    Range : 0 ... 18857 =      0.000 ...  2413.696 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.6000000000000001
+23.52941176470588% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 36, 3)
+0.7000000000000001
+24.705882352941178% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=36, n_times=18878
+    Range : 0 ... 18877 =      0.000 ...  2416.256 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.888888888888889
+25.882352941176475% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=36, n_times=18878
+    Range : 0 ... 18877 =      0.000 ...  2416.256 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.6222222222222221
+27.058823529411764% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=36, n_times=18878
+    Range : 0 ... 18877 =      0.000 ...  2416.256 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.8666666666666668
+28.235294117647058% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=36, n_times=18878
+    Range : 0 ... 18877 =      0.000 ...  2416.256 secs
+Ready.
+Fitting ICA to data using 22 channels (please be patient, this may take a while)
+Selecting by explained variance: 9 components
+Fitting ICA took 0.1s.
+Applying ICA to Raw instance
+    Transforming to ICA space (9 components)
+    Zeroing out 0 ICA components
+    Projecting back using 22 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.888888888888889
+29.411764705882355% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=36, n_times=18878
+    Range : 0 ... 18877 =      0.000 ...  2416.256 secs
+Ready.
+Fitting ICA to data using 22 channels (please be patient, this may take a while)
+Selecting by explained variance: 6 components
+Fitting ICA took 0.1s.
+Applying ICA to Raw instance
+    Transforming to ICA space (6 components)
+    Zeroing out 0 ICA components
+    Projecting back using 22 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.6222222222222221
+30.58823529411765% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=36, n_times=18878
+    Range : 0 ... 18877 =      0.000 ...  2416.256 secs
+Ready.
+Fitting ICA to data using 22 channels (please be patient, this may take a while)
+Selecting by explained variance: 8 components
+Fitting ICA took 0.1s.
+Applying ICA to Raw instance
+    Transforming to ICA space (8 components)
+    Zeroing out 0 ICA components
+    Projecting back using 22 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.8666666666666668
+31.76470588235294% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=36, n_times=18878
+    Range : 0 ... 18877 =      0.000 ...  2416.256 secs
+Ready.
+Creating RawArray with float64 data, n_channels=22, n_times=18858
+    Range : 0 ... 18857 =      0.000 ...  2413.696 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.6222222222222222
+32.94117647058823% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=36, n_times=18878
+    Range : 0 ... 18877 =      0.000 ...  2416.256 secs
+Ready.
+Creating RawArray with float64 data, n_channels=22, n_times=18858
+    Range : 0 ... 18857 =      0.000 ...  2413.696 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.5333333333333333
+34.11764705882353% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=36, n_times=18878
+    Range : 0 ... 18877 =      0.000 ...  2416.256 secs
+Ready.
+Creating RawArray with float64 data, n_channels=22, n_times=18858
+    Range : 0 ... 18857 =      0.000 ...  2413.696 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 22, 3)
+0.6000000000000001
+35.294117647058826% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=36, n_times=18878
+    Range : 0 ... 18877 =      0.000 ...  2416.256 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 36, 3)
+0.7222222222222222
+36.470588235294116% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=36, n_times=18878
+    Range : 0 ... 18877 =      0.000 ...  2416.256 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 36, 3)
+0.5666666666666667
+37.64705882352941% done
+Reading 0 ... 18877  =      0.000 ...  2416.256 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D3 760', 'S1_D3 850', 'S2_D1 760', 'S2_D1 850', 'S2_D10 760', 'S2_D10 850', 'S3_D2 760', 'S3_D2 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S7_D7 760', 'S7_D7 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=36, n_times=18878
+    Range : 0 ... 18877 =      0.000 ...  2416.256 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 36, 3)
+0.7000000000000001
+38.82352941176471% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.4999999999999999
+40.0% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.5777777777777777
+41.17647058823529% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Fitting ICA to data using 20 channels (please be patient, this may take a while)
+Selecting by explained variance: 10 components
+Fitting ICA took 5.1s.
+Applying ICA to Raw instance
+    Transforming to ICA space (10 components)
+    Zeroing out 0 ICA components
+    Projecting back using 20 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.5777777777777777
+42.35294117647059% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=20, n_times=18857
+    Range : 0 ... 18856 =      0.000 ...  2413.568 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.5222222222222223
+43.529411764705884% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 32, 3)
+0.5888888888888889
+44.70588235294118% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=32, n_times=18875
+    Range : 0 ... 18874 =      0.000 ...  2415.872 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.5222222222222223
+45.88235294117647% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=32, n_times=18875
+    Range : 0 ... 18874 =      0.000 ...  2415.872 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.4444444444444445
+47.05882352941176% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=32, n_times=18875
+    Range : 0 ... 18874 =      0.000 ...  2415.872 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.5777777777777777
+48.23529411764706% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=32, n_times=18875
+    Range : 0 ... 18874 =      0.000 ...  2415.872 secs
+Ready.
+Fitting ICA to data using 20 channels (please be patient, this may take a while)
+Selecting by explained variance: 10 components
+Fitting ICA took 5.0s.
+Applying ICA to Raw instance
+    Transforming to ICA space (10 components)
+    Zeroing out 0 ICA components
+    Projecting back using 20 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.5222222222222223
+49.411764705882355% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=32, n_times=18875
+    Range : 0 ... 18874 =      0.000 ...  2415.872 secs
+Ready.
+Fitting ICA to data using 20 channels (please be patient, this may take a while)
+Selecting by explained variance: 6 components
+Fitting ICA took 0.1s.
+Applying ICA to Raw instance
+    Transforming to ICA space (6 components)
+    Zeroing out 0 ICA components
+    Projecting back using 20 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.4444444444444445
+50.588235294117645% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=32, n_times=18875
+    Range : 0 ... 18874 =      0.000 ...  2415.872 secs
+Ready.
+Fitting ICA to data using 20 channels (please be patient, this may take a while)
+Selecting by explained variance: 10 components
+Fitting ICA took 5.0s.
+Applying ICA to Raw instance
+    Transforming to ICA space (10 components)
+    Zeroing out 0 ICA components
+    Projecting back using 20 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.5777777777777777
+51.76470588235295% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=32, n_times=18875
+    Range : 0 ... 18874 =      0.000 ...  2415.872 secs
+Ready.
+Creating RawArray with float64 data, n_channels=20, n_times=18857
+    Range : 0 ... 18856 =      0.000 ...  2413.568 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.4888888888888888
+52.94117647058824% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=32, n_times=18875
+    Range : 0 ... 18874 =      0.000 ...  2415.872 secs
+Ready.
+Creating RawArray with float64 data, n_channels=20, n_times=18857
+    Range : 0 ... 18856 =      0.000 ...  2413.568 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.47777777777777775
+54.11764705882353% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=32, n_times=18875
+    Range : 0 ... 18874 =      0.000 ...  2415.872 secs
+Ready.
+Creating RawArray with float64 data, n_channels=20, n_times=18857
+    Range : 0 ... 18856 =      0.000 ...  2413.568 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 20, 3)
+0.5222222222222223
+55.294117647058826% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=32, n_times=18875
+    Range : 0 ... 18874 =      0.000 ...  2415.872 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 32, 3)
+0.5666666666666667
+56.470588235294116% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=32, n_times=18875
+    Range : 0 ... 18874 =      0.000 ...  2415.872 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 32, 3)
+0.5555555555555556
+57.647058823529406% done
+Reading 0 ... 18874  =      0.000 ...  2415.872 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S3_D2 760', 'S3_D2 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S7_D6 760', 'S7_D6 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=32, n_times=18875
+    Range : 0 ... 18874 =      0.000 ...  2415.872 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 32, 3)
+0.5888888888888889
+58.82352941176471% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.9
+60.0% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.9333333333333333
+61.1764705882353% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Fitting ICA to data using 40 channels (please be patient, this may take a while)
+Selecting by explained variance: 8 components
+Fitting ICA took 0.2s.
+Applying ICA to Raw instance
+    Transforming to ICA space (8 components)
+    Zeroing out 0 ICA components
+    Projecting back using 40 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.9333333333333333
+62.35294117647059% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=40, n_times=23083
+    Range : 0 ... 23082 =      0.000 ...  2954.496 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.7111111111111111
+63.52941176470588% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 52, 3)
+0.8444444444444444
+64.70588235294117% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=52, n_times=23121
+    Range : 0 ... 23120 =      0.000 ...  2959.360 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.9222222222222223
+65.88235294117646% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=52, n_times=23121
+    Range : 0 ... 23120 =      0.000 ...  2959.360 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.7555555555555555
+67.05882352941175% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=52, n_times=23121
+    Range : 0 ... 23120 =      0.000 ...  2959.360 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.9333333333333333
+68.23529411764706% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=52, n_times=23121
+    Range : 0 ... 23120 =      0.000 ...  2959.360 secs
+Ready.
+Fitting ICA to data using 40 channels (please be patient, this may take a while)
+Selecting by explained variance: 8 components
+Fitting ICA took 0.2s.
+Applying ICA to Raw instance
+    Transforming to ICA space (8 components)
+    Zeroing out 0 ICA components
+    Projecting back using 40 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.9222222222222223
+69.41176470588235% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=52, n_times=23121
+    Range : 0 ... 23120 =      0.000 ...  2959.360 secs
+Ready.
+Fitting ICA to data using 40 channels (please be patient, this may take a while)
+Selecting by explained variance: 7 components
+Fitting ICA took 0.1s.
+Applying ICA to Raw instance
+    Transforming to ICA space (7 components)
+    Zeroing out 0 ICA components
+    Projecting back using 40 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.7555555555555555
+70.58823529411765% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=52, n_times=23121
+    Range : 0 ... 23120 =      0.000 ...  2959.360 secs
+Ready.
+Fitting ICA to data using 40 channels (please be patient, this may take a while)
+Selecting by explained variance: 8 components
+Fitting ICA took 0.1s.
+Applying ICA to Raw instance
+    Transforming to ICA space (8 components)
+    Zeroing out 0 ICA components
+    Projecting back using 40 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.9333333333333333
+71.76470588235294% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=52, n_times=23121
+    Range : 0 ... 23120 =      0.000 ...  2959.360 secs
+Ready.
+Creating RawArray with float64 data, n_channels=40, n_times=23083
+    Range : 0 ... 23082 =      0.000 ...  2954.496 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.6555555555555556
+72.94117647058823% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=52, n_times=23121
+    Range : 0 ... 23120 =      0.000 ...  2959.360 secs
+Ready.
+Creating RawArray with float64 data, n_channels=40, n_times=23083
+    Range : 0 ... 23082 =      0.000 ...  2954.496 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.6222222222222222
+74.11764705882354% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=52, n_times=23121
+    Range : 0 ... 23120 =      0.000 ...  2959.360 secs
+Ready.
+Creating RawArray with float64 data, n_channels=40, n_times=23083
+    Range : 0 ... 23082 =      0.000 ...  2954.496 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 40, 3)
+0.7111111111111111
+75.29411764705883% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=52, n_times=23121
+    Range : 0 ... 23120 =      0.000 ...  2959.360 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 52, 3)
+0.8444444444444444
+76.47058823529412% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=52, n_times=23121
+    Range : 0 ... 23120 =      0.000 ...  2959.360 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 52, 3)
+0.788888888888889
+77.64705882352942% done
+Reading 0 ... 23120  =      0.000 ...  2959.360 secs...
+['S3_D11 760', 'S3_D11 850', 'S8_D16 760', 'S8_D16 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=52, n_times=23121
+    Range : 0 ... 23120 =      0.000 ...  2959.360 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 52, 3)
+0.8444444444444444
+78.82352941176471% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.888888888888889
+80.0% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.888888888888889
+81.17647058823529% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Fitting ICA to data using 14 channels (please be patient, this may take a while)
+Selecting by explained variance: 6 components
+Fitting ICA took 0.1s.
+Applying ICA to Raw instance
+    Transforming to ICA space (6 components)
+    Zeroing out 0 ICA components
+    Projecting back using 14 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.888888888888889
+82.35294117647058% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=14, n_times=22995
+    Range : 0 ... 22994 =      0.000 ...  2943.232 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.6444444444444444
+83.52941176470588% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.711111111111111
+84.70588235294117% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23007
+    Range : 0 ... 23006 =      0.000 ...  2944.768 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.8666666666666666
+85.88235294117646% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23007
+    Range : 0 ... 23006 =      0.000 ...  2944.768 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.7333333333333333
+87.05882352941177% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23007
+    Range : 0 ... 23006 =      0.000 ...  2944.768 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.888888888888889
+88.23529411764706% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23007
+    Range : 0 ... 23006 =      0.000 ...  2944.768 secs
+Ready.
+Fitting ICA to data using 14 channels (please be patient, this may take a while)
+Selecting by explained variance: 6 components
+Fitting ICA took 0.1s.
+Applying ICA to Raw instance
+    Transforming to ICA space (6 components)
+    Zeroing out 0 ICA components
+    Projecting back using 14 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.8666666666666666
+89.41176470588236% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23007
+    Range : 0 ... 23006 =      0.000 ...  2944.768 secs
+Ready.
+Fitting ICA to data using 14 channels (please be patient, this may take a while)
+Selecting by explained variance: 7 components
+Fitting ICA took 0.1s.
+Applying ICA to Raw instance
+    Transforming to ICA space (7 components)
+    Zeroing out 0 ICA components
+    Projecting back using 14 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.7333333333333333
+90.58823529411765% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23007
+    Range : 0 ... 23006 =      0.000 ...  2944.768 secs
+Ready.
+Fitting ICA to data using 14 channels (please be patient, this may take a while)
+Selecting by explained variance: 6 components
+Fitting ICA took 0.1s.
+Applying ICA to Raw instance
+    Transforming to ICA space (6 components)
+    Zeroing out 0 ICA components
+    Projecting back using 14 PCA components
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.888888888888889
+91.76470588235294% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23007
+    Range : 0 ... 23006 =      0.000 ...  2944.768 secs
+Ready.
+Creating RawArray with float64 data, n_channels=14, n_times=22995
+    Range : 0 ... 22994 =      0.000 ...  2943.232 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.6888888888888889
+92.94117647058823% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23007
+    Range : 0 ... 23006 =      0.000 ...  2944.768 secs
+Ready.
+Creating RawArray with float64 data, n_channels=14, n_times=22995
+    Range : 0 ... 22994 =      0.000 ...  2943.232 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.7222222222222222
+94.11764705882352% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23007
+    Range : 0 ... 23006 =      0.000 ...  2944.768 secs
+Ready.
+Creating RawArray with float64 data, n_channels=14, n_times=22995
+    Range : 0 ... 22994 =      0.000 ...  2943.232 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 14, 3)
+0.6444444444444444
+95.29411764705881% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23007
+    Range : 0 ... 23006 =      0.000 ...  2944.768 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.8333333333333334
+96.47058823529412% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23007
+    Range : 0 ... 23006 =      0.000 ...  2944.768 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.7777777777777778
+97.6470588235294% done
+Reading 0 ... 23006  =      0.000 ...  2944.768 secs...
+['S1_D1 760', 'S1_D1 850', 'S1_D2 760', 'S1_D2 850', 'S1_D3 760', 'S1_D3 850', 'S1_D9 760', 'S1_D9 850', 'S2_D1 760', 'S2_D1 850', 'S2_D3 760', 'S2_D3 850', 'S3_D2 760', 'S3_D2 850', 'S3_D11 760', 'S3_D11 850', 'S5_D5 760', 'S5_D5 850', 'S5_D6 760', 'S5_D6 850', 'S5_D7 760', 'S5_D7 850', 'S6_D5 760', 'S6_D5 850', 'S6_D7 760', 'S6_D7 850', 'S6_D8 760', 'S6_D8 850', 'S7_D6 760', 'S7_D6 850']
+Filtering raw data in 1 contiguous segment
+Setting up band-pass filter from 0.05 - 0.7 Hz
+
+FIR filter parameters
+---------------------
+Designing a one-pass, zero-phase, non-causal bandpass filter:
+- Windowed time-domain design (firwin) method
+- Hamming window with 0.0194 passband ripple and 53 dB stopband attenuation
+- Lower passband edge: 0.05
+- Lower transition bandwidth: 0.02 Hz (-6 dB cutoff frequency: 0.04 Hz)
+- Upper passband edge: 0.70 Hz
+- Upper transition bandwidth: 0.20 Hz (-6 dB cutoff frequency: 0.80 Hz)
+- Filter length: 1291 samples (165.248 s)
+
+Creating RawArray with float64 data, n_channels=26, n_times=23007
+    Range : 0 ... 23006 =      0.000 ...  2944.768 secs
+Ready.
+Used Annotations descriptions: ['Control', 'Tapping/Left', 'Tapping/Right']
+Not setting metadata
+90 matching events found
+Setting baseline interval to [-4.992, 0.0] s
+Applying baseline correction (mode: mean)
+0 projection items activated
+Using data from preloaded Raw for 90 events and 157 original time points ...
+0 bad epochs dropped
+(90, 26, 3)
+0.711111111111111
+98.82352941176471% done

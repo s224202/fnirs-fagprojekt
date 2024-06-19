@@ -1,0 +1,268 @@
+Loaded dependency [python3/3.10.13]: gcc/11.4.0-binutils-2.40
+Loaded dependency [python3/3.10.13]: sqlite3/3.44.2
+Loaded module: python3/3.10.13
+
+Loading python3/3.10.13
+  Loading requirement: gcc/11.4.0-binutils-2.40 sqlite3/3.44.2
+WARNING: Ignoring invalid distribution -lotly (/zhome/ce/e/186696/.local/lib/python3.10/site-packages)
+ERROR: Could not find a version that satisfies the requirement pywin32==306 (from versions: none)
+ERROR: No matching distribution found for pywin32==306
+
+[notice] A new release of pip is available: 23.3.1 -> 24.0
+[notice] To update, run: pip install --upgrade pip
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/.local/lib/python3.10/site-packages/sklearn/decomposition/_fastica.py:128: ConvergenceWarning: FastICA did not converge. Consider increasing tolerance or the maximum number of iterations.
+  warnings.warn(
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/.local/lib/python3.10/site-packages/sklearn/decomposition/_fastica.py:128: ConvergenceWarning: FastICA did not converge. Consider increasing tolerance or the maximum number of iterations.
+  warnings.warn(
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/.local/lib/python3.10/site-packages/sklearn/decomposition/_fastica.py:128: ConvergenceWarning: FastICA did not converge. Consider increasing tolerance or the maximum number of iterations.
+  warnings.warn(
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
+[Parallel(n_jobs=1)]: Done  17 tasks      | elapsed:    0.0s
+/zhome/ce/e/186696/fagprojekt/Tools/function_wrappers.py:30: FutureWarning: The current default of copy=False will change to copy=True in 1.7. Set the value of copy explicitly to avoid this warning
+  return X.get_data()
