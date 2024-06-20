@@ -48,14 +48,14 @@ regression_spline = build_pipeline(systemic='Band pass', motion='Spline', phys='
 model = MLPClassifier(hidden_layer_sizes=(10), max_iter=10000, random_state=r, solver='adam', activation='relu')
 #model = SVC(random_state=r, kernel='linear')
 baselinemodel = DummyClassifier(strategy='most_frequent')
-#datalist = [load_individual(0), load_individual(1), load_individual(2), load_individual(3), load_individual(4)]
+datalist = [load_individual(0), load_individual(1), load_individual(2), load_individual(3), load_individual(4)]
 #datalist = [load_author_data(2), load_author_data(3), load_author_data(4)]
 #datalist = [load_CUH_data(1, 'Healthy'), load_CUH_data(2, 'Healthy'), load_CUH_data(3, 'Healthy'), load_CUH_data(4, 'Healthy'), 
             #load_CUH_data(5, 'Healthy'), 
             #load_CUH_data(5, 'Healthy'), load_CUH_data(7, 'Healthy')]
-datalist = [load_CUH_data(1, 'DoC'), load_CUH_data(2, 'DoC'), load_CUH_data(5, 'DoC'), 
+#datalist = [load_CUH_data(1, 'DoC'), load_CUH_data(2, 'DoC'), load_CUH_data(5, 'DoC'), 
             #load_CUH_data(3, 'DoC'), load_CUH_data(6, 'DoC'),
-            load_CUH_data(4, 'DoC'), load_CUH_data(7, 'DoC')]
+#            load_CUH_data(4, 'DoC'), load_CUH_data(7, 'DoC')]
 #data, labels = concatenate_data(datalist, labelslist)
 pipelines_list = [pipeline, bandpass, ica, bpca, regression, tddr, Wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline]
 labelslist = [datalist[i].annotations.to_data_frame()['description'] for i in range(len(datalist))]
@@ -74,9 +74,9 @@ for i in range(1):
     # f1stds = []
     for j in range(17):
         newdata = pipelines_list[j].fit_transform(datalist[i])
-        # sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=10, tol=0.01, n_jobs=-1)
-        # sfs.fit(newdata, labelslist[i])
-        # sfs.transform(newdata)
+        sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=10, tol=0.01, n_jobs=-1)
+        sfs.fit(newdata, labelslist[i])
+        sfs.transform(newdata)
         scoring = {'rec': 'recall_macro', 'f1': 'f1_macro', 'acc': 'accuracy'}
         smallrecs = []
         smallf1s = []
@@ -98,17 +98,17 @@ for i in range(1):
         #scores2 = cross_val_score(baselinemodel,newdata, labelslist[i], cv=3)
         #baseline_results[i].append((scores2.mean(), scores2.std()))
         print(f'{(i*17+j)/(len(datalist)*17)*100}% done')
-        persons[i].append(([np.mean(smallaccs), np.std(smallaccs), np.mean(smallrecs), np.std(smallrecs), np.mean(smallf1s), np.std(smallf1s)]))
-        #open('results.txt', 'a').write(sfs.get_support().__str__())
+        #persons[i].append(([np.mean(smallaccs), np.std(smallaccs), np.mean(smallrecs), np.std(smallrecs), np.mean(smallf1s), np.std(smallf1s)]))
+        open('results.txt', 'a').write(sfs.get_support().__str__())
 
-# df = pd.DataFrame(results_list)
-# df.T.to_csv('results.csv')
-# df = pd.DataFrame(baseline_results)
-# df.T.to_csv('baseline_results.csv')
+df = pd.DataFrame(results_list)
+df.T.to_csv('results.csv')
+df = pd.DataFrame(baseline_results)
+df.T.to_csv('baseline_results.csv')
 
 # save the acc, f1 and rec results to a csv
-df = pd.DataFrame(persons)
-df.T.to_csv('results.csv')
+# df = pd.DataFrame(persons)
+# df.T.to_csv('results.csv')
 
 # testpipe1 = build_pipeline(systemic='Band pass', motion='None', phys='None', classifier='None', split_epochs=False) 
 # testpipe2 = build_pipeline(systemic='Band pass', motion='Spline', phys='None', classifier='None', split_epochs=False)

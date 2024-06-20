@@ -48,7 +48,7 @@ def build_pipeline(systemic:str, motion:str, phys:str, classifier:str, split_epo
         estimator_list.append(('phys', FunctionTransformer(phys_func)))
     if split_epochs:  
         estimator_list.append(('event_splitter', FunctionTransformer(event_splitter_wrapper)))
-        estimator_list.append(('heuristics', FunctionTransformer(compute_heuristics_CUH)))
+        estimator_list.append(('heuristics', FunctionTransformer(compute_heuristics)))
         estimator_list.append(('array_flattener', FunctionTransformer(arrayflattener)))                      
         estimator_list.append(('scaler', StandardScaler()))
 
