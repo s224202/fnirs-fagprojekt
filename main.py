@@ -61,7 +61,7 @@ pipelines_list = [pipeline, bandpass, ica, bpca, regression, tddr, Wiener, splin
 labelslist = [datalist[i].annotations.to_data_frame()['description'] for i in range(len(datalist))]
 label_encoder = LabelEncoder()
 persons = []
-for i in range(5):
+for i in range(1):
     persons.append([])
     results_list.append([])
     baseline_results.append([])
@@ -72,17 +72,17 @@ for i in range(5):
     # accstds = []
     # recstds = []
     # f1stds = []
-    for j in range(len(pipelines_list)):
+    for j in range(17):
         newdata = pipelines_list[j].fit_transform(datalist[i])
-        sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=10, tol=0.01, n_jobs=-1)
-        sfs.fit(newdata, labelslist[i])
-        sfs.transform(newdata)
+        # sfs = SequentialFeatureSelector(model, n_features_to_select='auto', cv=10, tol=0.01, n_jobs=-1)
+        # sfs.fit(newdata, labelslist[i])
+        # sfs.transform(newdata)
         scoring = {'rec': 'recall_macro', 'f1': 'f1_macro', 'acc': 'accuracy'}
         smallrecs = []
         smallf1s = []
         smallaccs = []
 
-        for train, test in StratifiedKFold(n_splits=5, shuffle=True, random_state=r).split(newdata, labelslist[i]):
+        for train, test in StratifiedKFold(n_splits=10, shuffle=True, random_state=r).split(newdata, labelslist[i]):
                 model.fit(newdata[train], labelslist[i][train])
                 smallrecs.append(recall_score(labelslist[i][test], model.predict(newdata[test]), average='binary', pos_label=1))
                 smallf1s.append(f1_score(labelslist[i][test], model.predict(newdata[test]), average='binary', pos_label=1))
@@ -99,7 +99,7 @@ for i in range(5):
         #baseline_results[i].append((scores2.mean(), scores2.std()))
         print(f'{(i*17+j)/(len(datalist)*17)*100}% done')
         persons[i].append(([np.mean(smallaccs), np.std(smallaccs), np.mean(smallrecs), np.std(smallrecs), np.mean(smallf1s), np.std(smallf1s)]))
-        open('results.txt', 'a').write(sfs.get_support().__str__() + '\n' + scores.__str__() + '\n' + scores2.__str__() + '\n')
+        #open('results.txt', 'a').write(sfs.get_support().__str__())
 
 # df = pd.DataFrame(results_list)
 # df.T.to_csv('results.csv')
@@ -111,14 +111,14 @@ df = pd.DataFrame(persons)
 df.T.to_csv('results.csv')
 
 # testpipe1 = build_pipeline(systemic='Band pass', motion='None', phys='None', classifier='None', split_epochs=False) 
-# testpipe2 = build_pipeline(systemic='Band pass', motion='None', phys='ICA', classifier='None', split_epochs=False)
-# testdata1 = load_CUH_data(1, 'DoC')
-# testdata2 = load_CUH_data(1, 'DoC')
+# testpipe2 = build_pipeline(systemic='Band pass', motion='Spline', phys='None', classifier='None', split_epochs=False)
+# testdata1 = load_CUH_data(5, 'DoC')
+# testdata2 = load_CUH_data(5, 'DoC')
 # testdata1 = testpipe1.fit_transform(testdata1)
 # testdata2 = testpipe2.fit_transform(testdata2)
 
 # # plot the results
-# testdata1.plot(n_channels=10, scalings=None, duration=100, show=False)
-# testdata2.plot(n_channels=10, scalings=None, duration=100, show=False)
+# testdata1.plot(n_channels=10, scalings='auto', duration=20, show=False, title='No filter')
+# testdata2.plot(n_channels=10, scalings='auto', duration=20, show=False, title='ICA')
 
-plt.show()
+# plt.show()

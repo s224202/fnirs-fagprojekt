@@ -30,10 +30,17 @@ def motion_artifact_detection(data,T):
     for i in range(len(data)):
         if data[i] > T:
             Motion_Artifact = []
-            while data[i] > T:
+            while data[i] > T and i < (len(data) - 1):
                 i += 1
                 Motion_Artifact.append(i)
             Motion_Artifacts.append(Motion_Artifact)
+    # Hacky but probably fine
+    i = 0
+    while i < len(Motion_Artifacts):
+        if len(Motion_Artifacts[i]) < 3:
+            Motion_Artifacts.pop(i)
+            i -= 1
+        i += 1
     return Motion_Artifacts
 
 # Motion Artifact correction
@@ -42,7 +49,7 @@ def motion_artifact_correction(data):
     
     for i in range(len(data)):
         MSTD = moving_std(data[i], 10)
-        MAD = motion_artifact_detection(MSTD, 0.5)
+        MAD = motion_artifact_detection(MSTD, 0.1)
         for j in range(len(MAD)):
             myspline = CubicSpline(MAD[j], data[i][MAD[j]])
             data[i][MAD[j]] = data[i][MAD[j]]-myspline(MAD[j])
