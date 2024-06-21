@@ -51,7 +51,7 @@ def bandpass_wrapper(x):
 def ICA_wrapper(x):
     ica = mne.preprocessing.ICA(n_components=0.8, random_state=42, max_iter='auto')
     ica.fit(x.copy().filter(l_freq = 1, h_freq= None ))
-    x = ica.apply(x, exclude=ica.find_bads_muscle(inst=x, l_freq=0.5, h_freq=5)[0])
+    x = ica.apply(x, exclude=ica.find_bads_muscle(inst=x, l_freq=0.5, h_freq=x.info['sfreq']/2 - 0.1)[0])
     return x
 
 def PCA_wrapper(x):
