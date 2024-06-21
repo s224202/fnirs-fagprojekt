@@ -84,9 +84,10 @@ for i in range(1):
 
         for train, test in StratifiedKFold(n_splits=10, shuffle=True, random_state=r).split(newdata, labelslist[i]):
                 model.fit(newdata[train], labelslist[i][train])
-                smallrecs.append(recall_score(labelslist[i][test], model.predict(newdata[test]), average='binary', pos_label=1))
-                smallf1s.append(f1_score(labelslist[i][test], model.predict(newdata[test]), average='binary', pos_label=1))
+                #smallrecs.append(recall_score(labelslist[i][test], model.predict(newdata[test]), average='binary', pos_label=1))
+                #smallf1s.append(f1_score(labelslist[i][test], model.predict(newdata[test]), average='binary', pos_label=1))
                 smallaccs.append(accuracy_score(labelslist[i][test], model.predict(newdata[test])))
+        results_list[i].append((np.mean(smallaccs), np.std(smallaccs)))
         # accs.append(np.mean(smallaccs))
         # recs.append(np.mean(smallrecs))
         # f1s.append(np.mean(smallf1s))
