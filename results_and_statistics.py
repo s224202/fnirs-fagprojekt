@@ -2,8 +2,9 @@
 import pandas as pd
 import numpy as np
 from scipy import stats
+from statsmodels.stats.multitest import multipletests, fdrcorrection
 
-# For Riget
+# For CUH  (DoC or healthy)
 # read csv files
 df = pd.read_csv('Results/resultsriget.csv', sep=',', header=None)
 # print(df.iloc[0, 1::2])
@@ -50,8 +51,6 @@ print(f'Are the pipelines variances equal?', stats.bartlett(none, bandpass, ica,
 # shapiro-wilks
 for row, pipeline in enumerate(["None", "Band-pass", "ICA", "bPCA", "sc regression", "TDDR", "Wiener", "Spline", "ICA-TDDR", "ICA-Wiener", "ICA-Spline", "bPCA-TDDR", "bPCA-Wiener", "bPCA-Spline", "sc regression-TDDR", "sc regression-Wiener", "sc regression-Spline"]):
     print(f'Is {pipeline} normally distributed?', stats.shapiro(df.iloc[row, 1::6]).pvalue > 0.05)
-
-# print(f'Is baseline normally distributed?', stats.shapiro(dfbase.iloc[0, 1::2]).pvalue > 0.05)
 
 #%%
 # calculate one-way ANOVA and Kruskal-Wallis (without baseline)
@@ -121,18 +120,14 @@ print(f'Are the pipelines variances equal?', stats.bartlett(Patient1, Patient2, 
 for column, patient in enumerate(["Column", "Patient 1", "Patient 2", "Patient 3","Patient 4","Patient 5","Patient 6","Patient 7","Patient 8","Patient 9","Patient 10","Patient 11","Patient 12","Patient 13","Patient 14","Patient 15","Patient 16","Patient 17","Patient 18","Patient 19","Patient 20","Patient 21","Patient 22","Patient 23","Patient 24","Patient 25","Patient 26","Patient 27","Patient 28","Patient 29","Patient 30","Patient 31","Patient 32","Patient 33","Patient 34","Patient 35","Patient 36"]):
     print(f'Is {patient} normally distributed?', stats.shapiro(df.iloc[:, 1::6]).pvalue > 0.05)
 #%%
-#PROBLEM
 # mann-whitney u for patients vs baseline
 for column, patient in enumerate(["Column", "Patient 1", "Patient 2", "Patient 3","Patient 4","Patient 5","Patient 6","Patient 7","Patient 8","Patient 9","Patient 10","Patient 11","Patient 12","Patient 13","Patient 14","Patient 15","Patient 16","Patient 17","Patient 18","Patient 19","Patient 20","Patient 21","Patient 22","Patient 23","Patient 24","Patient 25","Patient 26","Patient 27","Patient 28","Patient 29","Patient 30","Patient 31","Patient 32","Patient 33","Patient 34","Patient 35","Patient 36"]):
-    print(f't-test for {patient} and baseline:', (stats.mannwhitneyu(df.iloc[:, 1:126:6], [0.5 for _ in range(len(df.iloc[:, 1:126:6]))], nan_policy='omit').pvalue, stats.mannwhitneyu(df.iloc[:, 1:126:6], [0.5 for _ in range(len(df.iloc[:, 1:126:6]))], nan_policy='omit').pvalue < 0.05))
-#%%
-print(df.iloc[:, 1:126:6])
+    print(f'Mann-Whitney test for {patient} and baseline:', (stats.mannwhitneyu(df.T.iloc[column, 1:126:6], [0.5 for _ in range(len(df.T.iloc[column, 1:126:6]))], nan_policy='omit').pvalue, stats.mannwhitneyu(df.T.iloc[column, 1:126:6], [0.5 for _ in range(len(df.T.iloc[column, 1:126:6]))], nan_policy='omit').pvalue < 0.05))
 #%%
 
-for column, patient in enumerate(["Column", "Patient 1", "Patient 2", "Patient 3","Patient 4","Patient 5","Patient 6","Patient 7","Patient 8","Patient 9","Patient 10","Patient 11","Patient 12","Patient 13","Patient 14","Patient 15","Patient 16","Patient 17","Patient 18","Patient 19","Patient 20","Patient 21","Patient 22","Patient 23","Patient 24","Patient 25","Patient 26","Patient 27","Patient 28","Patient 29","Patient 30","Patient 31","Patient 32","Patient 33","Patient 34","Patient 35","Patient 36"]):
-    print(f't-test for {patient} and baseline:', (stats.ttest_ind(df.iloc[:, 1::6], [0.5 for _ in range(len(df.iloc[:, 1::6]))], nan_policy='omit').pvalue, stats.ttest_ind(df.iloc[:, 1::6], [0.5 for _ in range(len(df.iloc[:, 1::6]))], nan_policy='omit').pvalue < 0.05))
-
-
+# adjusted p-values with fdr correctionn (benjamini-yekutieli)
+pvalues = [stats.mannwhitneyu(df.T.iloc[column, 1:126:6], [0.5 for _ in range(len(df.T.iloc[column, 1:126:6]))], nan_policy='omit').pvalue for column in range(37)]
+print(fdrcorrection(pvalues, alpha=0.05, method='n', is_sorted=False))
 
 
 
@@ -142,7 +137,7 @@ for column, patient in enumerate(["Column", "Patient 1", "Patient 2", "Patient 3
 #%%
 # For Rob Lukes
 # read csv files
-df = pd.read_csv('Results/results.csv', sep=',', header=None)
+df = pd.read_csv('Results/resultsrobFinal.csv', sep=',', header=None)
 # print(df.iloc[0, 1::2])
 
 #%%
@@ -150,7 +145,6 @@ df = pd.read_csv('Results/results.csv', sep=',', header=None)
 
 for row, pipeline in enumerate(["None", "Band-pass", "ICA", "bPCA", "sc regression", "TDDR", "Wiener", "Spline", "ICA-TDDR", "ICA-Wiener", "ICA-Spline", "bPCA-TDDR", "bPCA-Wiener", "bPCA-Spline", "sc regression-TDDR", "sc regression-Wiener", "sc regression-Spline"]):
     print(f'Mean of pipeline {pipeline}: {round(np.mean(df.iloc[row, 1::2]), 3)}', f'SD of pipeline {pipeline}: {round(np.mean(df.iloc[row, 2::2]), 3)}')
-
 
 #%%
 none = df.iloc[0, 1::2]
@@ -186,7 +180,16 @@ for row, pipeline in enumerate(["None", "Band-pass", "ICA", "bPCA", "sc regressi
 print(f'Is there a statistical significant difference between the means?', stats.f_oneway(none, bandpass, ica, bpca, regression, tddr, wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline, nan_policy='omit').pvalue < 0.05, stats.f_oneway(none, bandpass, ica, bpca, regression, tddr, wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline, nan_policy='omit').pvalue)
 print(f'Is there a statistical significant difference between the means? (no distribution assumptions)', stats.kruskal(none, bandpass, ica, bpca, regression, tddr, wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline, nan_policy='omit').pvalue < 0.05, stats.kruskal(none, bandpass, ica, bpca, regression, tddr, wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline, nan_policy='omit').pvalue)
 
+
 #%%
-# t-test for baseline
+# mann-whitney test for pipelines vs baseline
 for row, pipeline in enumerate(["None", "Band-pass", "ICA", "bPCA", "sc regression", "TDDR", "Wiener", "Spline", "ICA-TDDR", "ICA-Wiener", "ICA-Spline", "bPCA-TDDR", "bPCA-Wiener", "bPCA-Spline", "sc regression-TDDR", "sc regression-Wiener", "sc regression-Spline"]):
-    print(f't-test for {pipeline} and baseline:', stats.false_discovery_control(stats.ttest_ind(df.iloc[row, 1::2], [0.5 for _ in range(len(df.iloc[row, 1::2]))], nan_policy='omit').pvalue, method='bh'), stats.ttest_ind(df.iloc[row, 1::2], [0.5 for _ in range(len(df.iloc[row,1::2]))], nan_policy='omit').pvalue < 0.05)
+    print(f'Mann-Whitney for {pipeline} and baseline:', stats.mannwhitneyu(df.iloc[row, 1::2], [0.333 for _ in range(len(df.iloc[row,1::2]))]).pvalue, stats.mannwhitneyu(df.iloc[row, 1::2], [0.333 for _ in range(len(df.iloc[row,1::2]))]).pvalue < 0.05)
+
+#%%
+
+# adjusted p-values with fdr correctionn (benjamini-yekutieli)
+pvalues = [stats.mannwhitneyu(df.iloc[row, 1::2], [0.333 for _ in range(len(df.iloc[row,1::2]))]).pvalue for row in range(17)]
+print(fdrcorrection(pvalues, alpha=0.05, method='n', is_sorted=False))
+
+#%%
