@@ -48,20 +48,20 @@ regression_spline = build_pipeline(systemic='Band pass', motion='Spline', phys='
 model = MLPClassifier(hidden_layer_sizes=(10), max_iter=10000, random_state=r, solver='adam', activation='relu')
 #model = SVC(random_state=r, kernel='linear')
 baselinemodel = DummyClassifier(strategy='most_frequent')
-datalist = [load_individual(0), load_individual(1), load_individual(2), load_individual(3), load_individual(4)]
+#datalist = [load_individual(0), load_individual(1), load_individual(2), load_individual(3), load_individual(4)]
 #datalist = [load_author_data(2), load_author_data(3), load_author_data(4)]
 #datalist = [load_CUH_data(1, 'Healthy'), load_CUH_data(2, 'Healthy'), load_CUH_data(3, 'Healthy'), load_CUH_data(4, 'Healthy'), 
             #load_CUH_data(5, 'Healthy'), 
             #load_CUH_data(5, 'Healthy'), load_CUH_data(7, 'Healthy')]
-#datalist = [load_CUH_data(1, 'DoC'), load_CUH_data(2, 'DoC'), load_CUH_data(5, 'DoC'), 
+datalist = [load_CUH_data(1, 'DoC'), load_CUH_data(2, 'DoC'), load_CUH_data(5, 'DoC'), 
             #load_CUH_data(3, 'DoC'), load_CUH_data(6, 'DoC'),
-#            load_CUH_data(4, 'DoC'), load_CUH_data(7, 'DoC')]
+            load_CUH_data(4, 'DoC'), load_CUH_data(7, 'DoC')]
 #data, labels = concatenate_data(datalist, labelslist)
 pipelines_list = [pipeline, bandpass, ica, bpca, regression, tddr, Wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline]
 labelslist = [datalist[i].annotations.to_data_frame()['description'] for i in range(len(datalist))]
 label_encoder = LabelEncoder()
 persons = []
-for i in range(1):
+for i in range(len(datalist)):
     persons.append([])
     results_list.append([])
     baseline_results.append([])
@@ -84,9 +84,10 @@ for i in range(1):
 
         for train, test in StratifiedKFold(n_splits=10, shuffle=True, random_state=r).split(newdata, labelslist[i]):
                 model.fit(newdata[train], labelslist[i][train])
-                smallrecs.append(recall_score(labelslist[i][test], model.predict(newdata[test]), average='binary', pos_label=1))
-                smallf1s.append(f1_score(labelslist[i][test], model.predict(newdata[test]), average='binary', pos_label=1))
+                #smallrecs.append(recall_score(labelslist[i][test], model.predict(newdata[test]), average='binary', pos_label=1))
+                #smallf1s.append(f1_score(labelslist[i][test], model.predict(newdata[test]), average='binary', pos_label=1))
                 smallaccs.append(accuracy_score(labelslist[i][test], model.predict(newdata[test])))
+        results_list[i].append((np.mean(smallaccs), np.std(smallaccs)))
         # accs.append(np.mean(smallaccs))
         # recs.append(np.mean(smallrecs))
         # f1s.append(np.mean(smallf1s))
