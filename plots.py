@@ -5,6 +5,7 @@ from Tools.function_wrappers import *
 import matplotlib.pyplot as plt
 from matplotlib.pyplot import figure, xlabel, ylabel, title
 import seaborn as sns
+import pandas as pd
 
 #%%
 # For Rob Luke Dataset
@@ -170,6 +171,56 @@ evoked_control_hbo.plot_joint(
 evoked_control_hbr.plot_joint(
     times=times, topomap_args=topomap_args
 )
+
+#%%
+#violinplot for pipelines results
+df = pd.read_csv('Results/resultsrobFinal.csv', sep=',', header=None)
+none = df.iloc[0, 1::2]
+bandpass = df.iloc[1, 1::2]
+ica = df.iloc[2, 1::2]
+bpca = df.iloc[3, 1::2]
+regression = df.iloc[4, 1::2]
+tddr = df.iloc[5, 1::2]
+wiener = df.iloc[6, 1::2]
+spline = df.iloc[7, 1::2]
+ica_tddr = df.iloc[8, 1::2]
+ica_wiener = df.iloc[9, 1::2]
+ica_spline = df.iloc[10, 1::2]
+bpca_tddr = df.iloc[11, 1::2]
+bpca_wiener = df.iloc[12, 1::2]
+bpca_spline = df.iloc[13, 1::2]
+regression_tddr = df.iloc[14, 1::2]
+regression_wiener = df.iloc[15, 1::2]
+regression_spline = df.iloc[16, 1::2]
+baseline = 0.3333
+
+data = [none, bandpass, ica, bpca, regression, tddr, wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline]
+
+sns.violinplot(data=data, scale='width', inner='point', linewidth=1.5, cut=0, bw=0.5, palette='Set2')
+plt.show()
+
+#%%
+#versus boxplot 
+pipelines = ['Control', 'Band pass', 'ICA', 'bPCA', 'SCR', 'TDDR', 'Wiener', 'Spline', 'ICA-TDDR', 'ICA-Wiener', 'ICA-Spline', 'bPCA-TDDR', 'bPCA-Wiener', 'bPCA-Spline', 'SCR-TDDR', 'SCR-Wiener', 'SCR-Spline']
+plt.figure(figsize=(10,6))
+baseline_line = plt.hlines(baseline, -1, len(data), color='r', linestyles='dashed', label='Baseline Model')
+plt.ylim(0,1)
+sns.boxplot(data=data, palette='Set2')
+locs, labels = plt.xticks()
+plt.xticks(locs, pipelines, rotation=45, ha='right')
+for loc in locs:
+    plt.axvline(x=loc, color='grey', linestyle='--', lw=0.5) 
+plt.tight_layout()
+plt.legend(handles=[baseline_line], loc='lower right')
+plt.title("Pipelines' performances on Rob Luke's dataset")
+plt.ylabel('Mean accuracies')
+plt.show()
+
+
+
+
+
+
 
 #%%
 # For Rigets data
@@ -452,4 +503,101 @@ ax.set(xlabel='Time (s)', ylabel='Amplitude (a.u.)')
 fig.show()
 
 #%%
-cuh_data.info
+#violinplot for pipelines results
+df = pd.read_csv('Results/resultsriget.csv', sep=',', header=None)
+none = df.iloc[0, 1::6]
+bandpass = df.iloc[1, 1::6]
+ica = df.iloc[2, 1::6]
+bpca = df.iloc[3, 1::2]
+regression = df.iloc[4, 1::6]
+tddr = df.iloc[5, 1::6]
+wiener = df.iloc[6, 1::6]
+spline = df.iloc[7, 1::6]
+ica_tddr = df.iloc[8, 1::6]
+ica_wiener = df.iloc[9, 1::6]
+ica_spline = df.iloc[10, 1::6]
+bpca_tddr = df.iloc[11, 1::6]
+bpca_wiener = df.iloc[12, 1::6]
+bpca_spline = df.iloc[13, 1::6]
+regression_tddr = df.iloc[14, 1::6]
+regression_wiener = df.iloc[15, 1::6]
+regression_spline = df.iloc[16, 1::6]
+baseline = 0.5
+
+data = [none, bandpass, ica, bpca, regression, tddr, wiener, spline, ica_tddr, ica_wiener, ica_spline, bpca_tddr, bpca_wiener, bpca_spline, regression_tddr, regression_wiener, regression_spline]
+
+sns.violinplot(data=data, scale='width', inner='point', linewidth=1.5, cut=0, bw=0.5, palette='Set2')
+plt.show()
+
+#%%
+#versus boxplot 
+pipelines = ['Control', 'Band pass', 'ICA', 'bPCA', 'SCR', 'TDDR', 'Wiener', 'Spline', 'ICA-TDDR', 'ICA-Wiener', 'ICA-Spline', 'bPCA-TDDR', 'bPCA-Wiener', 'bPCA-Spline', 'SCR-TDDR', 'SCR-Wiener', 'SCR-Spline']
+plt.figure(figsize=(10,6))
+baseline_line = plt.hlines(baseline, -1, len(data), color='r', linestyles='dashed', label='Baseline Model')
+plt.ylim(0,1)
+sns.boxplot(data=data, palette='Set2')
+locs, labels = plt.xticks()
+plt.xticks(locs, pipelines, rotation=45, ha='right')
+for loc in locs:
+    plt.axvline(x=loc, color='grey', linestyle='--', lw=0.5) 
+plt.tight_layout()
+plt.legend(handles=[baseline_line], loc='upper right')
+plt.title("Pipelines' performances on CUH's dataset")
+plt.ylabel('Mean accuracies')
+plt.show()
+
+#%%
+# boxplot for the results of the patients
+Patient1 = df.iloc[:, 1]
+Patient2 = df.iloc[:, 7]
+Patient3 = df.iloc[:, 13]
+Patient4 = df.iloc[:, 19]
+Patient5 = df.iloc[:, 25]
+Patient6 = df.iloc[:, 31]
+Patient7 = df.iloc[:, 37]
+Patient8 = df.iloc[:, 43]
+Patient9 = df.iloc[:, 49]
+Patient10 = df.iloc[:, 55]
+Patient11 = df.iloc[:, 61]
+Patient12 = df.iloc[:, 67]
+Patient13 = df.iloc[:, 73]
+Patient14 = df.iloc[:, 79]
+Patient15 = df.iloc[:, 85]
+Patient16 = df.iloc[:, 91]
+Patient17 = df.iloc[:, 97]
+Patient18 = df.iloc[:, 103]
+Patient19 = df.iloc[:, 109]
+Patient20 = df.iloc[:, 115]
+Patient21 = df.iloc[:, 121]
+Patient22 = df.iloc[:, 127]
+Patient23 = df.iloc[:, 133]
+Patient24 = df.iloc[:, 139]
+Patient25 = df.iloc[:, 145]
+Patient26 = df.iloc[:, 151]
+Patient27 = df.iloc[:, 157]
+Patient28 = df.iloc[:, 163]
+Patient29 = df.iloc[:, 169]
+Patient30 = df.iloc[:, 175]
+Patient31 = df.iloc[:, 181]
+Patient32 = df.iloc[:, 187]
+Patient33 = df.iloc[:, 193]
+Patient34 = df.iloc[:, 199]
+Patient35 = df.iloc[:, 205]
+Patient36 = df.iloc[:, 211]
+
+data = [Patient1, Patient2, Patient3, Patient4, Patient5, Patient6, Patient7, Patient8, Patient9, Patient10, Patient11, Patient12, Patient13, Patient14, Patient15, Patient16, Patient17, Patient18, Patient19, Patient20, Patient21, Patient22, Patient23, Patient24, Patient25, Patient26, Patient27, Patient28, Patient29, Patient30, Patient31, Patient32, Patient33, Patient34, Patient35, Patient36]
+
+patients = ['Patient 1', 'Patient', 'Patient 3', 'Patient 4', 'Patient 5', 'Patient 6', 'Patient 7', 'Patient 8', 'Patient 9', 'Patient 10', 'Patient 11', 'Patient 12', 'Patient 13', 'Patient 14', 'Patient 15', 'Patient 16', 'Patient 17', 'Patient 18', 'Patient 19', 'Patient 20', 'Patient 21', 'Patient 22', 'Patient 23', 'Patient 24', 'Patient 25', 'Patient 26', 'Patient 27', 'Patient 28', 'Patient 29', 'Patient 30', 'Patient 31', 'Patient 32', 'Patient 33', 'Patient 34', 'Patient 35', 'Patient 36']
+plt.figure(figsize=(10,6))
+baseline_line = plt.hlines(baseline, -1, len(data), color='r', linestyles='dashed', label='Baseline Model')
+plt.ylim(0,1)
+sns.boxplot(data=data, palette='Set2')
+locs, labels = plt.xticks()
+plt.xticks(locs, patients, rotation=45, ha='right')
+for loc in locs:
+    plt.axvline(x=loc, color='grey', linestyle='--', lw=0.5) 
+plt.tight_layout()
+plt.legend(handles=[baseline_line], loc='upper right')
+plt.title("Patients' mean accuracies (CUH's dataset)")
+plt.ylabel('Mean accuracies')
+plt.show()
