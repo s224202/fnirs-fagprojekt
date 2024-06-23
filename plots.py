@@ -117,7 +117,7 @@ mne.viz.plot_compare_evokeds(
 #%%
 #plotting topomaps of right tapping, left tapping and control
 topomap_args = dict(extrapolate="local")
-
+# 
 evoked_left_hbo = epochs["Tapping/Left"].average(picks="hbo")
 evoked_left_hbr = epochs["Tapping/Left"].average(picks="hbr")
 evoked_right_hbo = epochs["Tapping/Right"].average(picks="hbo")
@@ -294,8 +294,8 @@ epochs = mne.Epochs(
     detrend=None,
     verbose=True)
 
-#plotting mean response to tongue task
-print('Mean response to tongue task')
+#plotting mean response to imagery task
+print('Mean response to imagery task')
 epochs["1"].plot_image(
     combine="mean",
     vmin=-30,
@@ -310,61 +310,13 @@ epochs["2"].plot_image(
     vmax=30,
     ts_args=dict(ylim=dict(hbo=[-25, 25], hbr=[-25, 25])))
 
-#plotting mean response to imagery task
-print('Mean response to imagery task')
-epochs["3"].plot_image(
-    combine="mean",
-    vmin=-30,
-    vmax=30,
-    ts_args=dict(ylim=dict(hbo=[-25, 25], hbr=[-25, 25])))
-
-#%%
-# mean responses only with the channels of interest
-phys_channels_hbo = mne.pick_channels(ch_names = cuh_data.info['ch_names'], include = ['S5_D4 hbo', 'S5_D12 hbo', 'S6_D5 hbo', 'S6_D13 hbo'])
-print('Mean hbo response to tongue task (channel 5 and 6)')
-epochs["1"].plot_image(
-    combine="mean",
-    picks=phys_channels_hbo,
-    vmin=-30,
-    vmax=30,
-    ts_args=dict(ylim=dict(hbo=[-25,25])))
-
-phys_channels_hbr = mne.pick_channels(ch_names = cuh_data.info['ch_names'], include = ['S5_D4 hbr', 'S5_D12 hbr', 'S6_D5 hbr', 'S6_D13 hbr'])
-print('Mean hbr response to tongue task (channel 5 and 6)')
-epochs["1"].plot_image(
-    combine="mean",
-    picks=phys_channels_hbr,
-    vmin=-30,
-    vmax=30,
-    ts_args=dict(ylim=dict(hbr=[-25,25])))
-
-imagery_channels_hbo = mne.pick_channels(ch_names = cuh_data.info['ch_names'], include = ['S1_D1 hbo', 'S1_D8 hbo', 'S2_D1 hbo', 'S2_D9 hbo'])
-print('Mean hbo response to imagery task (channel 1 and 2)')
-epochs["3"].plot_image(
-    combine="mean",
-    picks=imagery_channels_hbo,
-    vmin=-30,
-    vmax=30,
-    ts_args=dict(ylim=dict(hbo=[-25,25])))
-
-imagery_channels_hbr = mne.pick_channels(ch_names = cuh_data.info['ch_names'], include = ['S1_D1 hbr', 'S1_D8 hbr', 'S2_D1 hbr', 'S2_D9 hbr'])
-print('Mean hbr response to imagery task (channel 1 and 2)')
-epochs["3"].plot_image(
-    combine="mean",
-    picks=imagery_channels_hbr,
-    vmin=-30,
-    vmax=30,
-    ts_args=dict(ylim=dict(hbr=[-25,25])))
-
 #%%
 #plotting standard fNIRS response image
 evoked_dict = {
-    "Motor/HbO": epochs["1"].average(picks="hbo"),
-    "Motor/HbR": epochs["1"].average(picks="hbr"),
+    "Imagery/HbO": epochs["1"].average(picks="hbo"),
+    "Imagery/HbR": epochs["1"].average(picks="hbr"),
     "Control/HbO": epochs["2"].average(picks="hbo"),
     "Control/HbR": epochs["2"].average(picks="hbr"),
-    "Imagery/HbO": epochs["3"].average(picks="hbo"),
-    "Imagery/HbR": epochs["3"].average(picks="hbr"),
 }
 
 # Rename channels until the encoding of frequency in ch_name is fixed
@@ -378,64 +330,19 @@ mne.viz.plot_compare_evokeds(
     evoked_dict, combine="mean", ci=0.95, colors=color_dict, styles=styles_dict)
 
 #%%
-#plotting standard fnirs response image with only the channels of interest
-print('Standard fNIRS response image (channels 5 and 6)')
-evoked_dict = {
-    "Motor/HbO": epochs["1"].average(picks=phys_channels_hbo),
-    "Motor/HbR": epochs["1"].average(picks=phys_channels_hbr),
-    "Control/HbO": epochs["2"].average(picks=phys_channels_hbo),
-    "Control/HbR": epochs["2"].average(picks=phys_channels_hbr),
-    "Imagery/HbO": epochs["3"].average(picks=phys_channels_hbo),
-    "Imagery/HbR": epochs["3"].average(picks=phys_channels_hbr),
-}
-
-for condition in evoked_dict:
-    evoked_dict[condition].rename_channels(lambda x: x[:-4])
-
-color_dict = dict(HbO="#AA3377", HbR="b")
-styles_dict = dict(Control=dict(linestyle="dashed"), Imagery=dict(linestyle="dotted"))
-
-mne.viz.plot_compare_evokeds(
-    evoked_dict, combine="mean", ci=0.95, colors=color_dict, styles=styles_dict)
-
-print('Standard fNIRS response image (channels 1 and 2)')
-evoked_dict = {
-    "Motor/HbO": epochs["1"].average(picks=imagery_channels_hbo),
-    "Motor/HbR": epochs["1"].average(picks=imagery_channels_hbr),
-    "Control/HbO": epochs["2"].average(picks=imagery_channels_hbo),
-    "Control/HbR": epochs["2"].average(picks=imagery_channels_hbr),
-    "Imagery/HbO": epochs["3"].average(picks=imagery_channels_hbo),
-    "Imagery/HbR": epochs["3"].average(picks=imagery_channels_hbr),
-}
-
-for condition in evoked_dict:
-    evoked_dict[condition].rename_channels(lambda x: x[:-4])
-
-color_dict = dict(HbO="#AA3377", HbR="b")
-styles_dict = dict(Control=dict(linestyle="dashed"), Imagery=dict(linestyle="dotted"))
-
-mne.viz.plot_compare_evokeds(
-    evoked_dict, combine="mean", ci=0.95, colors=color_dict, styles=styles_dict)
-
-#%%
 #plotting topomaps of right tapping, left tapping and control
 topomap_args = dict(extrapolate="local")
 
-evoked_motor_hbo = epochs["1"].average(picks="hbo")
-evoked_motor_hbr = epochs["1"].average(picks="hbr")
+evoked_imagery_hbo = epochs["1"].average(picks="hbo")
+evoked_imagery_hbr = epochs["1"].average(picks="hbr")
 evoked_control_hbo = epochs["2"].average(picks="hbo")
 evoked_control_hbr = epochs["2"].average(picks="hbr")
-evoked_imagery_hbo = epochs["3"].average(picks="hbo")
-evoked_imagery_hbr = epochs["3"].average(picks="hbr")
 evoked_diff_hbo = mne.combine_evoked([evoked_control_hbo, evoked_imagery_hbo], weights=[1, -1])
 evoked_diff_hbr = mne.combine_evoked([evoked_control_hbr, evoked_imagery_hbr], weights=[1, -1])
 
-ts = 5
+ts = 9
 vlim = (-15, 15)
 
-print('Topomap of HbO and HbR for motor')
-evoked_motor_hbo.plot_topomap(times=ts, vlim=vlim, colorbar=False, **topomap_args)
-evoked_motor_hbr.plot_topomap(times=ts, vlim=vlim, colorbar=False, **topomap_args)
 print('Topomap of HbO and HbR for control')
 evoked_control_hbo.plot_topomap(times=ts, vlim=vlim, colorbar=False, **topomap_args)
 evoked_control_hbr.plot_topomap(times=ts, vlim=vlim, colorbar=False, **topomap_args)
@@ -444,19 +351,10 @@ evoked_imagery_hbo.plot_topomap(times=ts, vlim=vlim, colorbar=False, **topomap_a
 evoked_imagery_hbr.plot_topomap(times=ts, vlim=vlim, colorbar=False, **topomap_args)
 print('Topomap of HbO and HbR for difference between control and imagery')
 evoked_diff_hbo.plot_topomap(times=ts, vlim=vlim, colorbar=False, **topomap_args)
-evoked_diff_hbr.plot_topomap(times=ts, vlim=vlim, colorbar=True, **topomap_args)
+evoked_diff_hbr.plot_topomap(times=ts, vlim=vlim, colorbar=False, **topomap_args)
 #%%
 
-#plotting joint topomap of HbO and HbR for tongue
 times = np.arange(0, 12, 2)
-print('Topomap of HbO and HbR for motor')
-evoked_motor_hbo.plot_joint(
-    times=times, topomap_args=topomap_args
-)
-evoked_left_hbr.plot_joint(
-    times=times, topomap_args=topomap_args
-)
-
 #plotting joint topomap of HbO and HbR for control
 print('Topomap of HbO and HbR for control')
 evoked_control_hbo.plot_joint(
@@ -478,33 +376,17 @@ evoked_imagery_hbr.plot_joint(
 #%%
 #plotting response across all channels
 clims = dict(hbo=[-20, 20], hbr=[-20, 20])
-print('Response across all channels for tongue')
+print('Response across all channels for imagery')
 epochs["1"].average().plot_image(clim=clims)
 print('Response across all channels for control')
 epochs["2"].average().plot_image(clim=clims)
-print('Response across all channels for imagery')
-epochs["3"].average().plot_image(clim=clims)
 
-# %%
-#plotting mean and sd of responses for all channels (crazy ass plot)
-fig, ax = plt.subplots()
-ax.set_title("Participant 7 (CUH Dataset) - Mean and Standard Deviation of Responses")
-ax.plot(epochs["1"].average().times, epochs["1"].average().data.T, color='blue', alpha=0.1)
-ax.plot(epochs["2"].average().times, epochs["2"].average().data.T, color='red', alpha=0.1)
-ax.plot(epochs["3"].average().times, epochs["3"].average().data.T, color='green', alpha=0.1)
-ax.plot(epochs["1"].average().times, epochs["1"].average().data.mean(axis=0), color='blue', label='Tongue Task')
-ax.fill_between(epochs["1"].average().times, epochs["1"].average().data.mean(axis=0) - epochs["1"].average().data.std(axis=0), epochs["1"].average().data.mean(axis=0) + epochs["1"].average().data.std(axis=0), color='blue', alpha=0.5)
-ax.plot(epochs["2"].average().times, epochs["2"].average().data.mean(axis=0), color='red', label='Control Task')
-ax.fill_between(epochs["2"].average().times, epochs["2"].average().data.mean(axis=0) - epochs["2"].average().data.std(axis=0), epochs["2"].average().data.mean(axis=0) + epochs["2"].average().data.std(axis=0), color='red', alpha=0.5)
-ax.plot(epochs["3"].average().times, epochs["3"].average().data.mean(axis=0), color='green', label='Imagery Task')
-ax.fill_between(epochs["3"].average().times, epochs["3"].average().data.mean(axis=0) - epochs["3"].average().data.std(axis=0), epochs["3"].average().data.mean(axis=0) + epochs["3"].average().data.std(axis=0), color='green', alpha=0.5)
-ax.legend()
-ax.set(xlabel='Time (s)', ylabel='Amplitude (a.u.)')
-fig.show()
+# print channel names
+cuh_data.info['ch_names']
 
 #%%
 #violinplot for pipelines results
-df = pd.read_csv('Results/resultsriget.csv', sep=',', header=None)
+df = pd.read_csv('Results/results_DoC_healthy.csv', sep=',', header=None)
 none = df.iloc[0, 1::6]
 bandpass = df.iloc[1, 1::6]
 ica = df.iloc[2, 1::6]
@@ -542,7 +424,7 @@ for loc in locs:
     plt.axvline(x=loc, color='grey', linestyle='--', lw=0.5) 
 plt.tight_layout()
 plt.legend(handles=[baseline_line], loc='upper right')
-plt.title("Pipelines' performances on CUH's dataset")
+plt.title("Pipelines' performances on CUH's dataset (control)")
 plt.ylabel('Mean accuracies')
 plt.show()
 
@@ -599,5 +481,30 @@ for loc in locs:
 plt.tight_layout()
 plt.legend(handles=[baseline_line], loc='upper right')
 plt.title("Patients' mean accuracies (CUH's dataset)")
+plt.ylabel('Mean accuracies')
+plt.show()
+
+#%%
+# boxplot for the results of the participants
+Participant1 = df.iloc[:, 1]
+Participant2 = df.iloc[:, 7]
+Participant3 = df.iloc[:, 13]
+Participant4 = df.iloc[:, 19]
+Participant5 = df.iloc[:, 25]
+
+data = [Participant1, Participant2, Participant3, Participant4, Participant5]
+
+participants = ['Participant 1', 'Participant 2', 'Participant 3', 'Participant 4', 'Participant 5']
+plt.figure(figsize=(10,6))
+baseline_line = plt.hlines(baseline, -1, len(data), color='r', linestyles='dashed', label='Baseline Model')
+plt.ylim(0,1)
+sns.boxplot(data=data, palette='Set2')
+locs, labels = plt.xticks()
+plt.xticks(locs, participants, rotation=45, ha='right')
+for loc in locs:
+    plt.axvline(x=loc, color='grey', linestyle='--', lw=0.5)
+plt.tight_layout()
+plt.legend(handles=[baseline_line], loc='upper right')
+plt.title("Participants' mean accuracies (CUH's dataset with healthy partcipants)")
 plt.ylabel('Mean accuracies')
 plt.show()
